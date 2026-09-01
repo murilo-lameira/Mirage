@@ -1,8 +1,8 @@
 % =========================================================================
 % 📊 GERADOR DE GRÁFICOS COMPARATIVOS DO ALGORITMO GENÉTICO (MIRAGE)
 % =========================================================================
-% Lê o histórico em 'resultados_experimentos.csv' e plota comparações visuais
-% prontas para uso em slides e relatórios acadêmicos.
+% Lê o histórico em 'resultados_experimentos.csv' e plota comparações visuais,
+% salvando-as automaticamente na pasta 'data/graficos/' para relatórios e slides.
 % =========================================================================
 
 clc; clear; close all;
@@ -10,12 +10,14 @@ addpath(fileparts(mfilename('fullpath')));
 
 csv_filename = fullfile('data', 'resultados_experimentos.csv');
 if ~exist(csv_filename, 'file')
-    csv_filename = fullfile('data', 'resultados_experimentos.csv');
-end
-if ~exist(csv_filename, 'file')
-    error('Arquivo resultados_experimentos.csv nao encontrado. Execute alguns treinamentos antes!');
+    error('Arquivo data/resultados_experimentos.csv nao encontrado. Execute alguns treinamentos antes!');
 end
 
+% Garante que a pasta de gráficos existe
+output_dir = fullfile('data', 'graficos');
+if ~exist(output_dir, 'dir')
+    mkdir(output_dir);
+end
 
 fprintf('Lendo dados de %s...\n', csv_filename);
 
@@ -28,14 +30,16 @@ while ~feof(fid)
     line = fgetl(fid);
     if ischar(line) && ~isempty(strtrim(line))
         tokens = strsplit(line, ',');
-        if length(tokens) >= 11
-            % Converte valores numéricos a partir da coluna 2 (Dificuldade)
-            num_row = zeros(1, length(tokens) - 1);
-            for k = 2:length(tokens)
-                num_row(k-1) = str2double(tokens{k});
+            if length(tokens) >= 11
+                % Converte valores numéricos a partir da coluna 2 (Dificuldade)
+                num_row = zeros(1, min(15, length(tokens) - 1));
+                for k = 2:min(16, length(tokens))
+                    num_row(k-1) = str2double(tokens{k});
+                end
+                if length(num_row) == 15
+                    data_entries = [data_entries; num_row];
+                end
             end
-            data_entries = [data_entries; num_row];
-        end
     end
 end
 fclose(fid);
@@ -51,7 +55,7 @@ diffs = data_entries(:, 1);
 unique_diffs = unique(diffs);
 
 % 1. FIGURA 1: Perfil de Genes dos Elites por Dificuldade
-figure('Name', 'Comparativo de Genes por Dificuldade', 'Position', [100, 100, 900, 500]);
+fig1 = figure('Name', 'Comparativo de Genes por Dificuldade', 'Position', [100, 100, 900, 500]);
 
 genes_mean = zeros(length(unique_diffs), 4);
 diff_labels = {};
@@ -98,8 +102,13 @@ set(gca, 'XTickLabel', diff_labels);
 title('Velocidade de Movimento (Esquiva)');
 ylabel('Velocidade (m/s)'); grid on;
 
+% Salva Figura 1
+fig1_path = fullfile(output_dir, 'comparativo_genes.png');
+print(fig1, fig1_path, '-dpng');
+fprintf('-> Gráfico de Genes salvo em: %s\n', fig1_path);
+
 % 2. FIGURA 2: Fitness Máximo vs Médio por Dificuldade
-figure('Name', 'Comparativo de Fitness por Dificuldade', 'Position', [150, 150, 750, 450]);
+fig2 = figure('Name', 'Comparativo de Fitness por Dificuldade', 'Position', [150, 150, 750, 450]);
 fit_max_mean = zeros(length(unique_diffs), 1);
 fit_pop_mean = zeros(length(unique_diffs), 1);
 
@@ -117,4 +126,9 @@ ylabel('Pontuação de Fitness');
 legend('Fitness Máximo (Campeão)', 'Fitness Médio da População', 'Location', 'northwest');
 grid on;
 
-fprintf('\n>>> Graficos gerados com sucesso! Verifique as janelas de figura. <<<\n');
+% Salva Figura 2
+fig2_path = fullfile(output_dir, 'comparativo_fitness.png');
+print(fig2, fig2_path, '-dpng');
+fprintf('-> Gráfico de Fitness salvo em: %s\n', fig2_path);
+
+fprintf('\n>>> Todos os gráficos foram gerados e salvos em %s! <<<\n', output_dir);
