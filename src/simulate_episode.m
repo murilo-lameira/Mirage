@@ -23,7 +23,7 @@ function [T_survival, N_dodge, N_collision, D_taken, D_inflicted] = simulate_epi
     
     % Parâmetros Físicos do Tempo e Espaço
     dt = 0.05;              % Delta de tempo por frame
-    max_time = 15.0;        % Duração máxima do round
+    max_time = 30.0;        % Duração máxima do round (30 segundos)
     npc_radius = 1.0;       % Tamanho da "hitbox" do NPC
     radar_radius = 4.0;     % Área de detecção periférica
     
