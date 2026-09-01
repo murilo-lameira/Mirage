@@ -15,6 +15,9 @@ Este cofre reúne toda a fundamentação científica, arquitetura de simulação
 - [[Ref - Motta et al. (Online Opponent Modeling)]]: Técnicas de modelagem de oponentes adaptativas em tempo real.
 - [[Ref - Aula UNISENAI (Algoritmos Genéticos)]]: Notas teóricas de base sobre o funcionamento dos operadores genéticos na academia.
 
+### 00 - Guias & Operação
+- [[Guia de Uso & Comandos]]: Manual completo de operação, atalhos, comandos Octave e interpretação de gráficos.
+
 ### 20 - Arquitetura do Sistema
 - [[Estrutura do Projeto & Diretórios]]: Organização das pastas `data/`, `src/`, `scripts/` e `logs/`.
 - [[Cromossomo & Genes]]: Mapeamento físico dos 4 genes, limites dimensionais e sistema de **Orçamento Global (Point-Buy Budget)**.

@@ -21,7 +21,21 @@ Grava o desfecho final do treinamento evolutivo, ou seja, o desempenho do "Campe
 
 ---
 
-## 2. Catálogo Histórico de Experiência (`catalogo_sec.csv`)
+## 2. Histórico Contínuo de Gerações (`historico_geracoes.csv`)
+Armazena a telemetria passo a passo de cada geração para cada rodada individual.
+
+- **Objetivo Científico:** Permitir o cálculo da média estatística exata de aprendizado por nível de dificuldade, viabilizando a plotagem de curvas consolidadas de convergência (eliminando ruído estocástico de avaliações individuais).
+- **Estrutura (Colunas):**
+  - `Data_Hora`: Timestamp da execução.
+  - `Dificuldade`: 1 (Fácil), 2 (Médio) ou 3 (Difícil).
+  - `Rodada`: Identificador numérico da rodada dentro do lote.
+  - `Geracao`: Número da geração atual ($1 \dots G_{\max}$).
+  - `Fitness_Maximo_Global`: Maior fitness histórico acumulado até aquela geração (`history_best_so_far`).
+  - `Fitness_Medio_Pop`: Aptidão média de toda a população naquela geração.
+
+---
+
+## 3. Catálogo Histórico de Experiência (`catalogo_sec.csv`)
 Baseado no artigo de **Glavin & Madden**, este banco de dados salva *Snapshots* (fotografias) do campeão em momentos intermediários do treinamento evolutivo.
 
 - **Objetivo Científico:** Habilitar o Ajuste Dinâmico de Dificuldade (DDA) no projeto final, permitindo que a IA carregue um inimigo "burro" ou "especialista" em tempo real caso o jogador esteja frustrado ou entediado.

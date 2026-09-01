@@ -66,6 +66,7 @@ end
 % Arrays para o Grafico de Convergencia (Slides)
 history_max_fitness = zeros(max_generations, 1);
 history_mean_fitness = zeros(max_generations, 1);
+history_best_so_far = zeros(max_generations, 1);
 
 % Parametros do Criterio de Parada de Bhandari
 K_generations_stop = 15;
@@ -141,6 +142,8 @@ for gen = 1:max_generations
         best_overall_fitness = current_max_fit;
         best_overall_chromosome = population(best_idx, :);
     end
+    
+    history_best_so_far(gen) = best_overall_fitness;
     
     fprintf('Geracao %02d | Max Fitness: %7.2f | Media: %7.2f\n', gen, current_max_fit, current_mean_fit);
     
@@ -296,14 +299,32 @@ fclose(fid);
 fprintf('>> Resultados principais salvos em: %s\n', csv_filename);
 % --- FIM DO BANCO DE DADOS ---
 
+% Exporta Curva de Evolucao para CSV
+try
+    hist_filename = fullfile('data', 'historico_geracoes.csv');
+    hist_fid = fopen(hist_filename, 'a');
+    if hist_fid ~= -1
+        if exist(hist_filename, 'file') ~= 2 || dir(hist_filename).bytes == 0
+            fprintf(hist_fid, 'Data_Hora,Dificuldade,Rodada,Geracao,Fitness_Maximo_Global,Fitness_Medio_Pop\n');
+        end
+        ts_hist = datestr(now, 'yyyy-mm-dd HH:MM:SS');
+        for g = 1:max_generations
+            fprintf(hist_fid, '%s,%d,1,%d,%.4f,%.4f\n', ...
+                ts_hist, difficulty, g, history_best_so_far(g), history_mean_fitness(g));
+        end
+        fclose(hist_fid);
+    end
+catch
+end
+
 % 4. GERAR GRAFICO DE CONVERGENCIA
 if ~exist('disable_plotting', 'var') || disable_plotting == false
-    history_max_fitness = history_max_fitness(1:max_generations);
+    history_best_so_far = history_best_so_far(1:max_generations);
     history_mean_fitness = history_mean_fitness(1:max_generations);
     generations_x = 1:max_generations;
 
     figure('Name', 'Curva de Convergencia do Algoritmo Genetico', 'Position', [200, 200, 700, 500]);
-    plot(generations_x, history_max_fitness, 'g-o', 'LineWidth', 2, 'MarkerFaceColor', 'g');
+    plot(generations_x, history_best_so_far, 'g-o', 'LineWidth', 2, 'MarkerFaceColor', 'g');
     hold on; grid on;
     plot(generations_x, history_mean_fitness, 'c-s', 'LineWidth', 2, 'MarkerFaceColor', 'c');
 

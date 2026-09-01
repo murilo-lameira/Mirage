@@ -191,6 +191,7 @@ function [T_survival, N_dodge, N_collision, D_taken, D_inflicted] = simulate_epi
             title(sprintf('Sobrevivência: %.2fs | HP: %d | Desvios: %d | Colisões: %d', t, max(0,HP), N_dodge, N_collision));
             axis([-20 20 -20 20]);
             drawnow;
+            pause(0.02); % Mantém a taxa de quadros suave em tempo real (~50 FPS)
         end
     end
 end

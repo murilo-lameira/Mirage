@@ -102,6 +102,7 @@ function run_batch_experiment(difficulty_arg, num_runs_arg, pure_mutation_arg)
         best_overall_fitness = -1;
         history_max_fitness = zeros(max_gen, 1);
         history_mean_fitness = zeros(max_gen, 1);
+        history_best_so_far = zeros(max_gen, 1);
         
         map_elites_fitness = -ones(3, 3);
         map_elites_chromosomes = zeros(3, 3, 4);
@@ -153,6 +154,8 @@ function run_batch_experiment(difficulty_arg, num_runs_arg, pure_mutation_arg)
                 best_overall_fitness = current_max_fit;
                 best_overall_chromosome = population(best_idx, :);
             end
+            
+            history_best_so_far(gen) = best_overall_fitness;
             
             % SKILLED EXPERIENCE CATALOGUE (SEC): Exporta Marcos
             if ismember(gen, sec_milestones) || (gen == max_gen)
@@ -269,6 +272,24 @@ function run_batch_experiment(difficulty_arg, num_runs_arg, pure_mutation_arg)
             end
         end
         
+        % Exporta Curva de Evolucao para CSV
+        try
+            hist_filename = fullfile('data', 'historico_geracoes.csv');
+            hist_fid = fopen(hist_filename, 'a');
+            if hist_fid ~= -1
+                if exist(hist_filename, 'file') ~= 2 || dir(hist_filename).bytes == 0
+                    fprintf(hist_fid, 'Data_Hora,Dificuldade,Rodada,Geracao,Fitness_Maximo_Global,Fitness_Medio_Pop\n');
+                end
+                ts_hist = datestr(now, 'yyyy-mm-dd HH:MM:SS');
+                for g = 1:real_gens
+                    fprintf(hist_fid, '%s,%d,%d,%d,%.4f,%.4f\n', ...
+                        ts_hist, difficulty, run, g, history_best_so_far(g), history_mean_fitness(g));
+                end
+                fclose(hist_fid);
+            end
+        catch
+        end
+
         % Salva Gráfico da Rodada Individual
         try
             rodadas_dir = fullfile('data', 'graficos', 'rodadas');
@@ -278,7 +299,7 @@ function run_batch_experiment(difficulty_arg, num_runs_arg, pure_mutation_arg)
             
             fig_run = figure('Position', [200, 200, 700, 500]);
             gens_x = 1:real_gens;
-            plot(gens_x, history_max_fitness(1:real_gens), 'g-o', 'LineWidth', 2, 'MarkerFaceColor', 'g');
+            plot(gens_x, history_best_so_far(1:real_gens), 'g-o', 'LineWidth', 2, 'MarkerFaceColor', 'g');
             hold on; grid on;
             plot(gens_x, history_mean_fitness(1:real_gens), 'c-s', 'LineWidth', 2, 'MarkerFaceColor', 'c');
             title(sprintf('Evolucao Tatica: Rodada %02d (Dificuldade %d)', run, difficulty));
