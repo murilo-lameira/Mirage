@@ -99,6 +99,7 @@ function run_batch_experiment(difficulty_arg, num_runs_arg, pure_mutation_arg)
         best_overall_chromosome = [];
         best_overall_fitness = -1;
         history_max_fitness = zeros(max_gen, 1);
+        history_mean_fitness = zeros(max_gen, 1);
         
         map_elites_fitness = -ones(3, 3);
         map_elites_chromosomes = zeros(3, 3, 4);
@@ -144,6 +145,7 @@ function run_batch_experiment(difficulty_arg, num_runs_arg, pure_mutation_arg)
             [current_max_fit, best_idx] = max(fitnesses);
             current_mean_fit = mean(fitnesses);
             history_max_fitness(gen) = current_max_fit;
+            history_mean_fitness(gen) = current_mean_fit;
             
             if current_max_fit > best_overall_fitness
                 best_overall_fitness = current_max_fit;
@@ -286,7 +288,8 @@ function run_batch_experiment(difficulty_arg, num_runs_arg, pure_mutation_arg)
             run_img_name = fullfile(rodadas_dir, sprintf('evolucao_dif%d_rodada%02d_%s.png', difficulty, run, ts_file));
             print(fig_run, run_img_name, '-dpng');
             close(fig_run);
-        catch
+        catch err
+            fprintf('ERRO GRAFICO: %s\n', err.message);
         end
 
         fprintf('[Dificuldade %d] Rodada %02d/%02d concluída em %6.2fs | Gens: %02d | FitMax: %7.2f | HP: %3d | Atk: %2d | AtkSpd: %.2f | MovSpd: %.2f\n', ...
