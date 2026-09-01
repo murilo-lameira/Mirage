@@ -19,15 +19,15 @@ $$\text{Fitness} = \max\Big(0.1, \; (w_1 \cdot T_{\text{survival}}) + (w_2 \cdot
 
 ---
 
-## ⚖️ Matriz de Pesos Equalizada (30 Segundos)
+## ⚖️ Matriz de Pesos e Escalonamento por Fator de Mérito
 
-Para evitar que a evolução beneficie apenas a velocidade e vida (desprezando o ataque e cadência), os pesos e a simulação de $30\text{s}$ exigem um perfil versátil e balanceado:
+Para garantir um sistema de pontuação justo — onde sobreviver e realizar manobras na densidade do modo **Difícil** conceda uma aptidão significativamente maior do que no modo **Fácil** ($\text{Difícil} > \text{Médio} > \text{Fácil}$) —, aplicamos uma calibração por Fator de Mérito:
 
-| Dificuldade | $w_1$ (Tempo 30s) | $w_2$ (Desvio) | $w_3$ (Dano) | $p_1$ (Hit) | $p_2$ (Dano Tomado) | Filosofia de Seleção |
-| :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| **Fácil (1)** | $3.0$ | $3.0$ | **$0.25$** | $4.0$ | $0.2$ | Recompensa dano ofensivo contínuo e sobrevivência ao longo de 30s. |
-| **Médio (2)** | $3.5$ | $5.0$ | **$0.20$** | $10.0$ | $0.5$ | Exige harmonia entre ataque contínuo e evasão de tiros médios. |
-| **Difícil (3)** | **$4.0$** | **$7.0$** | **$0.18$** | **$18.0$** | **$0.8$** | Foco em sobreviver aos 30s de *Bullet Hell* sem zerar poder de fogo. |
+| Dificuldade | $w_1$ (Tempo 30s) | $w_2$ (Desvio) | $w_3$ (Dano) | $p_1$ (Hit) | $p_2$ (Dano Tomado) | Faixa de Fitness Esperada | Filosofia de Seleção |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
+| **Fácil (1)** | $2.0$ | $2.0$ | $0.20$ | $2.0$ | $0.10$ | ~150 a ~250 pts | Pontuação reduzida por ambiente brando. |
+| **Médio (2)** | $6.0$ | $8.0$ | $0.30$ | $3.5$ | $0.15$ | ~500 a ~700 pts | Escalonamento intermediário de desafio. |
+| **Difícil (3)** | **$15.0$** | **$20.0$** | **$0.50$** | **$5.0$** | **$0.20$** | **~900 a ~1500 pts** | Recompensa massiva para cada segundo e esquiva no *Bullet Hell*. |
 
 ---
 

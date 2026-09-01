@@ -1,8 +1,8 @@
-# =========================================================================
-# ?? EXECUTOR PARALELO DE EXPERIMENTOS (MIRAGE - ALGORITMOS GENÉTICOS)
+ï»¿# =========================================================================
+# ?? EXECUTOR PARALELO DE EXPERIMENTOS (MIRAGE - ALGORITMOS GENï¿½TICOS)
 # =========================================================================
 # Executa 10 rodadas de treinamento para as 3 dificuldades simultaneamente
-# utilizando múltiplos processos em segundo plano do GNU Octave.
+# utilizando mï¿½ltiplos processos em segundo plano do GNU Octave.
 # =========================================================================
 
 $ErrorActionPreference = "Continue"
@@ -24,15 +24,15 @@ Write-Host "================================================================" -F
 Write-Host "     INICIANDO 30 EXPERIMENTOS EM PARALELO (10x CADA MODO)     " -ForegroundColor Yellow
 Write-Host "================================================================" -ForegroundColor Cyan
 Write-Host "Processos Paralelos:" -ForegroundColor Gray
-Write-Host "  -> Worker 1: Dificuldade Fácil (1)  - 10 Rodadas" -ForegroundColor Green
-Write-Host "  -> Worker 2: Dificuldade Médio (2)  - 10 Rodadas" -ForegroundColor Yellow
-Write-Host "  -> Worker 3: Dificuldade Difícil (3) - 10 Rodadas" -ForegroundColor Red
+Write-Host "  -> Worker 1: Dificuldade Fï¿½cil (1)  - 10 Rodadas" -ForegroundColor Green
+Write-Host "  -> Worker 2: Dificuldade Mï¿½dio (2)  - 10 Rodadas" -ForegroundColor Yellow
+Write-Host "  -> Worker 3: Dificuldade Difï¿½cil (3) - 10 Rodadas" -ForegroundColor Red
 Write-Host "----------------------------------------------------------------" -ForegroundColor Gray
 
 $workers = @(
-    @{ Diff = 1; Name = "Fácil (1)"; Log = (Join-Path $logsDir "worker_diff1.log"); ErrLog = (Join-Path $logsDir "worker_diff1_err.log") },
-    @{ Diff = 2; Name = "Médio (2)"; Log = (Join-Path $logsDir "worker_diff2.log"); ErrLog = (Join-Path $logsDir "worker_diff2_err.log") },
-    @{ Diff = 3; Name = "Difícil (3)"; Log = (Join-Path $logsDir "worker_diff3.log"); ErrLog = (Join-Path $logsDir "worker_diff3_err.log") }
+    @{ Diff = 1; Name = "Fï¿½cil (1)"; Log = (Join-Path $logsDir "worker_diff1.log"); ErrLog = (Join-Path $logsDir "worker_diff1_err.log") },
+    @{ Diff = 2; Name = "Mï¿½dio (2)"; Log = (Join-Path $logsDir "worker_diff2.log"); ErrLog = (Join-Path $logsDir "worker_diff2_err.log") },
+    @{ Diff = 3; Name = "Difï¿½cil (3)"; Log = (Join-Path $logsDir "worker_diff3.log"); ErrLog = (Join-Path $logsDir "worker_diff3_err.log") }
 )
 
 $processes = @()
@@ -60,7 +60,7 @@ while ($completed -lt 3) {
     
     Clear-Host
     Write-Host "================================================================" -ForegroundColor Cyan
-    Write-Host "   PAINEL DE EXECUÇÃO PARALELA (Tempo Decorrido: ${elapsed}s)   " -ForegroundColor Yellow
+    Write-Host "   PAINEL DE EXECUï¿½ï¿½O PARALELA (Tempo Decorrido: ${elapsed}s)   " -ForegroundColor Yellow
     Write-Host "================================================================" -ForegroundColor Cyan
     
     $completed = 0
@@ -68,7 +68,7 @@ while ($completed -lt 3) {
         $p = $w.Process
         $status = if ($p.HasExited) { 
             $completed++
-            if ($p.ExitCode -eq 0) { "[ CONCLUÍDO ]" } else { "[ ERRO ]" }
+            if ($p.ExitCode -eq 0) { "[ CONCLUï¿½DO ]" } else { "[ ERRO ]" }
         } else { 
             "[ EM ANDAMENTO ]" 
         }
@@ -90,10 +90,10 @@ $stopwatch.Stop()
 $totalSec = [math]::Round($stopwatch.Elapsed.TotalSeconds, 2)
 
 Write-Host "`n================================================================" -ForegroundColor Green
-Write-Host "   TODOS OS 30 EXPERIMENTOS FORAM CONCLUÍDOS EM ${totalSec}s!   " -ForegroundColor Green
+Write-Host "   TODOS OS 30 EXPERIMENTOS FORAM CONCLUï¿½DOS EM ${totalSec}s!   " -ForegroundColor Green
 Write-Host "================================================================" -ForegroundColor Green
 Write-Host "Os dados foram registrados no arquivo data/resultados_experimentos.csv`n" -ForegroundColor White
 
-Write-Host "Gerando gráficos comparativos..." -ForegroundColor Yellow
+Write-Host "Gerando grï¿½ficos comparativos..." -ForegroundColor Yellow
 Start-Process -FilePath $octaveGuiPath -ArgumentList "--persist src/gerar_graficos_comparativos.m" -WorkingDirectory (Split-Path $PSScriptRoot -Parent)
 
