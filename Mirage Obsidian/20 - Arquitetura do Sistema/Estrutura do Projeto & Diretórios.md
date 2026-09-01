@@ -8,46 +8,26 @@ Para manter os padrões de desenvolvimento de software e ciência de dados exigi
 
 ```text
 Mirage/
-├── data/                       # 📊 Bancos de Dados e Telemetria (CSVs)
-│   ├── resultados_experimentos.csv   # Histórico do campeão supremo por rodada
-│   ├── historico_geracoes.csv        # Evolução passo-a-passo por geração
-│   ├── catalogo_sec.csv              # Snapshots de gerações (DDA)
-│   ├── map_elites.csv                # Matriz 3x3 de nichos fenotípicos (QD)
-│   └── graficos/                     # Imagens PNG geradas
-│       ├── evolucao_media_por_dificuldade.png
-│       ├── comparativo_genes.png
-│       ├── comparativo_fitness.png
-│       └── rodadas/                  # Gráficos individuais por rodada
-│
-├── src/                        # 🧠 Código-Fonte Octave/MATLAB (.m)
-│   ├── npc_evasivo_ga.m              # Script principal e interface com visualização
-│   ├── run_batch_experiment.m        # Executor headless para lote
-│   ├── assistir_simulacao.m          # Player visual 2D em tempo real do campeão
-│   ├── analise_evolucao_media.m      # Cálculo de curvas médias consolidadas
-│   ├── gerar_graficos_comparativos.m # Gerador de gráficos comparativos
-│   ├── simulate_episode.m            # Motor físico de colisão e combate 2D
-│   ├── fitness_function.m            # Avaliação multi-objetivo
-│   ├── init_population.m             # Inicialização com Orçamento Global (Point-Buy)
-│   ├── selection.m                   # Seleção por Torneio
-│   ├── crossover.m                   # Crossover Aritmético/Uniforme
-│   ├── mutation.m                    # Mutação Gaussiana / Box-Muller
-│   ├── calculate_evade_force.m       # Cálculo preditivo de vetor de evasão (Reynolds)
-│   └── test_physics.m                # Testes unitários de física e colisão
-│
-├── scripts/                    # ⚙️ Automação e Executáveis
-│   ├── Rodar_Simulador.bat           # Lança o simulador gráfico
-│   ├── Assistir_Melhor_NPC.bat       # Abre o player 2D com o melhor campeão
-│   ├── Rodar_Experimentos_Paralelos.bat # Launcher de lote em paralelo
-│   ├── Rodar_Experimentos_Paralelos.ps1 # Orquestrador multithread de workers
-│   ├── Gerar_Todos_Graficos.bat      # Gera todos os gráficos consolidados
-│   └── Gerar_Todos_Graficos.ps1      # Script PowerShell para geração de gráficos
-│
-├── logs/                       # 📝 Telemetria de Execução dos Workers
-│   ├── worker_diff1.log / worker_diff1_err.log
-│   ├── worker_diff2.log / worker_diff2_err.log
-│   └── worker_diff3.log / worker_diff3_err.log
-│
-└── Mirage Obsidian/            # 📚 Cofre de Documentação Científica e MOCs
+├── data/
+│   ├── resultados_experimentos.csv
+│   ├── historico_geracoes.csv
+│   ├── catalogo_sec.csv
+│   ├── map_elites.csv
+│   └── graficos/
+├── src/
+│   ├── npc_evasivo_ga.m
+│   ├── run_batch_experiment.m
+│   ├── assistir_simulacao.m
+│   ├── analise_evolucao_media.m
+│   ├── gerar_graficos_comparativos.m
+│   └── simulate_episode.m
+├── scripts/
+│   ├── Rodar_Simulador.bat
+│   ├── Assistir_Melhor_NPC.bat
+│   ├── Rodar_Experimentos_Paralelos.bat
+│   └── Gerar_Todos_Graficos.bat
+├── logs/
+└── Mirage Obsidian/
 ```
 
 ---

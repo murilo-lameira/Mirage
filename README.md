@@ -30,18 +30,11 @@ O repositório é projetado seguindo as melhores práticas de Engenharia de Soft
 
 ```text
 Mirage/
-├── data/                       # 📊 Bancos de Dados CSV (Resultados, Histórico, SEC, MAP-Elites)
-│   └── graficos/               # 📈 Gráficos consolidados e rodadas individuais (.png)
-├── src/                        # 🧠 Código-Fonte Octave/MATLAB (.m)
-│   ├── npc_evasivo_ga.m        # Script principal de treinamento com interface
-│   ├── run_batch_experiment.m  # Executor headless para testes em lote
-│   ├── assistir_simulacao.m    # Player visual 2D em tempo real do melhor campeão
-│   ├── analise_evolucao_media.m # Gerador de curva média consolidada de aprendizado
-│   ├── gerar_graficos_comparativos.m # Gerador de gráficos estatísticos
-│   └── simulate_episode.m      # Motor físico de colisão e combate 2D
-├── scripts/                    # ⚙️ Automação (.bat, .ps1) para testes paralelos e análises
-├── logs/                       # 📝 Telemetria de background dos workers
-└── Mirage Obsidian/            # 📚 Cofre completo de Documentação Científica (Obsidian)
+├── data/              # Bancos de dados CSV e gráficos gerados (.png)
+├── src/               # Código-fonte Octave/MATLAB (.m)
+├── scripts/           # Automação de testes em lote (.bat, .ps1)
+├── logs/              # Telemetria e logs de execução dos workers
+└── Mirage Obsidian/   # Cofre de documentação científica e guias (Obsidian)
 ```
 
 ---
