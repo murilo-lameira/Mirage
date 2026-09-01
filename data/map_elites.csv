@@ -1,0 +1,8 @@
+Data_Hora,Dificuldade,Modo_EDS,Mobilidade,Classe,Fitness,HP,Atk,AtkSpd,MovSpd
+2026-09-01 13:15:39,1,1,Lento,Tank,203.33,111,31,1.96,1.78
+2026-09-01 13:15:39,1,1,Lento,Balanceado,295.99,42,41,2.18,2.07
+2026-09-01 13:15:39,1,1,Lento,Dano(GlassCannon),350.01,10,46,2.27,2.29
+2026-09-01 13:15:39,1,1,Medio,Tank,181.98,82,27,1.53,4.64
+2026-09-01 13:15:39,1,1,Medio,Balanceado,197.85,41,19,2.47,4.73
+2026-09-01 13:15:39,1,1,Medio,Dano(GlassCannon),264.05,10,43,1.62,4.53
+2026-09-01 13:15:39,1,1,Rapido,Tank,108.49,65,8,2.07,6.78

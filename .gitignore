@@ -1,0 +1,15 @@
+# Logs
+logs/
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+
+# Ignore Obsidian workspace files (keep the markdown notes)
+Mirage Obsidian/.obsidian/workspace.json
+Mirage Obsidian/.obsidian/workspace-mobile.json
+Mirage Obsidian/.obsidian/graph.json
