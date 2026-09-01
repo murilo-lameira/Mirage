@@ -311,6 +311,18 @@ if ~exist('disable_plotting', 'var') || disable_plotting == false
     legend('Fitness Maximo (Elites)', 'Fitness Medio (Populacao)', 'Location', 'southeast');
     drawnow;
 
+    try
+        rodadas_dir = fullfile('data', 'graficos', 'rodadas');
+        if ~exist(rodadas_dir, 'dir')
+            mkdir(rodadas_dir);
+        end
+        ts_file = datestr(now, 'yyyy-mm-dd_HH-MM-SS');
+        run_img_name = fullfile(rodadas_dir, sprintf('evolucao_dif%d_manual_%s.png', difficulty, ts_file));
+        print(gcf, run_img_name, '-dpng');
+        fprintf('>> Gráfico de evolução da rodada salvo em: %s\n', run_img_name);
+    catch
+    end
+
     % 5. TESTE VISUAL
     fprintf('\nPreparando exibicao visual do combate com o genoma perfeito...\n');
     fprintf('(Va ate a janela de graficos para assistir)\n');
