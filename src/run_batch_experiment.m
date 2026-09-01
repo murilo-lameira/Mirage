@@ -265,6 +265,30 @@ function run_batch_experiment(difficulty_arg, num_runs_arg, pure_mutation_arg)
             end
         end
         
+        % Salva Gráfico da Rodada Individual
+        try
+            rodadas_dir = fullfile('data', 'graficos', 'rodadas');
+            if ~exist(rodadas_dir, 'dir')
+                mkdir(rodadas_dir);
+            end
+            
+            fig_run = figure('Position', [200, 200, 700, 500]);
+            gens_x = 1:real_gens;
+            plot(gens_x, history_max_fitness(1:real_gens), 'g-o', 'LineWidth', 2, 'MarkerFaceColor', 'g');
+            hold on; grid on;
+            plot(gens_x, history_mean_fitness(1:real_gens), 'c-s', 'LineWidth', 2, 'MarkerFaceColor', 'c');
+            title(sprintf('Evolucao Tatica: Rodada %02d (Dificuldade %d)', run, difficulty));
+            xlabel('Geracoes');
+            ylabel('Valor de Aptidao (Fitness)');
+            legend('Fitness Maximo (Elites)', 'Fitness Medio (Populacao)', 'Location', 'southeast');
+            
+            ts_file = datestr(now, 'yyyy-mm-dd_HH-MM-SS');
+            run_img_name = fullfile(rodadas_dir, sprintf('evolucao_dif%d_rodada%02d_%s.png', difficulty, run, ts_file));
+            print(fig_run, run_img_name, '-dpng');
+            close(fig_run);
+        catch
+        end
+
         fprintf('[Dificuldade %d] Rodada %02d/%02d concluída em %6.2fs | Gens: %02d | FitMax: %7.2f | HP: %3d | Atk: %2d | AtkSpd: %.2f | MovSpd: %.2f\n', ...
             difficulty, run, num_runs, time_elapsed, real_gens, best_overall_fitness, ...
             round(best_overall_chromosome(1)), round(best_overall_chromosome(2)), ...

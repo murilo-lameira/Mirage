@@ -1,1 +1,5 @@
 Data_Hora,Dificuldade,Populacao,Geracoes_Treinadas,Fitness_Max,Fitness_Medio,Elite_HP,Elite_Atk,Elite_AtkSpd,Elite_MovSpd,Elite_Sobrevivencia,Elite_Desvios,Elite_Colisoes,Elite_DanoCausado,Elite_DanoTomado,Tempo_Treino_Seg,Modo_EDS
+
+2026-09-01 15:22:47,2,50,21,583.24,259.07,85,30,1.88,3.05,20.55,24,4,1003.85,100.00,187.32,0
+2026-09-01 15:22:49,1,20,30,826.67,562.39,15,40,2.47,2.44,30.00,22,0,2636.67,0.00,122.21,0
+2026-09-01 15:23:10,3,100,17,573.16,115.67,46,25,1.71,5.49,6.25,15,2,239.31,50.00,211.08,0
