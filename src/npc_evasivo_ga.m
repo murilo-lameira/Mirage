@@ -8,6 +8,8 @@
 % =========================================================================
 
 clc; clear; close all;
+warning('off', 'all');
+try graphics_toolkit('qt'); catch; end;
 addpath(fileparts(mfilename('fullpath')));
 
 fprintf('--- INICIANDO TREINAMENTO EVOLUTIVO ---\n');

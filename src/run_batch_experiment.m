@@ -6,6 +6,8 @@
 % =========================================================================
 
 function run_batch_experiment(difficulty_arg, num_runs_arg, pure_mutation_arg)
+    warning('off', 'all');
+    try graphics_toolkit('qt'); catch; end;
     addpath(fileparts(mfilename('fullpath')));
     % Lê argumentos da linha de comando ou variáveis padrão
     if nargin < 1

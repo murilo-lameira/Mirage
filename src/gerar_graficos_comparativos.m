@@ -6,6 +6,8 @@
 % =========================================================================
 
 clc; clear; close all;
+warning('off', 'all');
+try graphics_toolkit('qt'); catch; end;
 addpath(fileparts(mfilename('fullpath')));
 
 csv_filename = fullfile('data', 'resultados_experimentos.csv');
