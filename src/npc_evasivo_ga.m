@@ -8,6 +8,7 @@
 % =========================================================================
 
 clc; clear; close all;
+addpath(fileparts(mfilename('fullpath')));
 
 fprintf('--- INICIANDO TREINAMENTO EVOLUTIVO ---\n');
 

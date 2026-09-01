@@ -6,6 +6,7 @@
 % =========================================================================
 
 clc; clear; close all;
+addpath(fileparts(mfilename('fullpath')));
 
 csv_filename = fullfile('data', 'resultados_experimentos.csv');
 if ~exist(csv_filename, 'file')

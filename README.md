@@ -60,3 +60,4 @@ Requisitos: O projeto foi construído para rodar de forma leve no **GNU Octave**
 * Murilo Romualdo
 
 *Desenvolvido em 2026 para a disciplina de Inteligência Artificial — Engenharia de Controle e Automação — UNISENAI.*
+
