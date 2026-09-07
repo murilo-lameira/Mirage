@@ -84,12 +84,12 @@ $$\vec{F}_{\text{evade}} = \left(\frac{\vec{p}_{\text{npc}}(t_{\text{cpa}}) - \v
 * **Slide 1 — Capa Oficial:** Título do Mirage, Autores, Orientador Me. Ricardo Martinez Vicentini e Logo UNISENAI. *(Apresentador: Murilo Lameira)*
 * **Slide 2 — O Problema do Determinismo em Jogos:** Limitações de FSMs e Árvores de Comportamento; como o jogador decora e vence facilmente. *(Apresentador: Murilo Lameira)*
 * **Slide 3 — A Proposta do Mirage:** Visão geral da arena cinemática e aprendizado autônomo via Algoritmos Genéticos. *(Apresentador: Murilo Lameira)*
-* **Slide 4 — Fundamentação: Qualidade-Diversidade (MAP-Elites):** [[Ref - Kirk & Scirea (Map-Elites)]] e o Heatmap 3x3 de nichos de combate (`map_elites_heatmap.png`). *(Apresentador: Henry Matheus)*
-* **Slide 5 — Skilled Experience Catalogue (SEC) & DDA:** Marcos de evolução off-line para ajuste dinâmico de dificuldade em jogos reais [[Ref - Glavin & Madden (Skilled Experience Catalogue)]]. *(Apresentador: Henry Matheus)*
-* **Slide 6 — Parametrização e Operadores do AG:** Seleção por Torneio ($k=3$), Crossover Uniforme, Mutação Gaussiana e Modo EDS [[Parametrização Geral do GA]]. *(Apresentador: Henry Matheus)*
-* **Slide 7 — Cinemática de Esquiva Preditiva:** [[Ref - Lee (KIOTS)]], cálculo de Ponto de Maior Aproximação (CPA) e Steering Behaviors de Craig Reynolds. *(Apresentador: Leonardo Retori)*
-* **Slide 8 — O Genoma do NPC e o Orçamento Global (Point-Buy):** Restrição de orçamento ($\sum u_i \le 1.8$) nos 4 genes para impedir Super-NPCs e forçar trade-offs [[Cromossomo & Genes]]. *(Apresentador: Leonardo Retori)*
-* **Slide 9 — Função de Fitness e Escalonamento por Fator de Mérito:** Equação multi-objetivo e bonificação heroica do modo Difícil [[Função de Fitness]]. *(Apresentador: Leonardo Retori)*
+* **Slide 4 — Fundamentação: Qualidade-Diversidade (MAP-Elites):** [[Ref - Kirk & Scirea (Map-Elites)]] e o Heatmap 3x3 de nichos de combate (`map_elites_heatmap.png`). *(Apresentador: Leonardo Retori)*
+* **Slide 5 — Skilled Experience Catalogue (SEC) & DDA:** Marcos de evolução off-line para ajuste dinâmico de dificuldade em jogos reais [[Ref - Glavin & Madden (Skilled Experience Catalogue)]]. *(Apresentador: Leonardo Retori)*
+* **Slide 6 — Parametrização e Operadores do AG:** Seleção por Torneio ($k=3$), Crossover Uniforme, Mutação Gaussiana e Modo EDS [[Parametrização Geral do GA]]. *(Apresentador: Leonardo Retori)*
+* **Slide 7 — Cinemática de Esquiva Preditiva:** [[Ref - Lee (KIOTS)]], cálculo de Ponto de Maior Aproximação (CPA) e Steering Behaviors de Craig Reynolds. *(Apresentador: Henry Matheus)*
+* **Slide 8 — O Genoma do NPC e o Orçamento Global (Point-Buy):** Restrição de orçamento ($\sum u_i \le 1.8$) nos 4 genes para impedir Super-NPCs e forçar trade-offs [[Cromossomo & Genes]]. *(Apresentador: Henry Matheus)*
+* **Slide 9 — Função de Fitness e Escalonamento por Fator de Mérito:** Equação multi-objetivo e bonificação heroica do modo Difícil [[Função de Fitness]]. *(Apresentador: Henry Matheus)*
 * **Slide 10 — Arena 2D Dinâmica, Pilares de Cobertura e Bullet Hell:** Demonstração animada (`demonstracao_npc.gif`) com 4 pilares de absorção física, HUD com rastro/vetor Reynolds e contra-ataques azuis. *(Apresentador: Murilo Romualdo)*
 * **Slide 11 — Estudo de Caso: O Combate ao Reward Hacking:** Como o exploit do "tanque parado" foi diagnosticado e eliminado [[O Problema da Convergencia Prematura]]. *(Apresentador: Murilo Romualdo)*
 * **Slide 12 — Curvas de Convergência Monotônica (Noisy Fitness Mitigation):** Eliminação do ruído estocástico através do rastreamento de melhor histórico global [[Execução Paralela & Análise Comparativa]]. *(Apresentador: Murilo Romualdo)*
@@ -106,7 +106,7 @@ $$\vec{F}_{\text{evade}} = \left(\frac{\vec{p}_{\text{npc}}(t_{\text{cpa}}) - \v
 ```
  0:00          3:00          6:30          10:00        14:00  15:00
   ├─────────────┼─────────────┼─────────────┼────────────┼──────┤
-  │  Murilo L.  │    Henry    │  Leonardo   │ Murilo R.  │ FAQ  │
+  │  Murilo L.  │  Leonardo   │    Henry    │ Murilo R.  │ FAQ  │
   │  Contexto   │ QD & Teoria │Física/Budget│ Experim.   │Banca │
 ```
 

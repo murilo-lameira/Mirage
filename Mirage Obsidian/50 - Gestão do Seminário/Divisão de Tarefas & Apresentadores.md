@@ -11,12 +11,12 @@ O seminário é estruturado para uma apresentação coordenada e síncrona entre
 * **Tempo:** $0\text{min}00\text{s} \to 3\text{min}00\text{s}$ ($3$ minutos).
 * **Foco Técnico:** O problema dos NPCs determinísticos clássicos (FSMs e Árvores de Comportamento previsíveis); motivação para o uso de IA Evolutiva adaptativa no projeto Mirage.
 
-### 🧑‍💼 Henry Matheus
+### 🧑‍💼 Leonardo Retori
 * **Papel:** Apresentador 2 (Fundamentação Teórica, MAP-Elites e Operadores).
 * **Tempo:** $3\text{min}00\text{s} \to 6\text{min}30\text{s}$ ($3.5$ minutos).
 * **Foco Técnico:** Qualidade-Diversidade (MAP-Elites - Kirk & Scirea); importância de não convergir para um único arquétipo previsível; catálogo SEC (Glavin & Madden) e operadores genéticos (Torneio, Crossover Uniforme, Mutação Gaussiana).
 
-### 🧑‍💼 Leonardo Retori
+### 🧑‍💼 Henry Matheus
 * **Papel:** Apresentador 3 (Arquitetura Física, Genes e Equação de Fitness).
 * **Tempo:** $6\text{min}30\text{s} \to 10\text{min}00\text{s}$ ($3.5$ minutos).
 * **Foco Técnico:** Cinemática da esquiva preditiva (Steering Behaviors de Craig Reynolds e cálculo de CPA); vetor de 4 genes e **Orçamento Global de Atributos ($B = 1.8$)**; Função de Fitness Multi-Objetivo com calibração por Fator de Mérito.
