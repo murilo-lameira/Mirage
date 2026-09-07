@@ -34,6 +34,14 @@ Este projeto consolida os fundamentos acadêmicos de algoritmos evolutivos combi
   <img src="data/graficos/map_elites_heatmap.png" alt="Heatmap MAP-Elites Mirage" width="560">
 </p>
 
+* **🏛️ Pilares de Cobertura Física & Padrões Danmaku:** A arena contém 4 pilares simétricos que absorvem tiros e bloqueiam o NPC (*Occlusion Steering*), além de padrões compostos de disparo em leque (*Shotgun Cone*) e vórtices espirais contínuos.
+* **📊 Validação Estatística Rigorosa (ANOVA & Teste $t$):** Comprovação matemática formal de separabilidade de desempenho ($F = 138.24, \; p = 1.44 \times 10^{-15} \ll 0.05$) com gráficos Boxplot de dispersão por quartis e medianas:
+
+<p align="center">
+  <img src="data/graficos/boxplot_fitness_dificuldade.png" alt="Boxplot de Fitness por Dificuldade" width="480">
+  <img src="data/graficos/boxplot_distribuicao_genes.png" alt="Boxplot de Distribuição de Genes" width="480">
+</p>
+
 * **📚 Skilled Experience Catalogue (SEC):** Módulo baseado na pesquisa de Glavin & Madden, que salva marcos de geração da IA para permitir **Ajuste Dinâmico de Dificuldade (DDA)** em aplicações de jogos reais.
 * **💥 Evolutionary Dynamic Scripting (EDS):** Opcional "Modo Mutação Pura" validando as teses de adaptação imediata através do uso de ruídos Box-Muller (sem cruzamento).
 

@@ -49,6 +49,14 @@ A automação dispara **3 processos independentes do GNU Octave CLI simultaneame
 4. **[`src/analise_evolucao_media.m`](file:///f:/Faculdade/Projetos/Mirage/src/analise_evolucao_media.m):**
    * Script analítico que lê `data/historico_geracoes.csv` e calcula a **curva média de aprendizado** geração a geração de todas as rodadas executadas, salvando a imagem em `data/graficos/evolucao_media_por_dificuldade.png`.
 
+5. **[`src/gerar_boxplots.m`](file:///f:/Faculdade/Projetos/Mirage/src/gerar_boxplots.m):**
+   * Renderiza boxplots estatísticos com medianas, quartis e outliers:
+     * `data/graficos/boxplot_fitness_dificuldade.png`: Dispersão de fitness por dificuldade.
+     * `data/graficos/boxplot_distribuicao_genes.png`: Dispersão dos 4 genes (HP, Ataque, Cadência, Velocidade).
+
+6. **[`src/teste_estatistico_hipoteses.m`](file:///f:/Faculdade/Projetos/Mirage/src/teste_estatistico_hipoteses.m):**
+   * Realiza One-Way ANOVA e testes $t$ bicaudais com cálculo exato de $p$-valor e tamanho de efeito de Cohen ($d$), gerando `data/relatorio_estatistico.txt`.
+
 ---
 
 ## 📈 Descobertas e Interpretação dos Gráficos
@@ -56,15 +64,20 @@ A automação dispara **3 processos independentes do GNU Octave CLI simultaneame
 ### 1. Suavização de Fitness Ruidoso (Noisy Fitness)
 Ambientes com geração aleatória de projéteis (`rand()`) provocam variações nas notas dos indivíduos reavaliados. Para garantir que as curvas de evolução representem fielmente o conhecimento acumulado pelo GA sem oscilações caóticas para baixo, rastreamos o `history_best_so_far(gen)`. Isso produz curvas de convergência monotônicas (em degraus), ideais para apresentação acadêmica.
 
-### 2. Relação de Fitness entre Dificuldades
-Observa-se que a curva **Fácil (Verde)** atinge patamares de fitness maiores (~800) que a **Difícil (Vermelha)** (~550). 
-* **Explicação:** A aptidão mede performance física absoluta em combate. Como a arena no modo Fácil possui disparos lentos e esparsos, os NPCs sobrevivem os 30s completos com facilidade, sofrem poucas colisões e atingem notas brutas máximas. No modo Difícil, a densidade e velocidade dos projéteis é extrema, impondo um teto físico natural à nota de sobrevivência.
+### 2. Escalonamento por Fator de Mérito ($\text{Difícil} > \text{Médio} > \text{Fácil}$)
+Com o sistema de Fator de Mérito, o modo **Difícil** atinge médias de $\sim 1816\text{ pts}$, o **Médio** atinge $\sim 901\text{ pts}$ e o **Fácil** $\sim 602\text{ pts}$. A sobrevivência e evasão no inferno de balas são devidamente recompensadas com patamares superiores.
+
+### 3. Validação Estatística das Diferenças
+A One-Way ANOVA nos dados experimentais ($N=32$) confirmou:
+* Estatística $F = 138.24$
+* $p\text{-valor} = 1.44 \times 10^{-15} \ll 0.05$ (Rejeita-se $H_0$ com significância extrema).
+* Testes $t$ pareados entre todas as dificuldades demonstraram $p < 10^{-8}$ e tamanho de efeito $d > 4.0$, comprovando a separabilidade estatística dos comportamentos evoluídos.
 
 ---
 
 ## 🎮 Como Executar
 * **Lote Paralelo:** Duplo clique em `scripts/Rodar_Experimentos_Paralelos.bat`.
-* **Gerar Gráficos:** Duplo clique em `scripts/Gerar_Todos_Graficos.bat` ou pelo console do Octave.
+* **Gerar Gráficos e Relatório:** Duplo clique em `scripts/Gerar_Todos_Graficos.bat`.
 * **Guia Completo de Comandos:** Consulte [[Guia de Uso & Comandos]].
 
 ---

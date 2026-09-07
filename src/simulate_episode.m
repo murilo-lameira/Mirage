@@ -36,6 +36,10 @@ function [T_survival, N_dodge, N_collision, D_taken, D_inflicted] = simulate_epi
     npc_pos = [0, 0];
     npc_vel = [0, 0];
     
+    % Pilares de Cobertura Física Estáticos (Obstáculos que bloqueiam projéteis)
+    pillars = [-8.0, -8.0; 8.0, -8.0; -8.0, 8.0; 8.0, 8.0];
+    pillar_radius = 1.3;
+    
     % Histórico de rastro (Motion Trail) e Projéteis do NPC
     trail_history = [];
     npc_projectiles = [];
@@ -91,6 +95,27 @@ function [T_survival, N_dodge, N_collision, D_taken, D_inflicted] = simulate_epi
             projectiles = [projectiles; spawn_pos, proj_vel, 1, 0];
         end
         
+        % PADRÕES AVANÇADOS DE BULLET HELL:
+        % Padrão 1: Disparo em Leque (Shotgun Cone Spread) no Médio e Difícil
+        if difficulty >= 2 && mod(t, 2.8) < dt && t > 1.0
+            angle_shotgun = rand() * 2 * pi;
+            spawn_sg = [18 * cos(angle_shotgun), 18 * sin(angle_shotgun)];
+            aim_sg = (npc_pos - spawn_sg);
+            aim_sg = aim_sg / norm(aim_sg);
+            for spread = [-0.22, 0, 0.22]
+                cs = cos(spread); ss = sin(spread);
+                rot_v = [aim_sg(1)*cs - aim_sg(2)*ss, aim_sg(1)*ss + aim_sg(2)*cs];
+                projectiles = [projectiles; spawn_sg, rot_v * (proj_base_speed * 1.05), 1, 0];
+            end
+        end
+        
+        % Padrão 2: Onda Espiral Contínua (Danmaku Spiral Vortex) no modo Difícil
+        if difficulty == 3 && mod(t, 0.75) < dt && t > 2.0
+            ang_spiral = 4.5 * t;
+            dir_spiral = [cos(ang_spiral), sin(ang_spiral)];
+            projectiles = [projectiles; [0, 0], dir_spiral * 9.5, 1, 0];
+        end
+        
         % O NPC escaneia o ambiente e calcula a força somada para fugir
         total_evade_force = [0, 0];
         if ~isempty(projectiles)
@@ -123,10 +148,29 @@ function [T_survival, N_dodge, N_collision, D_taken, D_inflicted] = simulate_epi
         % Integração da Posição
         npc_pos = npc_pos + npc_vel * dt;
         
+        % Restrição física contra colisão com pilares (NPC não atravessa coberturas)
+        for p = 1:size(pillars, 1)
+            d_p = npc_pos - pillars(p, :);
+            dist_p = norm(d_p);
+            min_dist_p = npc_radius + pillar_radius;
+            if dist_p < min_dist_p
+                if dist_p > 1e-4
+                    normal_p = d_p / dist_p;
+                    npc_pos = pillars(p, :) + normal_p * min_dist_p;
+                    v_dot = dot(npc_vel, normal_p);
+                    if v_dot < 0
+                        npc_vel = npc_vel - v_dot * normal_p;
+                    end
+                else
+                    npc_pos = npc_pos + [0.1, 0.1];
+                end
+            end
+        end
+        
         % Restrição espacial (Bordas da Arena)
         npc_pos = max(min(npc_pos, [18, 18]), [-18, -18]);
         
-        % Atualiza os Projéteis e Checa Colisão/Radar
+        % Atualiza os Projéteis e Checa Colisão/Radar/Pilares
         if ~isempty(projectiles)
             active_idx = find(projectiles(:, 5) == 1);
             for i = 1:length(active_idx)
@@ -135,6 +179,19 @@ function [T_survival, N_dodge, N_collision, D_taken, D_inflicted] = simulate_epi
                 % Movimenta projétil
                 projectiles(idx, 1:2) = projectiles(idx, 1:2) + projectiles(idx, 3:4) * dt;
                 p_pos = projectiles(idx, 1:2);
+                
+                % Checa Colisão com Pilares (Pilares absorvem projéteis)
+                collided_pillar = false;
+                for p = 1:size(pillars, 1)
+                    if norm(p_pos - pillars(p, :)) < (pillar_radius + 0.3)
+                        projectiles(idx, 5) = 0; % Projétil bloqueado pela cobertura
+                        collided_pillar = true;
+                        break;
+                    end
+                end
+                if collided_pillar
+                    continue;
+                end
                 
                 % Checa distância do NPC
                 dist = norm(npc_pos - p_pos);
@@ -213,9 +270,16 @@ function [T_survival, N_dodge, N_collision, D_taken, D_inflicted] = simulate_epi
         if visualize
             cla; % Limpa o frame
             
-            % 1. Limite da Arena e Centro
+            % 1. Limite da Arena, Centro e Pilares de Cobertura
             rectangle('Position', [-18, -18, 36, 36], 'EdgeColor', [0.8, 0.2, 0.2], 'LineStyle', ':', 'LineWidth', 1.5);
             plot(0, 0, 'k+', 'MarkerSize', 8, 'LineWidth', 1.5);
+            
+            for p = 1:size(pillars, 1)
+                rectangle('Position', [pillars(p, 1)-pillar_radius, pillars(p, 2)-pillar_radius, pillar_radius*2, pillar_radius*2], ...
+                          'Curvature', [1, 1], 'FaceColor', [0.45, 0.50, 0.55], 'EdgeColor', [0.2, 0.25, 0.3], 'LineWidth', 2);
+                text(pillars(p, 1), pillars(p, 2), 'PILAR', 'HorizontalAlignment', 'center', ...
+                     'Color', [0.9, 0.95, 1.0], 'FontSize', 7, 'FontWeight', 'bold');
+            end
             
             % 2. Rastro de Movimento (Motion Trail)
             if size(trail_history, 1) > 1

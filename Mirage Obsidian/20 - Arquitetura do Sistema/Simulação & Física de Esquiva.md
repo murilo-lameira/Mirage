@@ -60,6 +60,22 @@ A hostilidade física do ambiente varia em função da dificuldade selecionada:
 
 ---
 
+## 🏛️ Pilares de Cobertura Física (*Cover Pillars*)
+
+A arena conta com **4 pilares cilíndricos simétricos** ($r = 1.3\text{m}$) posicionados em $(\pm 8, \pm 8)$:
+* **Absorção de Projéteis:** Qualquer tiro inimigo que atingir a área do pilar é neutralizado e destruído antes de atingir o NPC.
+* **Física de Bloqueio do NPC:** O NPC não pode atravessar os pilares, sofrendo restrição normal elástica e deslizamento tangencial, incentivando o surgimento de estratégias de escudo tático (*Occlusion Steering*).
+
+---
+
+## 🌪️ Padrões Compostos de Bullet Hell
+
+Além dos disparos direcionados simples, a arena implementa padrões clássicos:
+1. **Disparo em Leque (*Shotgun Cone*):** Salvas de 3 tiros em ângulos divergentes $(\pm 15^\circ)$ a cada $2.8\text{s}$ nos modos Médio e Difícil.
+2. **Vórtice Espiral (*Danmaku Spiral*):** Onda contínua emitida do centro da arena com velocidade angular $\omega = 4.5\text{ rad/s}$ no modo Difícil.
+
+---
+
 ## 🔗 Conexões
 - [[Ref - Lee (KIOTS)]]
 - [[Função de Fitness]]
