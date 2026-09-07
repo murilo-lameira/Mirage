@@ -81,20 +81,20 @@ $$\vec{F}_{\text{evade}} = \left(\frac{\vec{p}_{\text{npc}}(t_{\text{cpa}}) - \v
 
 # 🎚️ PARTE 2: BLUEPRINT VISUAL DE SLIDES (14 Slides)
 
-* **Slide 1 — Capa do Projeto:** Título, Autores, Orientador Me. Ricardo Martinez Vicentini e Logo UNISENAI.
-* **Slide 2 — O Problema do Determinismo em Jogos:** Limitações de FSMs e Árvores de Comportamento.
-* **Slide 3 — Fundamentação Científica: Qualidade-Diversidade:** [[Ref - Kirk & Scirea (Map-Elites)]].
-* **Slide 4 — Cinemática da Esquiva Preditiva:** [[Ref - Lee (KIOTS)]] e Steering Behaviors de Reynolds.
-* **Slide 5 — O Genoma do NPC e o Orçamento Global (Point-Buy):** [[Cromossomo & Genes]].
-* **Slide 6 — Função de Fitness Multi-Objetivo:** [[Função de Fitness]].
-* **Slide 7 — A Arena 2D de Simulação Física:** Radar periférico e detecção de CPA.
-* **Slide 8 — Parametrização e Operadores do AG:** [[Parametrização Geral do GA]].
-* **Slide 9 — Escalonamento de Dificuldade (Fácil, Médio, Difícil):** [[Configuração de Dificuldade]].
-* **Slide 10 — Critério de Parada e Estabilidade de Bhandari:** [[Critério de Parada e Convergência]].
-* **Slide 11 — Estudo de Caso: O Problema da Convergência Prematura:** [[O Problema da Convergencia Prematura]].
-* **Slide 12 — Automação Paralela e Resultados Experimentais (30 Testes):** [[Execução Paralela & Análise Comparativa]].
-* **Slide 13 — Gráficos Comparativos de Convergência do Octave:** [[Diário de Testes]].
-* **Slide 14 — Conclusões, Impacto da Engenharia e Trabalhos Futuros.**
+* **Slide 1 — Capa Oficial:** Título do Mirage, Autores, Orientador Me. Ricardo Martinez Vicentini e Logo UNISENAI. *(Apresentador: Murilo Lameira)*
+* **Slide 2 — O Problema do Determinismo em Jogos:** Limitações de FSMs e Árvores de Comportamento; como o jogador decora e vence facilmente. *(Apresentador: Murilo Lameira)*
+* **Slide 3 — A Proposta do Mirage:** Visão geral da arena cinemática e aprendizado autônomo via Algoritmos Genéticos. *(Apresentador: Murilo Lameira)*
+* **Slide 4 — Fundamentação: Qualidade-Diversidade (MAP-Elites):** [[Ref - Kirk & Scirea (Map-Elites)]] e o Heatmap 3x3 de nichos de combate (`map_elites_heatmap.png`). *(Apresentador: Henry Matheus)*
+* **Slide 5 — Skilled Experience Catalogue (SEC) & DDA:** Marcos de evolução off-line para ajuste dinâmico de dificuldade em jogos reais [[Ref - Glavin & Madden (Skilled Experience Catalogue)]]. *(Apresentador: Henry Matheus)*
+* **Slide 6 — Parametrização e Operadores do AG:** Seleção por Torneio ($k=3$), Crossover Uniforme, Mutação Gaussiana e Modo EDS [[Parametrização Geral do GA]]. *(Apresentador: Henry Matheus)*
+* **Slide 7 — Cinemática de Esquiva Preditiva:** [[Ref - Lee (KIOTS)]], cálculo de Ponto de Maior Aproximação (CPA) e Steering Behaviors de Craig Reynolds. *(Apresentador: Leonardo Retori)*
+* **Slide 8 — O Genoma do NPC e o Orçamento Global (Point-Buy):** Restrição de orçamento ($\sum u_i \le 1.8$) nos 4 genes para impedir Super-NPCs e forçar trade-offs [[Cromossomo & Genes]]. *(Apresentador: Leonardo Retori)*
+* **Slide 9 — Função de Fitness e Escalonamento por Fator de Mérito:** Equação multi-objetivo e bonificação heroica do modo Difícil [[Função de Fitness]]. *(Apresentador: Leonardo Retori)*
+* **Slide 10 — Arena 2D Dinâmica, Pilares de Cobertura e Bullet Hell:** Demonstração animada (`demonstracao_npc.gif`) com 4 pilares de absorção física, HUD com rastro/vetor Reynolds e contra-ataques azuis. *(Apresentador: Murilo Romualdo)*
+* **Slide 11 — Estudo de Caso: O Combate ao Reward Hacking:** Como o exploit do "tanque parado" foi diagnosticado e eliminado [[O Problema da Convergencia Prematura]]. *(Apresentador: Murilo Romualdo)*
+* **Slide 12 — Curvas de Convergência Monotônica (Noisy Fitness Mitigation):** Eliminação do ruído estocástico através do rastreamento de melhor histórico global [[Execução Paralela & Análise Comparativa]]. *(Apresentador: Murilo Romualdo)*
+* **Slide 13 — Validação Estatística Rigorosa (ANOVA & Boxplots):** Comprovação com One-Way ANOVA ($F = 138.24, \; p = 1.44 \times 10^{-15} \ll 0.05$) e gráficos de dispersão `boxplot_fitness_dificuldade.png` e `boxplot_distribuicao_genes.png`. *(Apresentador: Murilo Romualdo)*
+* **Slide 14 — Conclusões, Engenharia de Software e Trabalhos Futuros:** Síntese dos resultados, repositório aberto e roadmap técnico. *(Apresentador: Murilo Romualdo)*
 
 ---
 
@@ -106,7 +106,7 @@ $$\vec{F}_{\text{evade}} = \left(\frac{\vec{p}_{\text{npc}}(t_{\text{cpa}}) - \v
 ```
  0:00          3:00          6:30          10:00        14:00  15:00
   ├─────────────┼─────────────┼─────────────┼────────────┼──────┤
-  │  Leonardo   │    Henry    │  Murilo L.  │ Murilo R.  │ FAQ  │
+  │  Murilo L.  │    Henry    │  Leonardo   │ Murilo R.  │ FAQ  │
   │  Contexto   │ QD & Teoria │Física/Budget│ Experim.   │Banca │
 ```
 
@@ -114,20 +114,20 @@ $$\vec{F}_{\text{evade}} = \left(\frac{\vec{p}_{\text{npc}}(t_{\text{cpa}}) - \v
 
 # 🧠 PARTE 4: GUIA DE DEFESA (FAQ da Banca)
 
-### ❓ Pergunta 1: "Por que taxa de cruzamento tão alta (70–90%)? O que aconteceria com 10%?"
-**Resposta:** O crossover é o motor principal do AG para recombinar subestruturas genéticas bem-sucedidas. Com apenas 10%, a evolução dependeria quase exclusivamente de mutações estocásticas cegas, tornando o aprendizado lento e errático.
+### ❓ Pergunta 1: "Como vocês provam cientificamente que as diferenças de desempenho não foram mero acaso?"
+**Resposta:** Executamos 32 baterias independentes e submetemos os dados à Análise de Variância (One-Way ANOVA), calculando o $p$-valor exato via função beta incompleta (`betainc`). Obtivemos $F = 138.24$ e $p = 1.44 \times 10^{-15} \ll 0.05$, demonstrando rejeição inequívoca da hipótese nula e separabilidade estatística extrema entre as classes de dificuldade.
 
-### ❓ Pergunta 2: "Qual o papel da mutação e como vocês definem o equilíbrio?"
-**Resposta:** A mutação injeta diversidade no espaço de busca para escapar de ótimos locais. Mutação abaixo de 1% gera estagnação prematura; mutação acima de 15% quebra as estratégias consolidadas pelo cruzamento (comportamento caótico).
+### ❓ Pergunta 2: "Por que taxa de cruzamento tão alta (70–90%)? O que aconteceria com 10%?"
+**Resposta:** O crossover é o motor principal do AG para recombinar blocos construtivos genéticos (*building blocks*) bem-sucedidos. Com apenas 10%, a evolução dependeria quase exclusivamente de mutações estocásticas cegas, tornando o aprendizado lento e errático.
 
-### ❓ Pergunta 3: "Por que Seleção por Torneio e não Roleta Proporcional?"
-**Resposta:** A roleta proporcional sofre com o "efeito super-indivíduo", onde um único NPC com pontuação inicial alta domina todo o pool genético. O Torneio ($k=3$) mantém a pressão seletiva constante e preserva a diversidade de nichos comportamentais.
+### ❓ Pergunta 3: "Qual o papel do Orçamento Global de Atributos (Point-Buy Budget)?"
+**Resposta:** Sem o orçamento ($\sum u_i \le 1.8$), a evolução convergiria inevitavelmente para indivíduos com $100\%$ em todos os atributos (Super-NPCs invencíveis), eliminando a diversidade tática. O orçamento força um *trade-off* físico: para ganhar velocidade de fuga, o NPC deve abrir mão de vida e ataque.
 
-### ❓ Pergunta 4: "Como o critério de Bhandari é superior à parada por número fixo de gerações?"
-**Resposta:** Parar em um número fixo de gerações ou desperdiça CPU após a convergência ou interrompe o treino antes do aprendizado. Monitorar a taxa de melhoria ($\Delta < 1\%$ por 15 gerações) encerra o treino dinamicamente no momento exato em que a população atinge a estabilidade.
+### ❓ Pergunta 4: "Por que Seleção por Torneio e não Roleta Proporcional?"
+**Resposta:** A roleta proporcional sofre com o "efeito super-indivíduo", onde um único indivíduo com pontuação inicial alta domina desproporcionalmente o pool genético, gerando convergência prematura. O Torneio ($k=3$) mantém a pressão seletiva calibrada e constante ao longo das gerações.
 
 ### ❓ Pergunta 5: "Por que Algoritmos Genéticos e não Aprendizado por Reforço Profundo (DQN/PPO)?"
-**Resposta:** Deep RL exige redes neurais pesadas e centenas de milhares de passos de treino que consomem recursos excessivos de CPU/GPU incompatíveis com a taxa de quadros de um jogo. O AG é leve, opera diretamente sobre parâmetros contínuos de controle e treina em poucos segundos.
+**Resposta:** Deep RL exige redes neurais convolucionais densas e milhões de passos de treino com altíssimo custo computacional, incompatíveis com os ciclos de CPU de um jogo em tempo real. O AG associado ao MAP-Elites gera um catálogo diversificado de comportamentos em poucos segundos com footprint de memória mínimo.
 
 ---
 
