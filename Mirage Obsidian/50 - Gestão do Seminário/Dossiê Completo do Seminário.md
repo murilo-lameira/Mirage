@@ -79,7 +79,7 @@ $$\vec{F}_{\text{evade}} = \left(\frac{\vec{p}_{\text{npc}}(t_{\text{cpa}}) - \v
 
 ---
 
-# 🎚️ PARTE 2: BLUEPRINT VISUAL DE SLIDES (14 Slides)
+# 🎚️ PARTE 2: BLUEPRINT VISUAL DE SLIDES (15 Slides)
 
 * **Slide 1 — Capa Oficial:** Título do Mirage, Autores, Orientador Me. Ricardo Martinez Vicentini e Logo UNISENAI. *(Apresentador: Murilo Lameira)*
 * **Slide 2 — O Problema do Determinismo em Jogos:** Limitações de FSMs e Árvores de Comportamento; como o jogador decora e vence facilmente. *(Apresentador: Murilo Lameira)*
@@ -92,9 +92,10 @@ $$\vec{F}_{\text{evade}} = \left(\frac{\vec{p}_{\text{npc}}(t_{\text{cpa}}) - \v
 * **Slide 9 — Função de Fitness e Escalonamento por Fator de Mérito:** Equação multi-objetivo e bonificação heroica do modo Difícil [[Função de Fitness]]. *(Apresentador: Henry Matheus)*
 * **Slide 10 — Arena 2D Dinâmica, Pilares de Cobertura e Bullet Hell:** Demonstração animada (`demonstracao_npc.gif`) com 4 pilares de absorção física, HUD com rastro/vetor Reynolds e contra-ataques azuis. *(Apresentador: Murilo Romualdo)*
 * **Slide 11 — Estudo de Caso: O Combate ao Reward Hacking:** Como o exploit do "tanque parado" foi diagnosticado e eliminado [[O Problema da Convergencia Prematura]]. *(Apresentador: Murilo Romualdo)*
-* **Slide 12 — Curvas de Convergência Monotônica (Noisy Fitness Mitigation):** Eliminação do ruído estocástico através do rastreamento de melhor histórico global [[Execução Paralela & Análise Comparativa]]. *(Apresentador: Murilo Romualdo)*
-* **Slide 13 — Validação Estatística Rigorosa (ANOVA & Boxplots):** Comprovação com One-Way ANOVA ($F = 138.24, \; p = 1.44 \times 10^{-15} \ll 0.05$) e gráficos de dispersão `boxplot_fitness_dificuldade.png` e `boxplot_distribuicao_genes.png`. *(Apresentador: Murilo Romualdo)*
-* **Slide 14 — Conclusões, Engenharia de Software e Trabalhos Futuros:** Síntese dos resultados, repositório aberto e roadmap técnico. *(Apresentador: Murilo Romualdo)*
+* **Slide 12 — Mitigação de Ruído Estocástico (Noisy Fitness):** Eliminação do ruído estocástico através do rastreamento de melhor histórico global monotônico [[Execução Paralela & Análise Comparativa]]. *(Apresentador: Murilo Romualdo)*
+* **Slide 13 — Curva Média Consolidada & Parada Antecipada (Bhandari):** Análise comparativa das 30 baterias paralelas (`evolucao_media_por_dificuldade.png`) e comprovação de convergência precoce dos modos Difícil e Médio. *(Apresentador: Murilo Romualdo)*
+* **Slide 14 — Validação Estatística Rigorosa (ANOVA & Boxplots):** Comprovação com One-Way ANOVA ($F = 138.24, \; p = 1.44 \times 10^{-15} \ll 0.05$) e gráficos de dispersão `boxplot_fitness_dificuldade.png` e `boxplot_distribuicao_genes.png`. *(Apresentador: Murilo Romualdo)*
+* **Slide 15 — Conclusões, Engenharia de Software e Trabalhos Futuros:** Síntese dos resultados, repositório aberto e roadmap técnico. *(Apresentador: Murilo Romualdo)*
 
 ---
 
@@ -128,6 +129,9 @@ $$\vec{F}_{\text{evade}} = \left(\frac{\vec{p}_{\text{npc}}(t_{\text{cpa}}) - \v
 
 ### ❓ Pergunta 5: "Por que Algoritmos Genéticos e não Aprendizado por Reforço Profundo (DQN/PPO)?"
 **Resposta:** Deep RL exige redes neurais convolucionais densas e milhões de passos de treino com altíssimo custo computacional, incompatíveis com os ciclos de CPU de um jogo em tempo real. O AG associado ao MAP-Elites gera um catálogo diversificado de comportamentos em poucos segundos com footprint de memória mínimo.
+
+### ❓ Pergunta 6: "Por que as curvas dos modos Médio e Difícil terminam por volta da geração 21/22 enquanto o Fácil foi até a 50?"
+**Resposta:** Isso comprova a eficácia do nosso Critério de Parada Antecipada por Estagnação (Critério de Bhandari, com $K=15$ e $\epsilon=1\%$). Nos modos Médio e Difícil, o forte elitismo e altas taxas de recombinação (75% a 90%) fizeram a população convergir para a estratégia ideal logo por volta da 6ª geração. Como permaneceu 15 gerações estável com melhoria inferior a 1%, o algoritmo encerrou a execução para poupar processamento. No Fácil, a mutação agressiva (15%) e ausência de elitismo forçaram o algoritmo a explorar o espaço até o teto estipulado de 50 gerações.
 
 ---
 

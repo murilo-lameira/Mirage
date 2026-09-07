@@ -24,7 +24,7 @@ O seminário é estruturado para uma apresentação coordenada e síncrona entre
 ### 🧑‍💼 Murilo Romualdo
 * **Papel:** Apresentador 4 (Arena Dinâmica, Validação Estatística ANOVA, Demonstração e Fechamento).
 * **Tempo:** $10\text{min}00\text{s} \to 14\text{min}00\text{s}$ ($4$ minutos).
-* **Foco Técnico:** Pilares de cobertura física e padrões compostos de Bullet Hell; mitigação de Noisy Fitness com curvas monotônicas; validação estatística formal (One-Way ANOVA com $F=138.24, p=1.44\times 10^{-15}$ e Boxplots); demonstração visual do campeão e considerações finais.
+* **Foco Técnico:** Pilares de cobertura física e padrões compostos de Bullet Hell; mitigação de Noisy Fitness com curvas monotônicas; análise de 30 baterias consolidadas com parada precoce de Bhandari; validação estatística formal (One-Way ANOVA com $F=138.24, p=1.44\times 10^{-15}$ e Boxplots); demonstração visual do campeão e considerações finais.
 
 ---
 

@@ -40,9 +40,28 @@ Script estruturado com marcações de tempo e falas sugeridas para o seminário.
 ---
 
 ## 🎙️ Bloco 4: Dificuldades, Resultados e Conclusão ($10:00 \to 14:00$)
-**Apresentador:** Murilo Romualdo (Slides 10 a 14)
+**Apresentador:** Murilo Romualdo (Slides 10 a 15)
 
-* **Fala Chave:** *"A arena foi enriquecida com 4 pilares físicos de cobertura que absorvem projéteis e padrões compostos de disparo em leque e vórtice espiral. Para comprovar a reprodutibilidade acadêmica, automatizamos 32 baterias em paralelo no Octave e eliminamos o ruído de fitness com curvas de convergência monotônicas. Aplicamos a One-Way ANOVA, que comprovou com F = 138.24 e p = 1.44 x 10^-15 que as estratégias evoluídas para cada dificuldade são estatisticamente distintas e significantes."*
+* **Slide 10 — Arena 2D Dinâmica, Pilares de Cobertura e Bullet Hell:**
+  *"Para testar a resiliência física do NPC, enriquecemos a arena com 4 pilares simétricos de absorção balística, além de disparos em cone e vórtices espirais. O agente precisa não apenas fugir dos tiros, mas utilizar a geometria do ambiente como escudo tático (Occlusion Steering)."*
+
+* **Slide 11 — Estudo de Caso: Combate ao Reward Hacking:**
+  *"Durante os testes iniciais, identificamos que o AG aprendeu um 'exploit': criar um tanque gigante e ficar parado tomando tiros. Eliminamos essa anomalia introduzindo o Orçamento Global de Atributos, obrigando o cromossomo a trocar vida por agilidade de esquiva."*
+
+* **Slide 12 — Mitigação de Ruído Estocástico (Noisy Fitness):**
+  *"Em ambientes balísticos dinâmicos, a avaliação de um único indivíduo é ruidosa: um NPC medíocre pode ter sorte e sobreviver por desvio acidental. Para garantir rigor científico, desenvolvemos um módulo de rastreamento do melhor histórico global, convertendo oscilações estocásticas em curvas de aprendizado monotônicas."*
+
+* **Slide 13 — Curva Média Consolidada & Critério de Parada Antecipada (Bhandari):**
+  *"Executamos baterias paralelas no Octave com cerca de 30 rodadas por dificuldade. Como vemos neste gráfico consolidado de 50 gerações:*
+  * *No **Modo Difícil (linha vermelha)**, graças ao crossover alto (90%) e à preservação dos 3 melhores elites, o NPC aprende rápido e estabiliza em ~1770 pontos. O critério de estagnação de Bhandari encerra a execução aos 21 passos porque detectou que a população já convergiu plenamente (15 gerações sem ganho > 1%), economizando tempo e poder de processamento.*
+  * *No **Modo Médio (linha azul)**, ocorre o mesmo fenômeno na geração 22, estabilizando no platô de ~880 pontos.*
+  * *Já no **Modo Fácil (linha verde)**, configuramos intencionalmente uma mutação altíssima de 15% e sem elitismo. Por ser caótico e não estagnar, ele explora continuamente o espaço de busca até atingir o teto de 50 gerações."*
+
+* **Slide 14 — Validação Estatística Rigorosa (ANOVA & Boxplots):**
+  *"Submetemos todas as baterias à Análise de Variância (One-Way ANOVA). Com F = 138.24 e p-valor = 1.44 x 10^-15 (muito menor que 0.05), comprovamos matematicamente que as estratégias evoluídas para cada dificuldade são completamente distintas, reproduzíveis e estatisticamente significantes."*
+
+* **Slide 15 — Conclusões, Engenharia de Software e Trabalhos Futuros:**
+  *"O Mirage comprova a viabilidade de usar Computação Evolutiva e MAP-Elites para gerar comportamentos de NPCs adaptativos, imprevisíveis e leves em jogos de tempo real. Todo o código-fonte, dados e documentação modular estão abertos sob licença MIT."*
 
 ---
 

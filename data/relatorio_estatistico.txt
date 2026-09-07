@@ -1,23 +1,23 @@
 ==============================================================================
             📊 RELATÓRIO DE VALIDAÇÃO ESTATÍSTICA (PROJETO MIRAGE)            
 ==============================================================================
-Data de Emissão: 2026-09-07 14:29:43
-Total de Experimentos Avaliados: N = 33
+Data de Emissão: 2026-09-07 16:53:02
+Total de Experimentos Avaliados: N = 85
 ------------------------------------------------------------------------------
 1. ESTATÍSTICA DESCRITIVA (FITNESS MÁXIMO):
-   - Fácil   (N=10): Média =   602.99 | DesvPad =  29.24 | Mediana =   596.59
-   - Médio   (N=11): Média =   901.77 | DesvPad =  37.52 | Mediana =   905.95
-   - Difícil (N=12): Média =  1752.13 | DesvPad = 360.08 | Mediana =  1818.95
+   - Fácil   (N=30): Média =   627.50 | DesvPad =  32.64 | Mediana =   636.06
+   - Médio   (N=29): Média =   882.86 | DesvPad =  42.29 | Mediana =   886.34
+   - Difícil (N=26): Média =  1703.95 | DesvPad = 257.78 | Mediana =  1738.18
 ------------------------------------------------------------------------------
 2. ANÁLISE DE VARIÂNCIA (ONE-WAY ANOVA):
    - Hipótese Nula (H0): As médias de fitness são iguais entre dificuldades.
-   - Graus de Liberdade: Entre Grupos = 2, Dentro dos Grupos = 30
-   - Estatística F = 82.7879
-   - p-valor ANOVA = 6.125100e-13
+   - Graus de Liberdade: Entre Grupos = 2, Dentro dos Grupos = 82
+   - Estatística F = 406.6687
+   - p-valor ANOVA = 0.000000e+00
    >>> CONCLUSÃO: REJEITA-SE H0 (p < 0.05). Há diferença estatisticamente significante!
 ------------------------------------------------------------------------------
 3. TESTES T DE STUDENT (PAREADOS ENTRE NÍVEIS):
-   - Médio vs. Fácil:   t =  20.202 | p-valor = 2.652592e-14 | Cohen d = 8.83 (Efeito Grande)
-   - Difícil vs. Médio: t =   7.779 | p-valor = 1.287563e-07 | Cohen d = 3.25 (Efeito Grande)
-   - Difícil vs. Fácil: t =  10.023 | p-valor = 3.043393e-09 | Cohen d = 4.29 (Efeito Extremo)
+   - Médio vs. Fácil:   t =  26.018 | p-valor = 2.569396e-33 | Cohen d = 6.78 (Efeito Grande)
+   - Difícil vs. Médio: t =  16.918 | p-valor = 5.107785e-23 | Cohen d = 4.57 (Efeito Grande)
+   - Difícil vs. Fácil: t =  22.694 | p-valor = 2.757039e-29 | Cohen d = 6.08 (Efeito Extremo)
 ==============================================================================

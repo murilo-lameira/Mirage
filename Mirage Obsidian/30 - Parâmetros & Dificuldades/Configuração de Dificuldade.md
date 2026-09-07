@@ -9,7 +9,7 @@ Para oferecer um desafio balanceado de acordo com a habilidade do jogador, o Alg
 | Parâmetro | Modo Fácil (1) | Modo Médio (2) | Modo Difícil (3) |
 | :--- | :---: | :---: | :---: |
 | **Tamanho da População ($N_{\text{pop}}$)** | $20$ indivíduos | $50$ indivíduos | $100$ indivíduos |
-| **Gerações Máximas ($G_{\text{max}}$)** | $30$ gerações | $50$ gerações | $60$ gerações |
+| **Gerações Máximas ($G_{\text{max}}$)** | $50$ gerações | $50$ gerações | $50$ gerações |
 | **Taxa de Cruzamento ($P_c$)** | $60\%$ | $75\%$ | $90\%$ |
 | **Taxa de Mutação ($P_m$)** | $15\%$ (alta dispersão) | $5\%$ (balanceada) | $1\%$ (busca cirúrgica) |
 | **Elitismo ($N_e$)** | $0$ (sem preservação) | $1$ campeão | $3$ mestres absolutos |

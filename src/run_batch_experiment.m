@@ -54,7 +54,7 @@ function run_batch_experiment(difficulty_arg, num_runs_arg, pure_mutation_arg)
     switch difficulty
         case 1 % FÁCIL
             pop_size = 20;
-            max_gen = 30;
+            max_gen = 50;
             crossover_rate = 0.60;
             mutation_rate = 0.15;
             elitism_count = 0;
@@ -66,7 +66,7 @@ function run_batch_experiment(difficulty_arg, num_runs_arg, pure_mutation_arg)
             elitism_count = 1;
         case 3 % DIFÍCIL
             pop_size = 100;
-            max_gen = 60;
+            max_gen = 50;
             crossover_rate = 0.90;
             mutation_rate = 0.01;
             elitism_count = 3;

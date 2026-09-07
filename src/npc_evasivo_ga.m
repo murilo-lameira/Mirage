@@ -31,7 +31,7 @@ switch difficulty
     case 1 % FACIL
         fprintf('>>> MODO FACIL ATIVADO (Comportamento Erratico) <<<\n');
         pop_size = 20;           % Populacao pequena
-        max_generations = 30;    
+        max_generations = 50;    % Padronizado para 50 geracoes
         crossover_rate = 0.60;   % Recombinacao moderada
         mutation_rate = 0.15;    % Mutacao ALTISSIMA (15%) - perde estrategias faceis
         elitism_count = 0;       % Sem elitismo
@@ -47,7 +47,7 @@ switch difficulty
     case 3 % DIFICIL
         fprintf('>>> MODO DIFICIL ATIVADO (Convergencia Cirurgica) <<<\n');
         pop_size = 100;          % Populacao robusta
-        max_generations = 60;    
+        max_generations = 50;    % Padronizado para 50 geracoes
         crossover_rate = 0.90;   % Cruzamento altissimo (90%)
         mutation_rate = 0.01;    % Mutacao ultra baixa (1%)
         elitism_count = 3;       % Preserva os 3 mestres absolutos
