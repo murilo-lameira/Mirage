@@ -1,23 +1,23 @@
 ==============================================================================
             📊 RELATÓRIO DE VALIDAÇÃO ESTATÍSTICA (PROJETO MIRAGE)            
 ==============================================================================
-Data de Emissão: 2026-09-07 14:17:33
-Total de Experimentos Avaliados: N = 32
+Data de Emissão: 2026-09-07 14:29:43
+Total de Experimentos Avaliados: N = 33
 ------------------------------------------------------------------------------
 1. ESTATÍSTICA DESCRITIVA (FITNESS MÁXIMO):
    - Fácil   (N=10): Média =   602.99 | DesvPad =  29.24 | Mediana =   596.59
    - Médio   (N=11): Média =   901.77 | DesvPad =  37.52 | Mediana =   905.95
-   - Difícil (N=11): Média =  1816.83 | DesvPad = 295.59 | Mediana =  1823.28
+   - Difícil (N=12): Média =  1752.13 | DesvPad = 360.08 | Mediana =  1818.95
 ------------------------------------------------------------------------------
 2. ANÁLISE DE VARIÂNCIA (ONE-WAY ANOVA):
    - Hipótese Nula (H0): As médias de fitness são iguais entre dificuldades.
-   - Graus de Liberdade: Entre Grupos = 2, Dentro dos Grupos = 29
-   - Estatística F = 138.2441
-   - p-valor ANOVA = 1.443290e-15
+   - Graus de Liberdade: Entre Grupos = 2, Dentro dos Grupos = 30
+   - Estatística F = 82.7879
+   - p-valor ANOVA = 6.125100e-13
    >>> CONCLUSÃO: REJEITA-SE H0 (p < 0.05). Há diferença estatisticamente significante!
 ------------------------------------------------------------------------------
 3. TESTES T DE STUDENT (PAREADOS ENTRE NÍVEIS):
    - Médio vs. Fácil:   t =  20.202 | p-valor = 2.652592e-14 | Cohen d = 8.83 (Efeito Grande)
-   - Difícil vs. Médio: t =  10.185 | p-valor = 2.320583e-09 | Cohen d = 4.34 (Efeito Grande)
-   - Difícil vs. Fácil: t =  12.898 | p-valor = 7.584132e-11 | Cohen d = 5.64 (Efeito Extremo)
+   - Difícil vs. Médio: t =   7.779 | p-valor = 1.287563e-07 | Cohen d = 3.25 (Efeito Grande)
+   - Difícil vs. Fácil: t =  10.023 | p-valor = 3.043393e-09 | Cohen d = 4.29 (Efeito Extremo)
 ==============================================================================

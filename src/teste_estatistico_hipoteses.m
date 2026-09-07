@@ -160,3 +160,4 @@ if fid_out ~= -1
     fclose(fid_out);
     fprintf('\n-> Relatório estatístico salvo em: %s\n', relatorio_file);
 end
+
