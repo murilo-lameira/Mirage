@@ -17,6 +17,7 @@ Este cofre reúne toda a fundamentação científica, arquitetura de simulação
 
 ### 00 - Guias & Operação
 - [[Guia de Uso & Comandos]]: Manual completo de operação, atalhos, comandos Octave e interpretação de gráficos.
+- [[Backlog de Melhorias Futuras]]: Planejamento de melhorias avançadas (Validação Estatística ANOVA, Padrões Bullet Hell e Obstáculos).
 
 ### 20 - Arquitetura do Sistema
 - [[Estrutura do Projeto & Diretórios]]: Organização das pastas `data/`, `src/`, `scripts/` e `logs/`.

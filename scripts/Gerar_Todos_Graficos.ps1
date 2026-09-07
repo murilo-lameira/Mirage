@@ -9,6 +9,7 @@ Set-Location -Path "$ScriptDir\.."
 
 octave-cli --eval "addpath('src'); gerar_graficos_comparativos;"
 octave-cli --eval "addpath('src'); analise_evolucao_media;"
+octave-cli --eval "addpath('src'); gerar_heatmap_map_elites;"
 
 Write-Host ""
 Write-Host "Processo concluido! Verifique a pasta data/graficos/" -ForegroundColor Green

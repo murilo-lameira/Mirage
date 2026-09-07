@@ -8,6 +8,7 @@ echo Executando Octave (CLI) para analises...
 cd %~dp0..
 octave-cli --eval "addpath('src'); gerar_graficos_comparativos;"
 octave-cli --eval "addpath('src'); analise_evolucao_media;"
+octave-cli --eval "addpath('src'); gerar_heatmap_map_elites;"
 
 echo.
 echo Processo concluido! Verifique a pasta data/graficos/

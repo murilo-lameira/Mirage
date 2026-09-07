@@ -10,6 +10,16 @@
 
 ---
 
+## 🎮 Demonstração do NPC Campeão em Ação
+
+O simulador renderiza a física de evasão em tempo real a 50 FPS com HUD tática aprimorada (rastro cinemático, vetor de força de Reynolds verde, barra de vida colorida e contra-ataques azuis):
+
+<p align="center">
+  <img src="data/graficos/demonstracao_npc.gif" alt="Demonstração do NPC Evasivo Mirage" width="480">
+</p>
+
+---
+
 ## 🧠 Destaques Teóricos e Arquitetura
 
 Este projeto consolida os fundamentos acadêmicos de algoritmos evolutivos combinados a abordagens modernas da academia:
@@ -18,7 +28,12 @@ Este projeto consolida os fundamentos acadêmicos de algoritmos evolutivos combi
 * **⚖️ Orçamento Global (Point-Buy Budget):** Evita o *Reward Hacking* forçando *trade-offs* táticos (Velocidade e Esquiva vs. Dano e Cadência).
 * **🏆 Escalonamento por Fator de Mérito:** Calibração proporcional da função de aptidão baseada na densidade do desafio, garantindo um sistema de pontuação justo onde a sobrevivência no modo Difícil concede patamares superiores aos modos Médio e Fácil ($\text{Difícil} > \text{Médio} > \text{Fácil}$).
 * **📈 Suavização de Fitness Ruidoso (Noisy Fitness):** Rastreamento de aptidão histórica (`history_best_so_far`) para gerar curvas de convergência monotônicas (em degraus), eliminando oscilações causadas pela imprevisibilidade dos projéteis.
-* **🎯 MAP-Elites (Quality-Diversity):** Matriz tridimensional que força o surgimento de **diferentes classes fenotípicas** (Tanker, Balanceado, Glass Cannon) ao invés de buscar apenas um campeão absoluto.
+* **🎯 MAP-Elites (Quality-Diversity):** Matriz tridimensional que força o surgimento de **diferentes classes fenotípicas** (Tanker, Balanceado, Glass Cannon) ao invés de buscar apenas um campeão absoluto:
+
+<p align="center">
+  <img src="data/graficos/map_elites_heatmap.png" alt="Heatmap MAP-Elites Mirage" width="560">
+</p>
+
 * **📚 Skilled Experience Catalogue (SEC):** Módulo baseado na pesquisa de Glavin & Madden, que salva marcos de geração da IA para permitir **Ajuste Dinâmico de Dificuldade (DDA)** em aplicações de jogos reais.
 * **💥 Evolutionary Dynamic Scripting (EDS):** Opcional "Modo Mutação Pura" validando as teses de adaptação imediata através do uso de ruídos Box-Muller (sem cruzamento).
 

@@ -1,0 +1,22 @@
+{
+  "secrets": {},
+  "outputLocations": {},
+  "outputSettings": {
+    "markdown": {
+      "folder": "Markdown",
+      "attachments": {
+        "mode": "vault",
+        "path": ""
+      },
+      "duplicates": "create-copy",
+      "saveSourceId": true,
+      "template": "",
+      "titleTemplate": "{{title}}"
+    }
+  },
+  "onenoteAttachments": {},
+  "sourceFolders": {
+    "markdown": "F:\\Faculdade\\Projetos\\Mirage\\Mirage Obsidian"
+  },
+  "lastSourceFolder": "F:\\Faculdade\\Projetos\\Mirage\\Mirage Obsidian"
+}

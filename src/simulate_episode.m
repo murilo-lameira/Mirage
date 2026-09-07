@@ -1,6 +1,11 @@
-function [T_survival, N_dodge, N_collision, D_taken, D_inflicted] = simulate_episode(chromosome, visualize, difficulty)
+function [T_survival, N_dodge, N_collision, D_taken, D_inflicted] = simulate_episode(chromosome, visualize, difficulty, gif_filename)
+    warning('off', 'all');
+    try graphics_toolkit('qt'); catch; end;
     if nargin < 3
         difficulty = 2; % Se não for passado, assume Médio
+    end
+    if nargin < 4
+        gif_filename = ''; % Opcional para gravar GIF animado
     end
     % SIMULATE_EPISODE Roda a simulação de combate de 1 NPC contra uma
     % chuva de projéteis automatizados para avaliar o fitness físico.
@@ -31,13 +36,19 @@ function [T_survival, N_dodge, N_collision, D_taken, D_inflicted] = simulate_epi
     npc_pos = [0, 0];
     npc_vel = [0, 0];
     
-    % Matriz de Projéteis
+    % Histórico de rastro (Motion Trail) e Projéteis do NPC
+    trail_history = [];
+    npc_projectiles = [];
+    gif_first_frame = true;
+    frame_counter = 0;
+    
+    % Matriz de Projéteis Inimigos
     % Colunas: [posX, posY, velX, velY, status(1=ativo, 0=inativo), status_desvio]
     projectiles = [];
     
     % Setup Visual
     if visualize
-        fig = figure('Name', 'Treinamento Tático - Arena', 'Position', [100, 100, 600, 600]);
+        fig = figure('Name', 'Treinamento Tático - Arena Mirage', 'Position', [100, 100, 650, 650]);
         axis([-20 20 -20 20]);
         hold on; grid on;
     end
@@ -154,43 +165,140 @@ function [T_survival, N_dodge, N_collision, D_taken, D_inflicted] = simulate_epi
             end
         end
         
-        % Simula o Dano Causado com estabilidade de movimento
+        % Simula o Dano Causado com estabilidade de movimento e Disparos do NPC
         if mod(t, 1/AttackSpeed) < dt
             current_speed = norm(npc_vel);
             accuracy = max(0.5, 1.0 - (current_speed / MaxSpeed) * 0.3);
             D_inflicted = D_inflicted + (Attack * accuracy);
+            
+            % Disparo tático do NPC (Projéteis visíveis de contra-ataque)
+            if visualize
+                aim_angle = rand() * 2 * pi;
+                if ~isempty(projectiles)
+                    act = find(projectiles(:, 5) == 1);
+                    if ~isempty(act)
+                        dir_aim = projectiles(act(1), 1:2) - npc_pos;
+                        if norm(dir_aim) > 1e-3
+                            aim_angle = atan2(dir_aim(2), dir_aim(1));
+                        end
+                    end
+                end
+                shot_vel = [cos(aim_angle), sin(aim_angle)] * 16.0;
+                npc_projectiles = [npc_projectiles; npc_pos, shot_vel, 1];
+            end
+        end
+        
+        % Atualiza projéteis do NPC
+        if visualize && ~isempty(npc_projectiles)
+            act_p = find(npc_projectiles(:, 5) == 1);
+            if ~isempty(act_p)
+                npc_projectiles(act_p, 1:2) = npc_projectiles(act_p, 1:2) + npc_projectiles(act_p, 3:4) * dt;
+                out_bounds = abs(npc_projectiles(act_p, 1)) > 20 | abs(npc_projectiles(act_p, 2)) > 20;
+                npc_projectiles(act_p(out_bounds), 5) = 0;
+            end
+        end
+        
+        % Atualiza rastro de movimento (Motion Trail)
+        if visualize
+            trail_history = [trail_history; npc_pos];
+            if size(trail_history, 1) > 12
+                trail_history(1, :) = [];
+            end
         end
         
         % Atualiza tempo de sobrevivência (Até o NPC morrer ou o tempo acabar)
         T_survival = t;
         
-        % RENDERIZAÇÃO GRÁFICA
+        % RENDERIZAÇÃO GRÁFICA APRIMORADA
         if visualize
             cla; % Limpa o frame
             
-            % Desenha Radar Periférico
+            % 1. Limite da Arena e Centro
+            rectangle('Position', [-18, -18, 36, 36], 'EdgeColor', [0.8, 0.2, 0.2], 'LineStyle', ':', 'LineWidth', 1.5);
+            plot(0, 0, 'k+', 'MarkerSize', 8, 'LineWidth', 1.5);
+            
+            % 2. Rastro de Movimento (Motion Trail)
+            if size(trail_history, 1) > 1
+                plot(trail_history(:, 1), trail_history(:, 2), 'b:', 'LineWidth', 1.5);
+            end
+            
+            % 3. Radar Periférico do NPC
             rectangle('Position', [npc_pos(1)-radar_radius, npc_pos(2)-radar_radius, radar_radius*2, radar_radius*2], ...
-                      'Curvature', [1,1], 'EdgeColor', 'c', 'LineStyle', '--');
+                      'Curvature', [1,1], 'EdgeColor', [0.2, 0.8, 0.9], 'LineStyle', '--');
                       
-            % Desenha Corpo do NPC
+            % 4. Corpo do NPC (Círculo Azul com borda)
             rectangle('Position', [npc_pos(1)-npc_radius, npc_pos(2)-npc_radius, npc_radius*2, npc_radius*2], ...
-                      'Curvature', [1,1], 'FaceColor', 'b');
+                      'Curvature', [1,1], 'FaceColor', [0.1, 0.4, 0.9], 'EdgeColor', 'b', 'LineWidth', 1.5);
             
-            % Barra de Vida (Texto Flutuante)
-            text(npc_pos(1), npc_pos(2)+2, sprintf('HP: %d', max(0, HP)), ...
-                'HorizontalAlignment', 'center', 'Color', 'k', 'FontWeight', 'bold');
+            % 5. Vetor de Força de Esquiva de Reynolds (Seta Verde de Evasão)
+            if norm(total_evade_force) > 0.2
+                quiver(npc_pos(1), npc_pos(2), total_evade_force(1)*0.6, total_evade_force(2)*0.6, 0, ...
+                       'Color', [0.1, 0.85, 0.2], 'LineWidth', 2.0, 'MaxHeadSize', 0.8);
+            end
             
-            % Desenha Projéteis
+            % 6. Barra de Vida Dinâmica Colorida
+            hp_ratio = max(0, HP) / max(1, HP_max);
+            if hp_ratio > 0.5
+                bar_col = [0.1, 0.8, 0.2]; % Verde
+            elseif hp_ratio > 0.25
+                bar_col = [0.95, 0.75, 0.1]; % Amarelo / Laranja
+            else
+                bar_col = [0.9, 0.2, 0.2]; % Vermelho
+            end
+            rectangle('Position', [npc_pos(1)-1.6, npc_pos(2)+1.8, 3.2, 0.4], 'FaceColor', [0.2, 0.2, 0.2], 'EdgeColor', 'k');
+            if hp_ratio > 0.01
+                rectangle('Position', [npc_pos(1)-1.6, npc_pos(2)+1.8, 3.2 * hp_ratio, 0.4], 'FaceColor', bar_col, 'EdgeColor', 'none');
+            end
+            text(npc_pos(1), npc_pos(2)+2.6, sprintf('HP: %d/%d', max(0, round(HP)), round(HP_max)), ...
+                'HorizontalAlignment', 'center', 'Color', [0.1 0.1 0.1], 'FontSize', 8, 'FontWeight', 'bold');
+            
+            % 7. Projéteis Inimigos (Vermelhos)
             if ~isempty(projectiles)
                 active = projectiles(:, 5) == 1;
                 if any(active)
-                    plot(projectiles(active, 1), projectiles(active, 2), 'ro', 'MarkerFaceColor', 'r');
+                    plot(projectiles(active, 1), projectiles(active, 2), 'ro', 'MarkerFaceColor', [0.9, 0.1, 0.1], 'MarkerSize', 6);
                 end
             end
             
-            title(sprintf('Sobrevivência: %.2fs | HP: %d | Desvios: %d | Colisões: %d', t, max(0,HP), N_dodge, N_collision));
+            % 8. Projéteis do NPC (Ciano / Contra-Ataque)
+            if ~isempty(npc_projectiles)
+                act_p = npc_projectiles(:, 5) == 1;
+                if any(act_p)
+                    plot(npc_projectiles(act_p, 1), npc_projectiles(act_p, 2), 'c^', 'MarkerFaceColor', [0.1, 0.9, 0.9], 'MarkerSize', 5);
+                end
+            end
+            
+            title(sprintf('Tempo: %.1fs | HP: %d | Desvios: %d | Colisões: %d | Dano: %.0f', t, max(0,round(HP)), N_dodge, N_collision, D_inflicted), 'FontSize', 10);
             axis([-20 20 -20 20]);
             drawnow;
+            
+            % 9. Gravação opcional de GIF
+            if ~isempty(gif_filename)
+                frame_counter = frame_counter + 1;
+                if mod(frame_counter, 2) == 0 && t <= 8.0 % Grava até 8s em 15 FPS
+                    try
+                        temp_png = 'temp_gif_frame.png';
+                        print(fig, temp_png, '-dpng', '-r60');
+                        if exist(temp_png, 'file') == 2
+                            img_f = imread(temp_png);
+                            delete(temp_png);
+                            [im_ind, map_pal] = rgb2ind(img_f);
+                            if gif_first_frame
+                                imwrite(im_ind, map_pal, gif_filename, 'gif', 'LoopCount', Inf, 'DelayTime', 0.06);
+                                gif_first_frame = false;
+                            else
+                                imwrite(im_ind, map_pal, gif_filename, 'gif', 'WriteMode', 'append', 'DelayTime', 0.06);
+                            end
+                        end
+                    catch err_gif
+                        disp(['ERRO_GIF: ', err_gif.message]);
+                    end
+                end
+                if t >= 6.0
+                    break; % Finaliza imediatamente a simulação após gravar os 6s do GIF
+                end
+            end
+            
             pause(0.02); % Mantém a taxa de quadros suave em tempo real (~50 FPS)
         end
     end
