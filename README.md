@@ -49,33 +49,38 @@ O simulador renderiza a física de evasão em tempo real a 50 FPS com HUD tátic
 
 <details open>
 <summary><b>▶ Clique para expandir/recolher a aba de Física & Cinemática</b></summary>
-<br>
 
 O comportamento de esquiva do Mirage abandona árvores de decisão e autômatos finitos rígidos em favor de um sistema dinâmico contínuo fundamentado em mecânica clássica e inteligência cinemática vetorial.
 
 ### 1. Equação de Integração Cinemática
 Com passo temporal $\Delta t = 0.05\text{ s}$ ($50\text{ FPS}$) e arena $\Omega = [-20, 20] \times [-20, 20]\text{ metros}$:
 
-$$
+```math
 \vec{v}_{\text{npc}}(k+1) = \text{truncate}\left(\vec{v}_{\text{npc}}(k) + \frac{\vec{F}_{\text{total}}(k)}{m} \cdot \Delta t, \; v_{\text{max}}\right)
-$$
+```
 
-$$
+```math
 \vec{p}_{\text{npc}}(k+1) = \vec{p}_{\text{npc}}(k) + \vec{v}_{\text{npc}}(k+1) \cdot \Delta t
-$$
+```
 
 ### 2. Força de Evasão de Craig Reynolds e Ponto de Maior Aproximação (CPA)
-Para cada projétil com posição relativa $\vec{p}_r = \vec{p}_p - \vec{p}_{\text{npc}}$ e velocidade relativa $\vec{v}_r = \vec{v}_p - \vec{v}_{\text{npc}}$:
+Definem-se os vetores de posição e velocidade relativa entre projétil e NPC:
 
-$$
+```math
+\vec{p}_r = \vec{p}_p - \vec{p}_{\text{npc}}, \quad \vec{v}_r = \vec{v}_p - \vec{v}_{\text{npc}}
+```
+
+O tempo futuro estimado até a maior aproximação ($t_{\text{cpa}}$) é dado por:
+
+```math
 t_{\text{cpa}} = -\frac{\vec{p}_r \cdot \vec{v}_r}{\|\vec{v}_r\|^2}
-$$
+```
 
 Se $0 < t_{\text{cpa}} < 1.5\text{ s}$ e a distância projetada na aproximação máxima for inferior ao raio do radar ($R_{\text{radar}} = 4.0\text{ m}$), o NPC projeta a posição de escape e aplica aceleração corretiva:
 
-$$
+```math
 \vec{v}_{\text{desejada}} = \frac{\vec{p}_{\text{npc}}(t_{\text{cpa}}) - \vec{p}_p(t_{\text{cpa}})}{\|\vec{p}_{\text{npc}}(t_{\text{cpa}}) - \vec{p}_p(t_{\text{cpa}})\|} \cdot v_{\text{max}} \implies \vec{F}_{\text{evade}} = \vec{v}_{\text{desejada}} - \vec{v}_{\text{npc}}
-$$
+```
 
 ### 3. Zonas Geométricas de Detecção (Hitbox vs. Radar)
 ```text
@@ -108,20 +113,19 @@ $$
 
 <details open>
 <summary><b>▶ Clique para expandir/recolher a aba de Genética & Resultados</b></summary>
-<br>
 
 ### 1. Cromossomo e Orçamento Global de Atributos (*Point-Buy Budget*)
 Cada indivíduo da população carrega um cromossomo real contínuo com 4 genes normalizados:
 
-$$
+```math
 C = [G_1, G_2, G_3, G_4] = [v_{\text{max}}, \; \text{HP}_{\text{inicial}}, \; \text{Dano}, \; \text{Cadência}]
-$$
+```
 
 Para impedir o *Reward Hacking* (onde o AG cria indivíduos ultra-rápidos e imortais simultaneamente), introduziu-se o **Orçamento Máximo de Pontos**:
 
-$$
+```math
 \sum_{i=1}^4 w_i \cdot G_i \le B_{\text{max}} = 100\text{ pts}
-$$
+```
 
 Se a soma dos atributos ultrapassar o teto $B_{\text{max}}$, um operador de projeção reescala os genes proporcionalmente, forçando escolhas táticas reais.
 

@@ -17,17 +17,25 @@
 
 O **Mirage** opera sobre um modelo de simulação cinemática em tempo contínuo discretizado com passo temporal fixo:
 
-$$\Delta t = 0.05\text{ s} \quad (20 \text{ Hz / } 50 \text{ FPS})$$
+```math
+\Delta t = 0.05\text{ s} \quad (20 \text{ Hz / } 50 \text{ FPS})
+```
 
 A arena de combate é um plano cartesiano contínuo bidimensional:
 
-$$\Omega = [-20, 20] \times [-20, 20] \text{ metros}$$
+```math
+\Omega = [-20, 20] \times [-20, 20] \text{ metros}
+```
 
 A cada frame $k$, as equações diferenciais de movimento são resolvidas por integração semi-implícita de Euler:
 
-$$\vec{v}_{\text{npc}}(k+1) = \text{truncate}\left(\vec{v}_{\text{npc}}(k) + \frac{\vec{F}_{\text{total}}(k)}{m} \cdot \Delta t, \; v_{\text{max}}\right)$$
+```math
+\vec{v}_{\text{npc}}(k+1) = \text{truncate}\left(\vec{v}_{\text{npc}}(k) + \frac{\vec{F}_{\text{total}}(k)}{m} \cdot \Delta t, \; v_{\text{max}}\right)
+```
 
-$$\vec{p}_{\text{npc}}(k+1) = \vec{p}_{\text{npc}}(k) + \vec{v}_{\text{npc}}(k+1) \cdot \Delta t$$
+```math
+\vec{p}_{\text{npc}}(k+1) = \vec{p}_{\text{npc}}(k) + \vec{v}_{\text{npc}}(k+1) \cdot \Delta t
+```
 
 Onde:
 * $\vec{p} = (x, y)^T$ é o vetor posição no espaço euclidiano $\mathbb{R}^2$.
@@ -43,7 +51,9 @@ Diferente de sistemas rudimentares baseados em Máquinas de Estados Finitas (FSM
 
 O agente calcula forças vetoriais contínuas de aceleração para cada projétil perigoso ativo no campo:
 
-$$\vec{F}_{\text{total}} = \sum_{j \in \mathcal{P}_{\text{ameaça}}} \vec{F}_{\text{evade}}^{(j)} + \vec{F}_{\text{fronteira}} + \vec{F}_{\text{obstáculos}}$$
+```math
+\vec{F}_{\text{total}} = \sum_{j \in \mathcal{P}_{\text{ameaça}}} \vec{F}_{\text{evade}}^{(j)} + \vec{F}_{\text{fronteira}} + \vec{F}_{\text{obstáculos}}
+```
 
 ```text
                Projétil j (Vp)
@@ -65,12 +75,14 @@ $$\vec{F}_{\text{total}} = \sum_{j \in \mathcal{P}_{\text{ameaça}}} \vec{F}_{\t
 Para evitar reações falsas a tiros que passarão longe ou que já se distanciam do NPC, o sistema aplica a formulação vetorial preditiva de CPA (Lee, 2014):
 
 Para o projétil $j$ com posição $\vec{p}_p$ e velocidade $\vec{v}_p$, definem-se:
-* **Posição Relativa:** $\vec{p}_r = \vec{p}_p - \vec{p}_{\text{npc}}$
-* **Velocidade Relativa:** $\vec{v}_r = \vec{v}_p - \vec{v}_{\text{npc}}$
+* Posição Relativa: $\vec{p}_r = \vec{p}_p - \vec{p}_{\text{npc}}$
+* Velocidade Relativa: $\vec{v}_r = \vec{v}_p - \vec{v}_{\text{npc}}$
 
 O tempo futuro estimado até a distância mínima de separação é dado pela derivada do produto escalar:
 
-$$t_{\text{cpa}} = -\frac{\vec{p}_r \cdot \vec{v}_r}{\|\vec{v}_r\|^2}$$
+```math
+t_{\text{cpa}} = -\frac{\vec{p}_r \cdot \vec{v}_r}{\|\vec{v}_r\|^2}
+```
 
 ### Condição de Ativação do Gatilho Evasivo:
 A força de esquiva $\vec{F}_{\text{evade}}^{(j)}$ só é ativada se forem satisfeitas simultaneamente três restrições físicas:
@@ -79,11 +91,17 @@ A força de esquiva $\vec{F}_{\text{evade}}^{(j)}$ só é ativada se forem satis
 3. **Sentido do movimento:** $\vec{p}_r \cdot \vec{v}_r < 0$ (o projétil está de fato se aproximando, e não se afastando).
 
 Quando acionado:
-$$\vec{d}_{\text{evade}} = \vec{p}_{\text{npc}}(t_{\text{cpa}}) - \vec{p}_p(t_{\text{cpa}})$$
+```math
+\vec{d}_{\text{evade}} = \vec{p}_{\text{npc}}(t_{\text{cpa}}) - \vec{p}_p(t_{\text{cpa}})
+```
 
-$$\vec{v}_{\text{desejada}} = \frac{\vec{d}_{\text{evade}}}{\|\vec{d}_{\text{evade}}\|} \cdot v_{\text{max}}$$
+```math
+\vec{v}_{\text{desejada}} = \frac{\vec{d}_{\text{evade}}}{\|\vec{d}_{\text{evade}}\|} \cdot v_{\text{max}}
+```
 
-$$\vec{F}_{\text{evade}} = \vec{v}_{\text{desejada}} - \vec{v}_{\text{npc}}$$
+```math
+\vec{F}_{\text{evade}} = \vec{v}_{\text{desejada}} - \vec{v}_{\text{npc}}
+```
 
 ---
 
@@ -122,7 +140,10 @@ A arena apresenta **4 pilares cilíndricos rígidos** ($R_{\text{pillar}} = 1.3\
 1. **Absorção Balística:** Projéteis que atingem a área dos pilares são absorvidos e destruídos, limpando o campo e criando "zonas seguras" para o agente.
 2. **Restrição Mecânica e Deslizamento Tangencial (*Occlusion Steering*):**
    O NPC não pode atravessar os pilares. Se colidir, sofre reflexão elástica e atrito tangencial:
-   $$\vec{p}_{\text{npc}} \leftarrow \vec{p}_{\text{pilar}} + R_{\text{seguro}} \cdot \frac{\vec{p}_{\text{npc}} - \vec{p}_{\text{pilar}}}{\|\vec{p}_{\text{npc}} - \vec{p}_{\text{pilar}}\|}$$
+
+```math
+\vec{p}_{\text{npc}} \leftarrow \vec{p}_{\text{pilar}} + R_{\text{seguro}} \cdot \frac{\vec{p}_{\text{npc}} - \vec{p}_{\text{pilar}}}{\|\vec{p}_{\text{npc}} - \vec{p}_{\text{pilar}}\|}
+```
 
 ---
 
