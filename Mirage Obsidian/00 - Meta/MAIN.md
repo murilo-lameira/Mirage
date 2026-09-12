@@ -7,4 +7,4 @@ Este documento é a **Bússola de Operação (MAIN)** do cofre Obsidian.
 2. **Encoding:** Salve sempre em UTF-8 sem BOM.
 3. **Links:** Use links no padrão `[[Nome do Arquivo]]`.
 
-[[00 - MOCs & Índices/00 - MOC Principal|00 - MOC Principal]]
+[[00 - MOC Principal]]

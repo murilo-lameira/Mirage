@@ -170,8 +170,13 @@
         "value": "gemini-omni-1.1-flash",
         "label": "Gemini Omni 1.1 Flash",
         "maxTemperature": 2
+      },
+      {
+        "value": "gemini-3.8-flash",
+        "label": "Gemini 3.8 Flash",
+        "maxTemperature": 2
       }
     ],
-    "timestamp": 1788800084497
+    "timestamp": 1788915018997
   }
 }

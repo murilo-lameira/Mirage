@@ -16,6 +16,7 @@ Este cofre reúne toda a fundamentação científica, arquitetura de simulação
 - [[Ref - Aula UNISENAI (Algoritmos Genéticos)]]: Notas teóricas de base sobre o funcionamento dos operadores genéticos na academia.
 
 ### 00 - Guias & Operação
+- 🎨 [[Painel do Projeto|Painel Visual do Projeto (Canvas)]]: Mapa visual interativo do ecossistema Mirage.
 - [[Guia de Uso & Comandos]]: Manual completo de operação, atalhos, comandos Octave e interpretação de gráficos.
 - [[Backlog de Melhorias Futuras]]: Planejamento de melhorias avançadas (Validação Estatística ANOVA, Padrões Bullet Hell e Obstáculos).
 
