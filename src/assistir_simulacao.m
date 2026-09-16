@@ -10,8 +10,9 @@ if exist('difficulty', 'var')
 end
 
 clc; close all;
-warning('off', 'all');
-try graphics_toolkit('qt'); catch; end;
+if exist('OCTAVE_VERSION', 'builtin') > 0
+    try graphics_toolkit('qt'); catch; end;
+end
 addpath(fileparts(mfilename('fullpath')));
 
 if exist('preset_difficulty', 'var')

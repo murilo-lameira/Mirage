@@ -12,9 +12,15 @@ if exist('difficulty', 'var')
 end
 
 clc; close all;
-warning('off', 'all');
-try graphics_toolkit('qt'); catch; end;
-addpath(fileparts(mfilename('fullpath')));
+if exist('OCTAVE_VERSION', 'builtin') > 0
+    try graphics_toolkit('qt'); catch; end;
+end
+script_dir = fileparts(mfilename('fullpath'));
+project_root = fileparts(script_dir);
+if ~exist('data', 'dir') && exist(fullfile(project_root, 'data'), 'dir')
+    cd(project_root);
+end
+addpath(script_dir);
 
 if exist('preset_difficulty', 'var')
     difficulty = preset_difficulty;

@@ -7,11 +7,17 @@
 
 function run_batch_experiment(difficulty_arg, num_runs_arg, pure_mutation_arg)
     warning('off', 'all');
-    try graphics_toolkit('qt'); catch; end;
+    if exist('OCTAVE_VERSION', 'builtin') > 0
+        try graphics_toolkit('qt'); catch; end;
+    end
     addpath(fileparts(mfilename('fullpath')));
     % Lê argumentos da linha de comando ou variáveis padrão
     if nargin < 1
-        args = argv();
+        if exist('argv', 'builtin') || exist('argv', 'file')
+            try args = argv(); catch, args = {}; end
+        else
+            args = {};
+        end
         if length(args) >= 1
             difficulty_arg = str2double(args{1});
         else

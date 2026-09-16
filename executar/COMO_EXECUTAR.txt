@@ -1,0 +1,39 @@
+===========================================================================
+  PASTA DE EXECUÇÃO: PROJETO MIRAGE (ALGORITMOS GENÉTICOS EM JOGOS)
+===========================================================================
+
+Esta pasta reúne todos os inicializadores automáticos do projeto Mirage.
+Eles detectam dinamicamente se o seu computador possui GNU Octave ou MATLAB.
+
+ARQUIVOS PRINCIPAIS:
+
+1. DEMO_NPC_CAMPEAO.bat (ou demo_npc_campeao.sh para Linux/Mac)
+   -> Dê 2 cliques para ABRIR A ARENA 2D INSTANTANEAMENTE com o Campeão!
+   -> Ideal para a demonstração ao vivo para a banca avaliadora.
+
+2. INICIAR_MIRAGE.bat (ou iniciar_mirage.sh para Linux/Mac)
+   -> Painel de Controle completo com menu interativo:
+      - Assistir simulação
+      - Iniciar novos treinamentos
+      - Gerar gráficos e análises estatísticas
+      - Gerar GIF animado
+
+3. TREINAR_ALGORITMO_GENETICO.bat
+   -> Inicia a evolução das 50 gerações com gráficos de convergência.
+
+4. GERAR_TODOS_GRAFICOS.bat
+   -> Executa testes de hipótese (ANOVA, teste t) e exporta boxplots
+      e heatmaps para a pasta 'data/graficos/'.
+
+---------------------------------------------------------------------------
+SE O SEU PROFESSOR USAR MATLAB:
+---------------------------------------------------------------------------
+1. Se ele der 2 cliques nos arquivos .bat, o sistema detecta o MATLAB
+   automaticamente e executa a simulação.
+2. Ou ele pode abrir o próprio MATLAB, navegar até a pasta do projeto
+   e digitar no Command Window:
+      demo
+   ou
+      iniciar_mirage
+   ou abrir o arquivo 'demo.m' e pressionar F5!
+===========================================================================

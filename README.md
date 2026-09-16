@@ -218,12 +218,18 @@ O repositório é projetado seguindo as melhores práticas de Engenharia de Soft
 
 ```text
 Mirage/
-├── DEMO_NPC_CAMPEAO.bat       # 🎮 [1-CLIQUE] Abre direto a Arena 2D com o Campeão (Perfeito para a Apresentação!)
-├── INICIAR_MIRAGE.bat         # 🚀 [MENU PRINCIPAL] Launcher interativo completo com detecção automática do Octave
-├── TREINAR_ALGORITMO_GENETICO.bat # 🧬 [1-CLIQUE] Inicia novo treinamento GA com visualização em tempo real
-├── GERAR_TODOS_GRAFICOS.bat   # 📊 [1-CLIQUE] Executa análises estatísticas e exporta todas as figuras
-├── iniciar_mirage.sh          # 🐧 Launcher interativo para Linux / macOS
-├── demo_npc_campeao.sh        # 🐧 Launcher direto do Campeão para Linux / macOS
+├── DEMO_NPC_CAMPEAO.bat       # 🎮 [1-CLIQUE] Atalho rápido na raiz: Abre a Arena 2D com o Campeão
+├── INICIAR_MIRAGE.bat         # 🚀 [MENU PRINCIPAL] Atalho rápido na raiz para o Painel Interativo
+├── executar_demo.m            # 🔬 [MATLAB / Octave] Script direto nativo (F5 ou 'executar_demo')
+├── iniciar_mirage.m           # 🔬 [MATLAB / Octave] Menu interativo gráfico no MATLAB (F5 ou 'iniciar_mirage')
+├── executar/                  # 📂 PASTA COM TODOS OS LAUNCHERS ORGANIZADOS
+│   ├── DEMO_NPC_CAMPEAO.bat   # 🎮 Demonstração imediata na Arena 2D (Suporta Octave & MATLAB)
+│   ├── INICIAR_MIRAGE.bat     # 🚀 Painel de controle interativo completo
+│   ├── TREINAR_ALGORITMO_GENETICO.bat # 🧬 Inicia novo treinamento GA com visualização
+│   ├── GERAR_TODOS_GRAFICOS.bat # 📊 Gera todos os boxplots, heatmaps e testes estatísticos
+│   ├── demo_npc_campeao.sh    # 🐧 Launcher do Campeão para Linux / macOS
+│   ├── iniciar_mirage.sh      # 🐧 Launcher interativo para Linux / macOS
+│   └── COMO_EXECUTAR.txt      # 📄 Guia rápido em texto puro
 ├── data/                      # Bancos de dados CSV (com campeões pré-treinados) e figuras
 │   ├── graficos/              # Heatmaps, Boxplots, GIFs de animação e curvas de aprendizado
 │   ├── historico_geracoes.csv # Registro geracional dos experimentos
@@ -233,8 +239,8 @@ Mirage/
 │   ├── GUIA_DE_ESTUDO_E_SABATINA.md # Guia de defesa e sabatina por integrante (Física & AG)
 │   ├── FISICA_E_CINEMATICA.md   # Deduções de mecânica vetorial, CPA e Steering
 │   └── BIBLIOGRAFIA.md          # Fichamento e referências ABNT / IEEE
-├── src/                       # Código-fonte Octave / MATLAB (.m)
-├── scripts/                   # Automação, testes paralelos e detector universal de Octave
+├── src/                       # Código-fonte Octave / MATLAB (.m) 100% compatível
+├── scripts/                   # Automação, testes paralelos e detector universal (Octave/MATLAB)
 ├── logs/                      # Telemetria e logs de execução dos workers paralelos
 ├── documentos_seminario/      # Dossiê, roteiros de apresentação e lâminas
 └── Mirage Obsidian/           # Cofre com notas científicas e grafos interconectados
@@ -244,17 +250,31 @@ Mirage/
 
 ## 🚀 Como Executar em 1 Clique (Plug-and-Play)
 
-> **Zero Configuração:** O projeto conta com **autodetecção dinâmica do GNU Octave** (no Windows em `C:`, `D:`, `F:`, ou via `%PATH%`, e no Linux/macOS). Assim que clonar ou baixar o ZIP do GitHub, o simulador está pronto para rodar sem necessidade de ajustar caminhos manuais!
+> **Compatibilidade Total (Octave & MATLAB):** O projeto detecta automaticamente se o computador possui **GNU Octave** ou **MathWorks MATLAB**. Ao baixar o ZIP ou clonar do GitHub, tudo funciona out-of-the-box sem configurações manuais!
 
-### ⚡ Demonstração Imediata para o Seminário / Banca
-Basta dar **duplo clique** no arquivo na raiz do projeto:
-* **`DEMO_NPC_CAMPEAO.bat`** (Windows) ou `./demo_npc_campeao.sh` (Linux/macOS)
+---
+
+### ⚡ Opção A: Demonstração Rápida para o Seminário / Banca
+Basta dar **duplo clique** em qualquer um dos arquivos:
+* **`DEMO_NPC_CAMPEAO.bat`** (na raiz ou dentro da pasta `executar/`)
+* **`executar/demo_npc_campeao.sh`** (no Linux/macOS)
 > A Arena 2D abre instantaneamente a ~50 FPS carregando o melhor campeão evoluído da dificuldade escolhida, desviando do Bullet Hell e contra-atacando em tempo real!
 
 ---
 
-### 🎮 Central de Comando (Menu Interativo)
-Dê duplo clique em **`INICIAR_MIRAGE.bat`** (Windows) ou `./iniciar_mirage.sh` (Linux/macOS) para acessar a central de controle:
+### 🔬 Opção B: Para quem usa o MATLAB Diretamente
+Se o seu professor ou examinador preferir abrir o **MATLAB**:
+1. Abra o MATLAB e selecione a pasta do projeto `Mirage`.
+2. Para ver a demonstração da Arena com o Campeão:
+   * Abra o arquivo **`executar_demo.m`** e pressione **F5** (ou digite `executar_demo` no Command Window).
+3. Para acessar o menu interativo com todas as opções:
+   * Abra **`iniciar_mirage.m`** e pressione **F5** (ou digite `iniciar_mirage` no Command Window).
+> O código foi desenhado para rodar no MATLAB base, com cálculo analítico de ANOVA e testes $t$ sem exigir toolboxes adicionais.
+
+---
+
+### 🎮 Opção C: Painel Principal Interativo (Central de Comando)
+Dê duplo clique em **`INICIAR_MIRAGE.bat`** (na raiz ou em `executar/`):
 ```text
   [1] Assistir NPC Campeão em Ação (Arena 2D Interativa)
   [2] Demonstração Rápida no Modo Difícil (Bullet Hell Extremo)
@@ -269,17 +289,16 @@ Dê duplo clique em **`INICIAR_MIRAGE.bat`** (Windows) ou `./iniciar_mirage.sh` 
 
 ---
 
-### 💻 Instalação Rápida do GNU Octave (Caso ainda não tenha no computador)
-Caso execute o projeto em um computador de laboratório ou máquina nova que ainda não possua o Octave instalado:
-* **Windows (via Terminal - Mais Rápido):**
+### 💻 Como Instalar o GNU Octave (Caso a máquina não tenha nem Octave nem MATLAB)
+* **Windows (via Terminal - 1 comando):**
   ```cmd
   winget install GNU.Octave
   ```
-* **Windows (Instalador Gratuito):** [Baixar GNU Octave Oficial](https://octave.org/download)
+* **Windows (Instalador Oficial Grátis):** [Baixar GNU Octave](https://octave.org/download)
 * **Ubuntu / Debian:** `sudo apt-get install octave`
 * **macOS:** `brew install octave`
 
-*(Os scripts do Mirage detectam automaticamente a ausência do Octave e orientam o usuário com links diretos).*
+*(Os scripts do Mirage avisam amigavelmente e oferecem o link oficial caso nenhum interpretador seja encontrado).*
 
 ---
 

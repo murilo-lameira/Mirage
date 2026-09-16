@@ -7,10 +7,20 @@
 
 clc; clear; close all;
 warning('off', 'all');
-try graphics_toolkit('qt'); catch; end;
-addpath(fileparts(mfilename('fullpath')));
+if exist('OCTAVE_VERSION', 'builtin') > 0
+    try graphics_toolkit('qt'); catch; end;
+end
+script_dir = fileparts(mfilename('fullpath'));
+project_root = fileparts(script_dir);
+if ~exist('data', 'dir') && exist(fullfile(project_root, 'data'), 'dir')
+    cd(project_root);
+end
+addpath(script_dir);
 
 csv_filename = fullfile('data', 'resultados_experimentos.csv');
+if ~exist(csv_filename, 'file')
+    csv_filename = fullfile(project_root, 'data', 'resultados_experimentos.csv');
+end
 if ~exist(csv_filename, 'file')
     error('Arquivo data/resultados_experimentos.csv nao encontrado. Execute alguns treinamentos antes!');
 end

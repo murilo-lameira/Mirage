@@ -1,9 +1,9 @@
 @echo off
-chcp 65001 >nul
-title MIRAGE - Gerador de Gráficos e Estatísticas
-cd /d "%~dp0"
+setlocal enabledelayedexpansion
+title MIRAGE - Gerador de Graficos e Estatisticas
+cd /d "%~dp0.."
 
 echo =======================================================================
-echo     MIRAGE: GERAÇÃO DE GRÁFICOS CIENTÍFICOS E TESTES ESTATÍSTICOS
+echo     MIRAGE: GERACAO DE GRAFICOS CIENTIFICOS E TESTES ESTATISTICOS
 echo =======================================================================
 call "scripts\Gerar_Todos_Graficos.bat"

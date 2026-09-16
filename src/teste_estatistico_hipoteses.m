@@ -9,9 +9,17 @@
 
 clc; clear; close all;
 warning('off', 'all');
-addpath(fileparts(mfilename('fullpath')));
+script_dir = fileparts(mfilename('fullpath'));
+project_root = fileparts(script_dir);
+if ~exist('data', 'dir') && exist(fullfile(project_root, 'data'), 'dir')
+    cd(project_root);
+end
+addpath(script_dir);
 
 csv_file = fullfile('data', 'resultados_experimentos.csv');
+if exist(csv_file, 'file') ~= 2
+    csv_file = fullfile(project_root, 'data', 'resultados_experimentos.csv');
+end
 if exist(csv_file, 'file') ~= 2
     error('Arquivo data/resultados_experimentos.csv nao encontrado.');
 end

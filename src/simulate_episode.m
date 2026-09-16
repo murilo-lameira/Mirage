@@ -1,6 +1,8 @@
 function [T_survival, N_dodge, N_collision, D_taken, D_inflicted] = simulate_episode(chromosome, visualize, difficulty, gif_filename)
     warning('off', 'all');
-    try graphics_toolkit('qt'); catch; end;
+    if exist('OCTAVE_VERSION', 'builtin') > 0
+        try graphics_toolkit('qt'); catch; end;
+    end
     if nargin < 3
         difficulty = 2; % Se não for passado, assume Médio
     end

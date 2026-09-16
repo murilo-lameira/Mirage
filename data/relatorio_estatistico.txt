@@ -1,23 +1,23 @@
 ==============================================================================
             📊 RELATÓRIO DE VALIDAÇÃO ESTATÍSTICA (PROJETO MIRAGE)            
 ==============================================================================
-Data de Emissão: 2026-09-07 16:53:02
-Total de Experimentos Avaliados: N = 85
+Data de Emissão: 2026-09-16 20:43:12
+Total de Experimentos Avaliados: N = 86
 ------------------------------------------------------------------------------
 1. ESTATÍSTICA DESCRITIVA (FITNESS MÁXIMO):
    - Fácil   (N=30): Média =   627.50 | DesvPad =  32.64 | Mediana =   636.06
    - Médio   (N=29): Média =   882.86 | DesvPad =  42.29 | Mediana =   886.34
-   - Difícil (N=26): Média =  1703.95 | DesvPad = 257.78 | Mediana =  1738.18
+   - Difícil (N=27): Média =  1680.16 | DesvPad = 281.40 | Mediana =  1726.40
 ------------------------------------------------------------------------------
 2. ANÁLISE DE VARIÂNCIA (ONE-WAY ANOVA):
    - Hipótese Nula (H0): As médias de fitness são iguais entre dificuldades.
-   - Graus de Liberdade: Entre Grupos = 2, Dentro dos Grupos = 82
-   - Estatística F = 406.6687
+   - Graus de Liberdade: Entre Grupos = 2, Dentro dos Grupos = 83
+   - Estatística F = 327.4563
    - p-valor ANOVA = 0.000000e+00
    >>> CONCLUSÃO: REJEITA-SE H0 (p < 0.05). Há diferença estatisticamente significante!
 ------------------------------------------------------------------------------
 3. TESTES T DE STUDENT (PAREADOS ENTRE NÍVEIS):
    - Médio vs. Fácil:   t =  26.018 | p-valor = 2.569396e-33 | Cohen d = 6.78 (Efeito Grande)
-   - Difícil vs. Médio: t =  16.918 | p-valor = 5.107785e-23 | Cohen d = 4.57 (Efeito Grande)
-   - Difícil vs. Fácil: t =  22.694 | p-valor = 2.757039e-29 | Cohen d = 6.08 (Efeito Extremo)
+   - Difícil vs. Médio: t =  15.086 | p-valor = 5.165233e-21 | Cohen d = 4.03 (Efeito Grande)
+   - Difícil vs. Fácil: t =  20.358 | p-valor = 2.801590e-27 | Cohen d = 5.40 (Efeito Extremo)
 ==============================================================================

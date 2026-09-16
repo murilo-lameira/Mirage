@@ -9,13 +9,23 @@
 function gerar_boxplots()
     clc; clear; close all;
     warning('off', 'all');
-    try graphics_toolkit('qt'); catch; end;
-    addpath(fileparts(mfilename('fullpath')));
+    if exist('OCTAVE_VERSION', 'builtin') > 0
+        try graphics_toolkit('qt'); catch; end;
+    end
+    script_dir = fileparts(mfilename('fullpath'));
+    project_root = fileparts(script_dir);
+    if ~exist('data', 'dir') && exist(fullfile(project_root, 'data'), 'dir')
+        cd(project_root);
+    end
+    addpath(script_dir);
 
-csv_file = fullfile('data', 'resultados_experimentos.csv');
-if exist(csv_file, 'file') ~= 2
-    error('Arquivo data/resultados_experimentos.csv nao encontrado.');
-end
+    csv_file = fullfile('data', 'resultados_experimentos.csv');
+    if exist(csv_file, 'file') ~= 2
+        csv_file = fullfile(project_root, 'data', 'resultados_experimentos.csv');
+    end
+    if exist(csv_file, 'file') ~= 2
+        error('Arquivo data/resultados_experimentos.csv nao encontrado.');
+    end
 
 output_dir = fullfile('data', 'graficos');
 if ~exist(output_dir, 'dir')
@@ -112,7 +122,7 @@ function desenhar_caixa_boxplot(x_pos, vals, cor)
         return;
     end
     
-    q = quantile(vals, [0.25, 0.50, 0.75]);
+    q = calcular_quantis(vals, [0.25, 0.50, 0.75]);
     q1 = q(1);
     med = q(2);
     q3 = q(3);
@@ -145,4 +155,31 @@ function desenhar_caixa_boxplot(x_pos, vals, cor)
     % Pontos de dados reais com jitter horizontal suave
     jitter = (rand(size(vals)) - 0.5) * 0.18;
     plot(x_pos + jitter, vals, 'o', 'MarkerFaceColor', cor, 'MarkerEdgeColor', 'k', 'MarkerSize', 5);
+end
+
+% =========================================================================
+% CALCULAR QUANTIS COM FALLBACK (FUNCIONA NO MATLAB SEM TOOLBOX)
+% =========================================================================
+function q = calcular_quantis(vals, p)
+    if exist('quantile', 'file') || exist('quantile', 'builtin')
+        try
+            q = quantile(vals, p);
+            return;
+        catch
+        end
+    end
+    s = sort(vals(:));
+    N = length(s);
+    if N == 1
+        q = repmat(s(1), size(p));
+        return;
+    end
+    q = zeros(size(p));
+    for i = 1:length(p)
+        pos = 1 + (N - 1) * p(i);
+        low = floor(pos);
+        high = ceil(pos);
+        weight = pos - low;
+        q(i) = (1 - weight) * s(low) + weight * s(high);
+    end
 end
