@@ -366,4 +366,19 @@ function [T_survival, N_dodge, N_collision, D_taken, D_inflicted] = simulate_epi
             pause(0.02); % Mantém a taxa de quadros suave em tempo real (~50 FPS)
         end
     end
+    
+    % Banner de conclusão visual na Arena ao final do round
+    if visualize && exist('fig', 'var') && ishandle(fig)
+        figure(fig);
+        if HP <= 0
+            text(0, 0, sprintf('FIM DO COMBATE\nSobreviveu: %.1fs\nDesvios: %d | Dano: %.0f', T_survival, N_dodge, D_inflicted), ...
+                'HorizontalAlignment', 'center', 'FontSize', 13, 'FontWeight', 'bold', 'Color', [0.85 0.15 0.15], ...
+                'BackgroundColor', [1 1 1 0.92], 'EdgeColor', [0.8 0.1 0.1], 'LineWidth', 2);
+        else
+            text(0, 0, sprintf('VITORIA! SOBREVIVEU 30s!\nDesvios: %d | Colisoes: %d\nDano: %.0f', N_dodge, N_collision, D_inflicted), ...
+                'HorizontalAlignment', 'center', 'FontSize', 13, 'FontWeight', 'bold', 'Color', [0.1 0.65 0.2], ...
+                'BackgroundColor', [1 1 1 0.92], 'EdgeColor', [0.1 0.65 0.2], 'LineWidth', 2);
+        end
+        drawnow;
+    end
 end

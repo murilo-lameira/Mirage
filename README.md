@@ -218,38 +218,68 @@ O repositório é projetado seguindo as melhores práticas de Engenharia de Soft
 
 ```text
 Mirage/
-├── data/              # Bancos de dados CSV e gráficos gerados (.png, .svg)
-│   ├── graficos/      # Heatmaps, Boxplots, GIFs de animação e curvas de aprendizado
-│   ├── historico_geracoes.csv
-│   ├── resultados_experimentos.csv
-│   └── sec_catalogue.csv
-├── docs/              # Documentação acadêmica aprofundada
+├── DEMO_NPC_CAMPEAO.bat       # 🎮 [1-CLIQUE] Abre direto a Arena 2D com o Campeão (Perfeito para a Apresentação!)
+├── INICIAR_MIRAGE.bat         # 🚀 [MENU PRINCIPAL] Launcher interativo completo com detecção automática do Octave
+├── TREINAR_ALGORITMO_GENETICO.bat # 🧬 [1-CLIQUE] Inicia novo treinamento GA com visualização em tempo real
+├── GERAR_TODOS_GRAFICOS.bat   # 📊 [1-CLIQUE] Executa análises estatísticas e exporta todas as figuras
+├── iniciar_mirage.sh          # 🐧 Launcher interativo para Linux / macOS
+├── demo_npc_campeao.sh        # 🐧 Launcher direto do Campeão para Linux / macOS
+├── data/                      # Bancos de dados CSV (com campeões pré-treinados) e figuras
+│   ├── graficos/              # Heatmaps, Boxplots, GIFs de animação e curvas de aprendizado
+│   ├── historico_geracoes.csv # Registro geracional dos experimentos
+│   ├── resultados_experimentos.csv # Campeões treinados prontos para demonstração imediata
+│   └── map_elites.csv         # Matriz de diversidade fenotípica
+├── docs/                      # Documentação acadêmica aprofundada
+│   ├── GUIA_DE_ESTUDO_E_SABATINA.md # Guia de defesa e sabatina por integrante (Física & AG)
 │   ├── FISICA_E_CINEMATICA.md   # Deduções de mecânica vetorial, CPA e Steering
 │   └── BIBLIOGRAFIA.md          # Fichamento e referências ABNT / IEEE
-├── src/               # Código-fonte Octave / MATLAB (.m)
-├── scripts/           # Automação de testes em lote e orquestração (.bat, .ps1)
-├── logs/              # Telemetria e logs de execução dos workers paralelos
-├── documentos_seminario/ # Dossiê, roteiros de apresentação e lâminas
-└── Mirage Obsidian/   # Cofre com notas científicas e grafos interconectados
+├── src/                       # Código-fonte Octave / MATLAB (.m)
+├── scripts/                   # Automação, testes paralelos e detector universal de Octave
+├── logs/                      # Telemetria e logs de execução dos workers paralelos
+├── documentos_seminario/      # Dossiê, roteiros de apresentação e lâminas
+└── Mirage Obsidian/           # Cofre com notas científicas e grafos interconectados
 ```
 
 ---
 
-## 🚀 Como Executar
+## 🚀 Como Executar em 1 Clique (Plug-and-Play)
 
-> **Requisito:** O projeto é executado nativamente no **GNU Octave** (compatível com MATLAB).
+> **Zero Configuração:** O projeto conta com **autodetecção dinâmica do GNU Octave** (no Windows em `C:`, `D:`, `F:`, ou via `%PATH%`, e no Linux/macOS). Assim que clonar ou baixar o ZIP do GitHub, o simulador está pronto para rodar sem necessidade de ajustar caminhos manuais!
 
-### 1. Treinamento Solo Interativo
-Execute o atalho `scripts/Rodar_Simulador.bat` (ou invoque `npc_evasivo_ga` no console do Octave). Escolha a dificuldade e assista ao treinamento completo com animação e gráfico de convergência final.
+### ⚡ Demonstração Imediata para o Seminário / Banca
+Basta dar **duplo clique** no arquivo na raiz do projeto:
+* **`DEMO_NPC_CAMPEAO.bat`** (Windows) ou `./demo_npc_campeao.sh` (Linux/macOS)
+> A Arena 2D abre instantaneamente a ~50 FPS carregando o melhor campeão evoluído da dificuldade escolhida, desviando do Bullet Hell e contra-atacando em tempo real!
 
-### 2. Treinamento em Lote Paralelo (*Headless Data Science*)
-Para coletar massas de dados rapidamente sem renderização gráfica, execute `scripts/Rodar_Experimentos_Paralelos.bat`. O orquestrador dispara instâncias em segundo plano, registrando a telemetria em `data/historico_geracoes.csv` e `data/resultados_experimentos.csv`.
+---
 
-### 3. Assistir à Arena 2D com o Melhor Campeão
-Execute `scripts/Assistir_Melhor_NPC.bat` (ou `assistir_simulacao` no Octave). O sistema busca automaticamente o NPC mais adaptado no banco de dados e abre a simulação gráfica em tempo real (~50 FPS).
+### 🎮 Central de Comando (Menu Interativo)
+Dê duplo clique em **`INICIAR_MIRAGE.bat`** (Windows) ou `./iniciar_mirage.sh` (Linux/macOS) para acessar a central de controle:
+```text
+  [1] Assistir NPC Campeão em Ação (Arena 2D Interativa)
+  [2] Demonstração Rápida no Modo Difícil (Bullet Hell Extremo)
+  [3] Iniciar Treinamento do Algoritmo Genético (Gráficos em Tempo Real)
+  [4] Gerar Todos os Gráficos Científicos e Testes Estatísticos
+  [5] Gerar GIF Animado da Arena (data/graficos/demonstracao_npc.gif)
+  [6] Executar Baterias de Teste em Paralelo (30x Headless)
+  [7] Abrir Pasta de Gráficos e Resultados Gerados
+  [8] Abrir Documentação Técnica do Projeto
+  [0] Sair
+```
 
-### 4. Gerar Gráficos e Análise Consolidada
-Execute `scripts/Gerar_Todos_Graficos.bat` (ou execute `analise_evolucao_media` e `gerar_graficos_comparativos` no Octave). Todos os gráficos comparativos, heatmaps do MAP-Elites e curvas médias por dificuldade serão exportados para `data/graficos/`.
+---
+
+### 💻 Instalação Rápida do GNU Octave (Caso ainda não tenha no computador)
+Caso execute o projeto em um computador de laboratório ou máquina nova que ainda não possua o Octave instalado:
+* **Windows (via Terminal - Mais Rápido):**
+  ```cmd
+  winget install GNU.Octave
+  ```
+* **Windows (Instalador Gratuito):** [Baixar GNU Octave Oficial](https://octave.org/download)
+* **Ubuntu / Debian:** `sudo apt-get install octave`
+* **macOS:** `brew install octave`
+
+*(Os scripts do Mirage detectam automaticamente a ausência do Octave e orientam o usuário com links diretos).*
 
 ---
 

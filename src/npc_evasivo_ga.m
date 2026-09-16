@@ -7,24 +7,35 @@
 % Orientador: Me. Ricardo Martinez Vicentini
 % =========================================================================
 
-clc; clear; close all;
+if exist('difficulty', 'var')
+    preset_difficulty = difficulty;
+end
+
+clc; close all;
 warning('off', 'all');
 try graphics_toolkit('qt'); catch; end;
 addpath(fileparts(mfilename('fullpath')));
 
+if exist('preset_difficulty', 'var')
+    difficulty = preset_difficulty;
+end
+
 fprintf('--- INICIANDO TREINAMENTO EVOLUTIVO ---\n');
 
 % 1. ESCOLHA A DIFICULDADE E MODO DE EVOLUÇÃO
-% Abre uma caixa de dialogo visual para selecionar o modo
-fprintf('Aguardando selecao de dificuldade na interface...\n');
-difficulty = menu('Escolha a Dificuldade do Treinamento:', ...
-                  'Fácil (População 20, Alta Mutação)', ...
-                  'Médio (Balanceado)', ...
-                  'Difícil (População 100, Alto Cruzamento)');
-
-% Se o usuario fechar a janela no "X" sem escolher, assumimos Medio por padrao
-if difficulty == 0
-    difficulty = 2;
+if ~exist('difficulty', 'var') || isempty(difficulty)
+    fprintf('Aguardando selecao de dificuldade na interface...\n');
+    try
+        difficulty = menu('Escolha a Dificuldade do Treinamento:', ...
+                          'Fácil (População 20, Alta Mutação)', ...
+                          'Médio (Balanceado)', ...
+                          'Difícil (População 100, Alto Cruzamento)');
+    catch
+        difficulty = 2;
+    end
+    if isempty(difficulty) || difficulty == 0
+        difficulty = 2;
+    end
 end
 
 switch difficulty

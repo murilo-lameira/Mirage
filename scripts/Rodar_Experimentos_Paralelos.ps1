@@ -1,4 +1,4 @@
-﻿# =========================================================================
+# =========================================================================
 # ?? EXECUTOR PARALELO DE EXPERIMENTOS (MIRAGE - ALGORITMOS GEN�TICOS)
 # =========================================================================
 # Executa 10 rodadas de treinamento para as 3 dificuldades simultaneamente
@@ -6,14 +6,35 @@
 # =========================================================================
 
 $ErrorActionPreference = "Continue"
-$octavePath = "F:\Faculdade\Octave\Octave-11.3.0\mingw64\bin\octave-cli.exe"
-$octaveGuiPath = "F:\Faculdade\Octave\Octave-11.3.0\mingw64\bin\octave.exe"
-$numRuns = 10
 
-if (-not (Test-Path $octavePath)) {
-    Write-Host "ERRO: Octave CLI nao encontrado em: $octavePath" -ForegroundColor Red
+# Localizacao dinamica do Octave CLI
+$octavePath = (Get-Command octave-cli.exe -ErrorAction SilentlyContinue).Source
+if (-not $octavePath) {
+    $octavePath = (Get-Command octave.exe -ErrorAction SilentlyContinue).Source
+}
+if (-not $octavePath) {
+    $candidates = @(
+        "$env:ProgramFiles\GNU Octave\Octave-*\mingw64\bin\octave-cli.exe",
+        "${env:ProgramFiles(x86)}\GNU Octave\Octave-*\mingw64\bin\octave-cli.exe",
+        "C:\Octave\Octave-*\mingw64\bin\octave-cli.exe",
+        "D:\Octave\Octave-*\mingw64\bin\octave-cli.exe",
+        "F:\Faculdade\Octave\Octave-*\mingw64\bin\octave-cli.exe"
+    )
+    foreach ($c in $candidates) {
+        $found = Get-Item $c -ErrorAction SilentlyContinue | Select-Object -First 1
+        if ($found) {
+            $octavePath = $found.FullName
+            break
+        }
+    }
+}
+
+if (-not $octavePath -or -not (Test-Path $octavePath)) {
+    Write-Host "ERRO: GNU Octave nao encontrado automaticamente no sistema!" -ForegroundColor Red
+    Write-Host "Por favor, instale o GNU Octave ou adicione-o ao PATH do Windows." -ForegroundColor Yellow
     Exit 1
 }
+$numRuns = 10
 
 $logsDir = Join-Path (Split-Path $PSScriptRoot -Parent) "logs"
 if (-not (Test-Path $logsDir)) {

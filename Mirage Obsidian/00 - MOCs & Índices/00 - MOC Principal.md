@@ -40,6 +40,7 @@ Este cofre reúne toda a fundamentação científica, arquitetura de simulação
 ### 50 - Gestão do Seminário
 - [[Divisão de Tarefas & Apresentadores]]: Atribuições e papéis de Leonardo Retori, Henry Matheus, Murilo Lameira e Murilo Romualdo.
 - [[Roteiro de Apresentação (15 min)]]: Script cronometrado minuto a minuto com transições entre apresentadores.
+- [[Guia de Estudo e Sabatina por Integrante]]: Guia mestre de estudo, física vetorial e perguntas da banca separadas por integrante.
 - [[Dossiê Completo do Seminário]]: Documento mestre acadêmico contendo o handout para a banca, blueprint dos 14 slides e FAQ de defesa.
 
 ---

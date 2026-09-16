@@ -1,5 +1,13 @@
 @echo off
-cd %~dp0..
-echo Abrindo Simulador Visual do NPC Campeao...
-"F:\Faculdade\Octave\Octave-11.3.0\mingw64\bin\octave.exe" --persist --eval "addpath('src'); assistir_simulacao;"
+chcp 65001 >nul
+cd /d "%~dp0.."
+call "scripts\detect_octave.bat"
 
+if "%OCTAVE_FOUND%"=="0" (
+    echo [ERRO] GNU Octave nao encontrado no sistema!
+    pause
+    exit /b 1
+)
+
+echo Abrindo Simulador Visual do NPC Campeão...
+"%OCTAVE_BIN%" --persist --eval "addpath('src'); assistir_simulacao;"
