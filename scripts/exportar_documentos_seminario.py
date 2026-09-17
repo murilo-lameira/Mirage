@@ -433,4 +433,10 @@ if __name__ == "__main__":
     gerar_divisao_tarefas()
     gerar_roteiro_apresentacao()
     gerar_dossie_completo()
+    try:
+        from gerar_word_guia_estudo import gerar_guia_docx, gerar_guia_pdf
+        gerar_guia_docx()
+        gerar_guia_pdf()
+    except Exception as e:
+        print(f"Aviso ao exportar guia de estudo: {e}")
     print("\n>>> SUCESSO: Todos os arquivos DOCX e PDF foram gerados com sucesso! <<<")
