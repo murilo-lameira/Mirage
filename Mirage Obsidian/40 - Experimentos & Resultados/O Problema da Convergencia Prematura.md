@@ -32,11 +32,11 @@ Após a correção da Fase 1, o NPC passou a focar em esquiva. No entanto, surgi
 
 ---
 
-## 🎓 Impacto Acadêmico para o Seminário
-Este estudo de caso é um dos pontos mais fortes da apresentação perante a banca examinadora, pois demonstra que o grupo:
-1. Coletou e analisou dados experimentais reais.
-2. Identificou falhas clássicas de IA (Reward Hacking / Ótimo Local).
-3. Aplicou princípios formais de Engenharia de Software e Otimização para solucionar o problema matematicamente.
+## 🎓 Relevância Científica e Metodológica
+Este estudo de caso demonstra os desafios práticos de modelagem em Computação Evolutiva:
+1. Coleta e análise sistemática de dados de telemetria em execuções evolutivas.
+2. Identificação de anomalias clássicas de otimização (Reward Hacking e estagnação em ótimos locais).
+3. Aplicação de restrições matemáticas (Point-Buy Budget) para guiar o espaço de busca fenotípico.
 
 ---
 

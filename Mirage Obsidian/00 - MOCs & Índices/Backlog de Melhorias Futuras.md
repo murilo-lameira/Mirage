@@ -50,10 +50,18 @@ Objetivo: Elevar o desafio cinemático e tático do simulador com dinâmicas con
 | HUD Tática 2D (Rastro, Barra de Vida, Vetor Reynolds) | Visual & Simulação | ✅ **Implementado** |
 | Disparos Visíveis do NPC (Combate Bidirecional) | Mecânica de Jogo | ✅ **Implementado** |
 | Heatmap 2D do MAP-Elites (Quality-Diversity) | Análise de Dados | ✅ **Implementado** |
-| Gerador de GIF Animado Automático | Apresentação / README | ✅ **Implementado** |
+| Gerador de GIF Animado Automático | Visualização & Demonstração | ✅ **Implementado** |
 | Validação Estatística (ANOVA, Boxplots, $p$-value) | Estatística Acadêmica | ✅ **Implementado** |
 | Padrões Bullet Hell (Espirais, Leque) & Pilares de Cobertura | Mecânica Avançada | ✅ **Implementado** |
 | Lasers Lineares & Adversários Móveis | Expansões Futuras | ⏳ **No Backlog** |
+
+---
+
+## 🔗 Conexões
+- [[00 - MOC Principal]]
+- [[Guia de Uso & Comandos]]
+- [[Execução Paralela & Análise Comparativa]]
+- [[Simulação & Física de Esquiva]]
 
 ---
 *Documento de governança do projeto Mirage — UNISENAI.*

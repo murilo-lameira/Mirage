@@ -1,6 +1,6 @@
 # 📖 Guia de Uso, Comandos & Manual Operacional do Simulador Mirage
 
-Este documento é o guia definitivo para operadores, pesquisadores e apresentadores do projeto **Mirage**. Aqui estão descritos todos os comandos, rotinas de execução, atalhos de automação e interpretação de dados da aplicação.
+Este documento é o guia definitivo para operadores, pesquisadores e desenvolvedores do projeto **Mirage**. Aqui estão descritos todos os comandos, rotinas de execução, atalhos de automação e interpretação de dados da aplicação.
 
 ---
 
@@ -14,14 +14,14 @@ O sistema foi desenhado de forma modular, permitindo 4 fluxos principais de util
 | **2. Treinamento em Lote (Batch)** | Treinar N rodadas em segundo plano (rápido e sem interface travando) | `scripts/Rodar_Experimentos_Paralelos.bat` | `src/run_batch_experiment.m` |
 | **3. Assistir Campeão ao Vivo** | Carregar o melhor NPC do banco de dados e assistir na arena 2D em tempo real | `scripts/Assistir_Melhor_NPC.bat` | `src/assistir_simulacao.m` |
 | **4. Central de Gráficos e Análise** | Gerar gráficos comparativos, médias e mapa de calor MAP-Elites | `scripts/Gerar_Todos_Graficos.bat` | `src/gerar_graficos_comparativos.m`<br>`src/analise_evolucao_media.m`<br>`src/gerar_heatmap_map_elites.m` |
-| **5. Gerador de GIF Animado** | Gravar 6 segundos de combate do campeão em GIF para slides e README | `scripts/Gerar_GIF_Animado.bat` | `src/gerar_gif_animado.m` |
+| **5. Gerador de GIF Animado** | Gravar 6 segundos de combate do campeão em GIF para documentação e README | `scripts/Gerar_GIF_Animado.bat` | `src/gerar_gif_animado.m` |
 
 ---
 
 ## 🛠️ 2. Como Usar Cada Módulo
 
 ### 🎮 A. Treinamento Solo Interativo (`npc_evasivo_ga.m`)
-Ideal para demonstrações rápidas durante o seminário ou testes de calibração.
+Ideal para demonstrações rápidas ou testes de calibração interativa.
 
 - **Como Rodar:**
   - **Opção 1 (Atalho):** Duplo clique em `scripts/Rodar_Simulador.bat`.
@@ -78,7 +78,7 @@ Ideal para visualização imediata da performance da IA sem precisar esperar nov
 ---
 
 ### 📊 D. Geração de Gráficos e Análise de Dados
-Gera todo o material visual consolidado para slides, artigos e relatórios.
+Gera todo o material visual consolidado para artigos, relatórios e documentação técnica.
 
 - **Como Rodar:**
   - **Opção 1 (Atalho):** Duplo clique em `scripts/Gerar_Todos_Graficos.bat`.
@@ -125,6 +125,15 @@ Para evitar oscilações causadas pela aleatoriedade dos projéteis (*noisy fitn
 - **"O Octave dá erro de gráficos ao rodar sem interface":** O sistema já está configurado com o toolkit `qt` nativo e supressão de avisos.
 - **"Quero resetar os dados para começar experimentos do zero":** Basta apagar ou renomear os arquivos `.csv` da pasta `data/` (o sistema cria novos cabeçalhos automaticamente na próxima execução).
 - **"A simulação 2D fecha muito rápido":** O tempo de animação está travado em 30 segundos com 50 FPS (`pause(0.02)`). Certifique-se de executar via `Assistir_Melhor_NPC.bat` ou `assistir_simulacao.m`.
+
+---
+
+## 🔗 Conexões
+- [[00 - MOC Principal]]
+- [[Execução Paralela & Análise Comparativa]]
+- [[Arquitetura de Dados (Telemetria)]]
+- [[Estrutura do Projeto & Diretórios]]
+- [[Simulação & Física de Esquiva]]
 
 ---
 *Documento integrado à documentação oficial do projeto Mirage — UNISENAI.*

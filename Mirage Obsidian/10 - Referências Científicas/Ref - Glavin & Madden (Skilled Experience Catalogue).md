@@ -21,8 +21,8 @@ O SEC foi implementado de forma modular no jogo de tiro *Unreal Tournament*:
 - Todas as demais tarefas lógicas de baixo nível do agente — tais como movimentação pelo mapa tático, coleta de itens (armas/vida) e **esquiva de ameaças (opponent evasion)** — permaneceram sob controle de regras estáticas e fixas (*fixed-strategy*).
 - Isso isolou cientificamente a variável de teste, demonstrando que as políticas armazenadas pelo catálogo do SEC conseguiram equilibrar a partida contra 5 perfis distintos de oponentes de forma rápida, sem latência excessiva, mantendo o NPC em constante aprendizado paralelo on-line.
 
-## 💡 Aplicação no Projeto S.E.N.A.I.
-Essa referência apoia teoricamente a nossa lógica de Dificuldade Escalável. O conceito de carregar diferentes perfis de conhecimento e modular as reações e falhas físicas para aproximar a proficiência da habilidade do jogador é exatamente o que fazemos na nossa matriz de parâmetros Easy/Medium/Hard, fornecendo a base teórica de DDA exigida pela banca.
+## 💡 Aplicação no Projeto Mirage
+Essa referência apoia teoricamente a nossa lógica de Dificuldade Escalável. O conceito de carregar diferentes perfis de conhecimento e modular as reações e falhas físicas para aproximar a proficiência da habilidade do jogador é exatamente o que fazemos na nossa matriz de parâmetros Easy/Medium/Hard, fornecendo a base teórica de DDA (Dynamic Difficulty Adjustment) do sistema.
 
 ## 🔗 Conexões
 - [[00 - MOC Principal]]

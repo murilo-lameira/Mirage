@@ -5,6 +5,10 @@ function fitness = fitness_function(T_survival, N_dodge, N_collision, D_taken, D
     % Dificuldade 2 (Médio): Ambiente balanceado. Exige harmonia entre ataque e esquiva.
     % Dificuldade 3 (Difícil): Bullet Hell implacável. Evasão e sobrevivência são vitais.
     
+    if nargin < 6 || isempty(difficulty)
+        difficulty = 2; % Padrão: Médio
+    end
+    
     if difficulty == 1 % Fácil
         w1 = 2.0;  % Sobrevivência (Modo brando)
         w2 = 2.0;  % Desvios simples
@@ -28,4 +32,5 @@ function fitness = fitness_function(T_survival, N_dodge, N_collision, D_taken, D
     fitness = (w1 * T_survival) + (w2 * N_dodge) + (w3 * D_inflicted) - (p1 * N_collision) - (p2 * D_taken);
     fitness = max(0.1, fitness);
 end
+
 

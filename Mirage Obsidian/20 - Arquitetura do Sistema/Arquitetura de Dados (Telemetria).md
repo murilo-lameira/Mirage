@@ -1,6 +1,6 @@
 # 📊 Arquitetura de Dados e Telemetria (CSVs)
 
-Para fundamentar as teses estatísticas e comportamentais do projeto Mirage para a banca avaliadora, nosso simulador exporta a telemetria do treinamento para três bases de dados estruturadas em CSV de forma assíncrona (*thread-safe*).
+Para fundamentar as teses estatísticas e comportamentais do projeto Mirage, nosso simulador exporta a telemetria do treinamento para três bases de dados estruturadas em CSV de forma assíncrona (*thread-safe*).
 
 Esses arquivos suportam desde a **Geração de Gráficos Comparativos** até a mecânica teórica de **Ajuste Dinâmico de Dificuldade** (SEC) e **Quality-Diversity** (MAP-Elites).
 

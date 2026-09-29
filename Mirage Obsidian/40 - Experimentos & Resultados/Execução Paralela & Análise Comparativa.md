@@ -62,7 +62,7 @@ A automação dispara **3 processos independentes do GNU Octave CLI simultaneame
 ## 📈 Descobertas e Interpretação dos Gráficos
 
 ### 1. Suavização de Fitness Ruidoso (Noisy Fitness)
-Ambientes com geração aleatória de projéteis (`rand()`) provocam variações nas notas dos indivíduos reavaliados. Para garantir que as curvas de evolução representem fielmente o conhecimento acumulado pelo GA sem oscilações caóticas para baixo, rastreamos o `history_best_so_far(gen)`. Isso produz curvas de convergência monotônicas (em degraus), ideais para apresentação acadêmica.
+Ambientes com geração aleatória de projéteis (`rand()`) provocam variações nas notas dos indivíduos reavaliados. Para garantir que as curvas de evolução representem fielmente o conhecimento acumulado pelo GA sem oscilações caóticas para baixo, rastreamos o `history_best_so_far(gen)`. Isso produz curvas de convergência monotônicas (em degraus), facilitando a análise visual da progressão evolutiva.
 
 ### 2. Escalonamento por Fator de Mérito ($\text{Difícil} > \text{Médio} > \text{Fácil}$)
 Com o sistema de Fator de Mérito, o modo **Difícil** atinge médias de $\sim 1816\text{ pts}$, o **Médio** atinge $\sim 901\text{ pts}$ e o **Fácil** $\sim 602\text{ pts}$. A sobrevivência e evasão no inferno de balas são devidamente recompensadas com patamares superiores.
