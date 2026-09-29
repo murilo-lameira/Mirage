@@ -1,6 +1,6 @@
 # 🗺️ Mapeamento de Conteúdo (MOC) - Projeto Mirage com AG
 
-Este cofre reúne toda a fundamentação científica, arquitetura de simulação, controle de experimentos e gestão do seminário do nosso projeto de **Inteligência Artificial aplicada ao comportamento evasivo de NPCs com Algoritmos Genéticos**.
+Este cofre reúne toda a fundamentação científica, arquitetura de simulação e controle de experimentos do nosso projeto de **Inteligência Artificial aplicada ao comportamento evasivo de NPCs com Algoritmos Genéticos**.
 
 ---
 
@@ -37,11 +37,6 @@ Este cofre reúne toda a fundamentação científica, arquitetura de simulação
 - [[O Problema da Convergencia Prematura]]: Estudo de caso sobre o *Reward Hacking* (o exploit do tanque) e o patch de balanceamento com Orçamento de Atributos.
 - [[Execução Paralela & Análise Comparativa]]: Automação de 30 rodadas simultâneas (`Rodar_Experimentos_Paralelos.bat`) e gerador automático de gráficos.
 
-### 50 - Gestão do Seminário
-- [[Divisão de Tarefas & Apresentadores]]: Atribuições e papéis de Leonardo Retori, Henry Matheus, Murilo Lameira e Murilo Romualdo.
-- [[Roteiro de Apresentação (15 min)]]: Script cronometrado minuto a minuto com transições entre apresentadores.
-- [[Guia de Estudo e Sabatina por Integrante]]: Guia mestre de estudo, física vetorial e perguntas da banca separadas por integrante.
-- [[Dossiê Completo do Seminário]]: Documento mestre acadêmico contendo o handout para a banca, blueprint dos 14 slides e FAQ de defesa.
-
 ---
 *Projeto desenvolvido para a disciplina de Inteligência Artificial — Engenharia de Controle e Automação — UNISENAI.*
+

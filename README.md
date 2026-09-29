@@ -236,13 +236,11 @@ Mirage/
 │   ├── resultados_experimentos.csv # Campeões treinados prontos para demonstração imediata
 │   └── map_elites.csv         # Matriz de diversidade fenotípica
 ├── docs/                      # Documentação acadêmica aprofundada
-│   ├── GUIA_DE_ESTUDO_E_SABATINA.md # Guia de defesa e sabatina por integrante (Física & AG)
 │   ├── FISICA_E_CINEMATICA.md   # Deduções de mecânica vetorial, CPA e Steering
 │   └── BIBLIOGRAFIA.md          # Fichamento e referências ABNT / IEEE
 ├── src/                       # Código-fonte Octave / MATLAB (.m) 100% compatível
 ├── scripts/                   # Automação, testes paralelos e detector universal (Octave/MATLAB)
 ├── logs/                      # Telemetria e logs de execução dos workers paralelos
-├── documentos_seminario/      # Dossiê, roteiros de apresentação e lâminas
 └── Mirage Obsidian/           # Cofre com notas científicas e grafos interconectados
 ```
 

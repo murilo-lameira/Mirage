@@ -14,3 +14,10 @@ Mirage Obsidian/.obsidian/workspace.json
 Mirage Obsidian/.obsidian/workspace-mobile.json
 Mirage Obsidian/.obsidian/graph.json
 
+# Planejamento e Documentos do Seminario (manter localmente, fora do git)
+Mirage Obsidian/50 - Gestão do Seminário/
+documentos_seminario/
+docs/GUIA_DE_ESTUDO_E_SABATINA.md
+docs/Guia_Estudo_e_Sabatina_Por_Integrante.*
+scripts/exportar_documentos_seminario.py
+scripts/gerar_word_guia_estudo.py
