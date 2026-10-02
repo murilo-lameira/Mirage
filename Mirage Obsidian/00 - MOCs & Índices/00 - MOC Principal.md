@@ -15,8 +15,11 @@ Este cofre reúne toda a fundamentação científica, arquitetura de simulação
 - [[Ref - Motta et al. (Online Opponent Modeling)]]: Técnicas de modelagem de oponentes adaptativas em tempo real.
 - [[Ref - Aula UNISENAI (Algoritmos Genéticos)]]: Notas teóricas de base sobre o funcionamento dos operadores genéticos na academia.
 
+### 15 - Biblioteca de Artigos Científicos (Íntegra)
+- [[00 - MOC Biblioteca de Artigos]]: Catálogo central reunindo 13 obras científicas internacionais na íntegra, particionadas atômicas (< 200 linhas).
+
 ### 00 - Guias & Operação
-- 🎨 [[Painel do Projeto|Painel Visual do Projeto (Canvas)]]: Mapa visual interativo do ecossistema Mirage.
+- 🎨 [[Painel do Projeto.canvas|Painel Visual do Projeto (Canvas)]]: Mapa visual interativo do ecossistema Mirage.
 - [[Guia de Uso & Comandos]]: Manual completo de operação, atalhos, comandos Octave e interpretação de gráficos.
 - [[Backlog de Melhorias Futuras]]: Planejamento de melhorias avançadas (Validação Estatística ANOVA, Padrões Bullet Hell e Obstáculos).
 
@@ -37,6 +40,13 @@ Este cofre reúne toda a fundamentação científica, arquitetura de simulação
 - [[O Problema da Convergencia Prematura]]: Estudo de caso sobre o *Reward Hacking* (o exploit do tanque) e o patch de balanceamento com Orçamento de Atributos.
 - [[Execução Paralela & Análise Comparativa]]: Automação de 30 rodadas simultâneas (`Rodar_Experimentos_Paralelos.bat`) e gerador automático de gráficos.
 
+### 60 - Artigo Científico
+- [[00 - MOC Artigo Cientifico]]: Hub central de redação do short paper (5 páginas, padrão SBC/IEEE).
+- [[Estrutura do Artigo (5 Paginas)]]: Planejamento seção a seção e orçamento rigoroso de espaço (IMRaD).
+- [[Estudos de Ablaçao & Metodologia]]: Hipóteses formais de ablação (Budget e CPA) e métricas de QD.
+- [[Workflow LaTeX no VS Code]]: Guia prático de ambiente, extensões e compilação LaTeX no VS Code.
+
 ---
 *Projeto desenvolvido para a disciplina de Inteligência Artificial — Engenharia de Controle e Automação — UNISENAI.*
+
 

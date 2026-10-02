@@ -1,0 +1,28 @@
+=========================================================================
+MÉTRICAS FORMAIS DE QUALIDADE-DIVERSIDADE (MAP-ELITES) — PROJETO MIRAGE
+Fonte: data/map_elites.csv | Data da Avaliação: 29-Sep-2026 22:36:59
+Referência Teórica: Kirk & Scirea (FDG 2020); Mouret & Clune (2015)
+=========================================================================
+
+1. MÉTRICAS CONSOLIDADAS
+-------------------------------------------------------------------------
+Total de Nichos na Grade: 9 (3 Classes x 3 Perfis de Mobilidade)
+Nichos Ocupados com Elites Válidos: 9
+Taxa de Cobertura do Espaço (Coverage): 100.00%
+QD-Score Acumulado (Sum of Elite Fitness): 14040.85
+Aptidão Máxima do Repertoire: 2321.38
+
+2. DECOMPOSIÇÃO POR REGIME DE DIFICULDADE
+-------------------------------------------------------------------------
+Fácil   (D1): Cobertura = 100.0% | QD-Score = 3933.41
+Médio   (D2): Cobertura = 100.0% | QD-Score = 7263.83
+Difícil (D3): Cobertura = 100.0% | QD-Score = 14040.85
+
+3. MATRIZ DE APTIDÃO MÁXIMA DOS ELITES (FITNESS)
+-------------------------------------------------------------------------
+Mobilidade \ Classe       | Tanker          | Balanceado      | Glass Cannon   
+-------------------------------------------------------------------------
+Lento (< 4.5 m/s)         |         1993.85 |         1813.53 |         1196.57
+Médio (4.5 a 6.5 m/s)    |         2321.38 |         1733.83 |         1240.99
+Rápido (> 6.5 m/s)       |         1536.14 |         1424.77 |          779.79
+=========================================================================

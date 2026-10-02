@@ -2,6 +2,23 @@
 logs/
 *.log
 
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+
+# LaTeX build artifacts (preserva main.tex, main.pdf, referencias.bib e figuras)
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/*.bbl
+paper/*.blg
+paper/*.synctex.gz
+paper/*.fls
+paper/*.fdb_latexmk
+
 # OS generated files
 .DS_Store
 Thumbs.db

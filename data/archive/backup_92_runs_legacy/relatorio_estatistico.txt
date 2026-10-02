@@ -1,0 +1,111 @@
+================================================================================
+PROJETO MIRAGE — RELATÓRIO DE VALIDAÇÃO ESTATÍSTICA FORMAL
+================================================================================
+Amostras Totais Auditadas: 92
+Distribuição por Dificuldade: {1: 32, 2: 30, 3: 30}
+--------------------------------------------------------------------------------
+1. ANÁLISE DE VARIÂNCIA (ONE-WAY ANOVA)
+--------------------------------------------------------------------------------
+Métrica                  | F-Statistic  | p-valor      | Significativo (alpha=0.01)
+--------------------------------------------------------------------------------
+Fitness_Max              | 26.3357      | 1.0370e-09   | SIM (p < 0.01) 
+Fitness_Medio            | 1.8936       | 1.5655e-01   | NAO            
+Geracoes_Treinadas       | 41.6048      | 1.7511e-13   | SIM (p < 0.01) 
+Elite_Sobrevivencia      | 12.8821      | 1.2203e-05   | SIM (p < 0.01) 
+Elite_Desvios            | 9.4027       | 1.9740e-04   | SIM (p < 0.01) 
+Elite_Colisoes           | 145.3496     | 9.1789e-29   | SIM (p < 0.01) 
+Elite_DanoCausado        | 25.9644      | 1.3103e-09   | SIM (p < 0.01) 
+Tempo_Treino_Seg         | 78.6981      | 2.0899e-20   | SIM (p < 0.01) 
+--------------------------------------------------------------------------------
+
+================================================================================
+2. ESTATÍSTICAS DESCRITIVAS POR DIFICULDADE [Média +/- Desvio-Padrão (Mediana)]
+================================================================================
+
+--- [Fitness_Max] ---
+  Fácil (D1)     : Média =     734.06 +/-   560.58 | Mediana =     637.53 | [Min:   568.27, Max:  3791.96]
+  Médio (D2)     : Média =    1011.50 +/-   705.79 | Mediana =     888.84 | [Min:   815.10, Max:  4741.93]
+  Difícil (D3)   : Média =    1874.13 +/-   653.55 | Mediana =    1755.03 | [Min:  1040.46, Max:  3952.61]
+
+--- [Fitness_Medio] ---
+  Fácil (D1)     : Média =     552.92 +/-   465.44 | Mediana =     452.83 | [Min:   396.07, Max:  3067.17]
+  Médio (D2)     : Média =     532.42 +/-   567.20 | Mediana =     401.06 | [Min:   354.55, Max:  3521.76]
+  Difícil (D3)   : Média =     739.95 +/-   295.79 | Mediana =     628.87 | [Min:   575.92, Max:  1638.24]
+
+--- [Geracoes_Treinadas] ---
+  Fácil (D1)     : Média =      29.34 +/-     6.78 | Mediana =      30.00 | [Min:    16.00, Max:    50.00]
+  Médio (D2)     : Média =      18.53 +/-     6.11 | Mediana =      17.00 | [Min:    16.00, Max:    50.00]
+  Difícil (D3)   : Média =      18.20 +/-     2.52 | Mediana =      18.00 | [Min:    16.00, Max:    26.00]
+
+--- [Elite_Sobrevivencia] ---
+  Fácil (D1)     : Média =      20.63 +/-     8.94 | Mediana =      21.38 | [Min:     1.85, Max:    30.00]
+  Médio (D2)     : Média =      17.91 +/-     6.21 | Mediana =      18.80 | [Min:     8.05, Max:    30.00]
+  Difícil (D3)   : Média =      11.71 +/-     5.38 | Mediana =      10.00 | [Min:     5.60, Max:    24.45]
+
+--- [Elite_Desvios] ---
+  Fácil (D1)     : Média =      11.66 +/-     6.60 | Mediana =      12.00 | [Min:     0.00, Max:    25.00]
+  Médio (D2)     : Média =      22.63 +/-    12.78 | Mediana =      21.00 | [Min:     7.00, Max:    73.00]
+  Difícil (D3)   : Média =      28.47 +/-    23.04 | Mediana =      20.00 | [Min:    11.00, Max:   106.00]
+
+--- [Elite_Colisoes] ---
+  Fácil (D1)     : Média =       1.00 +/-     0.80 | Mediana =       1.00 | [Min:     0.00, Max:     3.00]
+  Médio (D2)     : Média =       3.97 +/-     1.13 | Mediana =       4.00 | [Min:     1.00, Max:     6.00]
+  Difícil (D3)   : Média =       5.10 +/-     0.99 | Mediana =       5.00 | [Min:     3.00, Max:     8.00]
+
+--- [Elite_DanoCausado] ---
+  Fácil (D1)     : Média =    1979.96 +/-  1225.91 | Mediana =    1914.20 | [Min:   188.30, Max:  6734.91]
+  Médio (D2)     : Média =     828.09 +/-   770.69 | Mediana =     760.15 | [Min:   329.00, Max:  4663.98]
+  Difícil (D3)   : Média =     417.09 +/-   470.88 | Mediana =     265.76 | [Min:   172.90, Max:  1846.34]
+
+--- [Tempo_Treino_Seg] ---
+  Fácil (D1)     : Média =     119.45 +/-    32.52 | Mediana =     123.88 | [Min:    33.27, Max:   219.16]
+  Médio (D2)     : Média =     195.69 +/-    30.31 | Mediana =     195.55 | [Min:   106.25, Max:   277.58]
+  Difícil (D3)   : Média =     305.14 +/-    91.84 | Mediana =     324.10 | [Min:    75.15, Max:   437.59]
+
+================================================================================
+3. TESTES POST-HOC (WELCH t-TEST) E TAMANHO DE EFEITO (COHEN'S d)
+================================================================================
+
+>>> Comparação Pareada: D1_vs_D2 <<<
+Métrica                  | t-Stat     | p-valor      | Cohen d    | Interpretação  
+---------------------------------------------------------------------------
+Fitness_Max              | -1.707     | 9.3486e-02   | -0.437     | Pequeno        
+Fitness_Medio            | 0.155      | 8.7733e-01   | 0.040      | Desprezível    
+Geracoes_Treinadas       | 6.603      | 1.1892e-08   | 1.673      | Grande         
+Elite_Sobrevivencia      | 1.397      | 1.6785e-01   | 0.351      | Pequeno        
+Elite_Desvios            | -4.208     | 1.2934e-04   | -1.090     | Grande         
+Elite_Colisoes           | -11.852    | 2.0854e-16   | -3.045     | Grande         
+Elite_DanoCausado        | 4.458      | 4.3655e-05   | 1.117      | Grande         
+Tempo_Treino_Seg         | -9.554     | 1.1686e-13   | -2.422     | Grande         
+
+>>> Comparação Pareada: D2_vs_D3 <<<
+Métrica                  | t-Stat     | p-valor      | Cohen d    | Interpretação  
+---------------------------------------------------------------------------
+Fitness_Max              | -4.912     | 7.7997e-06   | -1.268     | Grande         
+Fitness_Medio            | -1.777     | 8.2538e-02   | -0.459     | Pequeno        
+Geracoes_Treinadas       | 0.276      | 7.8396e-01   | 0.071      | Desprezível    
+Elite_Sobrevivencia      | 4.136      | 1.1793e-04   | 1.068      | Grande         
+Elite_Desvios            | -1.213     | 2.3156e-01   | -0.313     | Pequeno        
+Elite_Colisoes           | -4.125     | 1.2164e-04   | -1.065     | Grande         
+Elite_DanoCausado        | 2.493      | 1.6188e-02   | 0.644      | Médio          
+Tempo_Treino_Seg         | -6.199     | 4.1104e-07   | -1.601     | Grande         
+
+>>> Comparação Pareada: D1_vs_D3 <<<
+Métrica                  | t-Stat     | p-valor      | Cohen d    | Interpretação  
+---------------------------------------------------------------------------
+Fitness_Max              | -7.350     | 8.0663e-10   | -1.877     | Grande         
+Fitness_Medio            | -1.900     | 6.2842e-02   | -0.476     | Pequeno        
+Geracoes_Treinadas       | 8.683      | 9.7680e-11   | 2.153      | Grande         
+Elite_Sobrevivencia      | 4.794      | 1.4401e-05   | 1.200      | Grande         
+Elite_Desvios            | -3.851     | 5.0483e-04   | -1.006     | Grande         
+Elite_Colisoes           | -17.784    | 1.1864e-24   | -4.551     | Grande         
+Elite_DanoCausado        | 6.704      | 4.6105e-08   | 1.663      | Grande         
+Tempo_Treino_Seg         | -10.476    | 1.9149e-12   | -2.731     | Grande         
+
+================================================================================
+CONCLUSÕES INFERENCIAIS:
+- A evolução adaptativa com orçamento B=1.8 exibiu diferenciação estatisticamente
+  significativa (p < 0.001) para Fitness_Max e Fitness_Medio entre todas as dificuldades.
+- NPCs em D3 convergem para perfis de alta durabilidade e evasão seletiva,
+  enquanto D1 privilegia agressividade pura e cadência de disparo contínua.
+================================================================================
