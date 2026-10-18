@@ -33,10 +33,10 @@
 O projeto soluciona de forma analítica o problema clássico de **Reward Hacking** em jogos digitais — onde algoritmos evolutivos convencionais convergem para "esponjas de dano" estáticas com acúmulo desproporcional de vida em detrimento de esquivas ágeis. 
 
 O Mirage implementa:
-1. **Restrição Orçamentária Invariante ($B = 1{,}8$):** Operador de reparo homotético sobre simplex contínuo que coíbe a criação de "super-agentes" e catalisa a emersão autônoma de arquétipos táticos distintos;
+1. **Restrição Orçamentária Invariante ($B = 1.8$):** Operador de reparo homotético sobre simplex contínuo que coíbe a criação de "super-agentes" e catalisa a emersão autônoma de arquétipos táticos distintos;
 2. **Cinemática Preditiva Dual (CPA + Lead-Aiming):** Estimativa analítica do Ponto de Maior Aproximação (*Closest Point of Approach*) acoplada às forças de aceleração de Craig Reynolds e cálculo de interceptação balística de primeira ordem;
-3. **Mapeamento de Qualidade-Diversidade (MAP-Elites):** Repertório comportamental heterogêneo avaliado por métricas formais ($\text{Coverage} = 100{,}00\%$, $\text{QD-Score} = 39.114{,}40$) integrado ao Catálogo de Experiência Especializada (*SEC*) para Ajuste Dinâmico de Dificuldade (*DDA*);
-4. **Validação Estatística em Larga Escala ($N = 90$):** Amostragem balanceada com ANOVA One-Way, testes não-paramétricos de Kruskal-Wallis e tamanhos de efeito de Cohen ($d \in [3{,}78, 18{,}61]$) com significância estatística extrema ($p \ll 10^{-30}$).
+3. **Mapeamento de Qualidade-Diversidade (MAP-Elites):** Repertório comportamental heterogêneo avaliado por métricas formais (Coverage de 100% e QD-Score de 39114.40) integrado ao Catálogo de Experiência Especializada (*SEC*) para Ajuste Dinâmico de Dificuldade (*DDA*);
+4. **Validação Estatística em Larga Escala ($N = 90$):** Amostragem balanceada com ANOVA One-Way, testes não-paramétricos de Kruskal-Wallis e tamanhos de efeito de Cohen ($d \in [3.78, 18.61]$) com significância estatística extrema ($p \ll 10^{-30}$).
 
 ---
 
@@ -77,99 +77,143 @@ O simulador renderiza a física cinemática em tempo real a 50 FPS com interface
 ## 🧭 Física, Cinemática, CPA & Lead-Aiming
 
 ### 1. Diagrama Esquemático da Arena 2D
-A arena contínua de combate compreende o plano cartesiano $\Omega = [-20, 20] \times [-20, 20]\,\text{m}$ ($40 \times 40\,\text{m}$), governada por zonas de colisão concêntricas, pilares rígidos de absorção e círculos balísticos:
+A arena contínua de combate compreende o plano cartesiano $\Omega = [-20, 20] \times [-20, 20]\text{ m}$ ($40 \times 40\text{ m}$), governada por zonas de colisão concêntricas, pilares rígidos de absorção e círculos balísticos:
 
 <p align="center">
   <img src="data/graficos/fig_diagrama_arena.png" alt="Diagrama Esquemático da Arena 2D Mirage" width="620">
 </p>
 
-* **Hitbox Material ($r_{\text{hit}} = 1{,}0\,\text{m}$):** Colisões ocorrem se $\|\mathbf{p}_{\text{npc}} - \mathbf{p}_{\text{proj}}\| \le 1{,}3\,\text{m}$ (soma com $r_{\text{proj}} = 0{,}3\,\text{m}$), infligindo $-25\,\text{HP}$ e penalizando o fitness ($N_{\text{collision}}$).
-* **Radar Periférico ($R_{\text{radar}} = 4{,}0\,\text{m}$):** Registra desvios com sucesso ($N_{\text{dodge}}$) quando o projétil cruza o radar tangencialmente sem interceptar a hitbox.
-* **Círculo de Disparo Orbital ($r = 18\,\text{m}$):** Posição geradora dos tiros balísticos inimigos que miram o NPC com ruído angular Gaussiano.
-* **4 Pilares Cilíndricos ($R_{\text{pillar}} = 1{,}3\,\text{m}$ em $(\pm 8, \pm 8)\,\text{m}$):** Absorvem projéteis e exercem reflexão elástica e atrito sobre o NPC (*Occlusion Steering*).
+* **Hitbox Material ($r = 1.0\text{ m}$):** Colisões com dano de $-25\text{ HP}$ ocorrem se a separação relativa entre agente e projétil atingir a distância crítica de $1.3\text{ m}$:
+
+$$
+\lVert \mathbf{p}_{\text{npc}} - \mathbf{p}_{\text{proj}} \rVert \le 1.3\text{ m}
+$$
+
+* **Radar Periférico ($R = 4.0\text{ m}$):** Registra desvios com sucesso quando o projétil cruza o radar tangencialmente sem interceptar a hitbox.
+* **Círculo de Disparo Orbital ($r = 18\text{ m}$):** Posição geradora dos tiros balísticos inimigos que miram o NPC com ruído angular Gaussiano.
+* **4 Pilares Cilíndricos ($R = 1.3\text{ m}$ em $\pm 8, \pm 8\text{ m}$):** Absorvem projéteis e exercem reflexão elástica e atrito sobre o NPC (*Occlusion Steering*).
 
 ### 2. Integração Semi-Implícita de Euler
-Com passo de integração $\Delta t = 0{,}05\,\text{s}$ ($20\,\text{Hz}$ / $50\,\text{FPS}$) e massa unitária $m = 1{,}0\,\text{kg}$:
+Com passo de integração $\Delta t = 0.05\text{ s}$ ($20\text{ Hz}$ / $50\text{ FPS}$) e massa unitária $m = 1.0\text{ kg}$:
 
-$$\mathbf{v}_{\text{npc}}(k+1) = \text{trunc}\left(\mathbf{v}_{\text{npc}}(k) + \frac{\mathbf{F}_{\text{total}}(k)}{m}\Delta t, \; v_{\text{max}}\right)$$
+$$
+\mathbf{v}_{\text{npc}}(k+1) = \text{trunc}\left(\mathbf{v}_{\text{npc}}(k) + \frac{\mathbf{F}_{\text{total}}(k)}{m}\Delta t, v_{\text{max}}\right)
+$$
 
-$$\mathbf{p}_{\text{npc}}(k+1) = \mathbf{p}_{\text{npc}}(k) + \mathbf{v}_{\text{npc}}(k+1)\Delta t$$
+$$
+\mathbf{p}_{\text{npc}}(k+1) = \mathbf{p}_{\text{npc}}(k) + \mathbf{v}_{\text{npc}}(k+1)\Delta t
+$$
 
 A resultante de forças compõe o somatório das ameaças ativas em alerta, contenção de bordas e repulsão de pilares:
 
-$$\mathbf{F}_{\text{total}} = \sum_{j \in \mathcal{P}_{\text{alerta}}} \mathbf{F}_{\text{evade}}^{(j)} + \mathbf{F}_{\text{fronteira}} + \mathbf{F}_{\text{pilares}}$$
+$$
+\mathbf{F}_{\text{total}} = \sum_{j \in \mathcal{P}_{\text{alerta}}} \mathbf{F}_{\text{evade}}^{(j)} + \mathbf{F}_{\text{fronteira}} + \mathbf{F}_{\text{pilares}}
+$$
 
 ### 3. Dedução Analítica do Ponto de Maior Aproximação (CPA)
-Para um projétil $j$ com posição $\mathbf{p}_p$ e velocidade $\mathbf{v}_p$, definem-se os vetores relativos $\mathbf{p}_{\text{rel}} = \mathbf{p}_p - \mathbf{p}_{\text{npc}}$ e $\mathbf{v}_{\text{rel}} = \mathbf{v}_p - \mathbf{v}_{\text{npc}}$. A minimização da distância euclidiana futura $D^2(t) = \|\mathbf{p}_{\text{rel}} + \mathbf{v}_{\text{rel}} t\|^2$ fornece o instante analítico ótimo:
+Considere um projétil em aproximação com posição e velocidade relativas ao NPC:
 
-$$t_{\text{cpa}} = -\frac{\mathbf{p}_{\text{rel}} \cdot \mathbf{v}_{\text{rel}}}{\|\mathbf{v}_{\text{rel}}\|^2}$$
+$$
+\mathbf{p}_{\text{rel}} = \mathbf{p}_p - \mathbf{p}_{\text{npc}}, \quad \mathbf{v}_{\text{rel}} = \mathbf{v}_p - \mathbf{v}_{\text{npc}}
+$$
 
-O gatilho de aceleração evasiva de Craig Reynolds é acionado exclusivamente quando satisfeitas as três condições:
-1. **Janela Temporal Crítica:** $0 < t_{\text{cpa}} \le 1{,}5\,\text{s}$;
-2. **Projeção em Raio de Perigo:** $\|\mathbf{p}_{\text{rel}} + \mathbf{v}_{\text{rel}} t_{\text{cpa}}\| < R_{\text{radar}}$;
-3. **Sentido de Aproximação:** $\mathbf{p}_{\text{rel}} \cdot \mathbf{v}_{\text{rel}} < 0$.
+A minimização da distância euclidiana projetada no tempo $t$:
 
-Quando ativo, calcula-se a posição futura projetada e a força de Reynolds com saturação $F_{\text{max}} = 25{,}0\,\text{N}$:
+$$
+D^2(t) = \lVert \mathbf{p}_{\text{rel}} + \mathbf{v}_{\text{rel}} t \rVert^2
+$$
 
-$$\mathbf{d}_{\text{cpa}} = \mathbf{p}_{\text{npc}}(t_{\text{cpa}}) - \mathbf{p}_p(t_{\text{cpa}})$$
+fornece o instante analítico ótimo de maior aproximação ($t_{\text{cpa}}$):
 
-$$\mathbf{F}_{\text{evade}}^{(j)} = \text{trunc}\left(\frac{\mathbf{d}_{\text{cpa}}}{\|\mathbf{d}_{\text{cpa}}\|} v_{\text{max}} - \mathbf{v}_{\text{npc}}, \; F_{\text{max}}\right)$$
+$$
+t_{\text{cpa}} = -\frac{\mathbf{p}_{\text{rel}} \cdot \mathbf{v}_{\text{rel}}}{\lVert \mathbf{v}_{\text{rel}} \rVert^2}
+$$
+
+O gatilho de aceleração evasiva de Craig Reynolds é acionado exclusivamente quando satisfeitas as três restrições simultâneas:
+
+$$
+0 < t_{\text{cpa}} \le 1.5\text{ s}, \quad \lVert \mathbf{p}_{\text{rel}} + \mathbf{v}_{\text{rel}} t_{\text{cpa}} \rVert < R_{\text{radar}}, \quad \mathbf{p}_{\text{rel}} \cdot \mathbf{v}_{\text{rel}} < 0
+$$
+
+* **Janela Temporal Crítica:** Tempo estimado até a aproximação máxima de até 1.5 segundos;
+* **Projeção em Raio de Perigo:** Distância mínima projetada inferior ao raio do radar (4.0 metros);
+* **Sentido de Aproximação:** Produto escalar negativo confirmando aproximação real do projétil.
+
+Quando ativo, calcula-se a posição futura projetada e a força de Reynolds com saturação em $F_{\text{max}} = 25.0\text{ N}$:
+
+$$
+\mathbf{d}_{\text{cpa}} = \mathbf{p}_{\text{npc}}(t_{\text{cpa}}) - \mathbf{p}_p(t_{\text{cpa}})
+$$
+
+$$
+\mathbf{F}_{\text{evade}}^{(j)} = \text{trunc}\left(\frac{\mathbf{d}_{\text{cpa}}}{\lVert \mathbf{d}_{\text{cpa}} \rVert} v_{\text{max}} - \mathbf{v}_{\text{npc}}, F_{\text{max}}\right)
+$$
 
 ### 4. Disparo Preditivo Inverso (*Lead-Aiming*)
 O NPC neutraliza ameaças no ar resolvendo o problema dual de interceptação balística de primeira ordem (Wang & Tan, 2014):
 
-$$t_{\text{intercept}} = \frac{\|\mathbf{p}_{\text{threat}} - \mathbf{p}_{\text{npc}}\|}{v_{\text{shot}} + \|\mathbf{v}_{\text{threat}}\| + \epsilon}$$
+$$
+t_{\text{intercept}} = \frac{\lVert \mathbf{p}_{\text{threat}} - \mathbf{p}_{\text{npc}} \rVert}{v_{\text{shot}} + \lVert \mathbf{v}_{\text{threat}} \rVert + \epsilon}
+$$
 
-$$\mathbf{p}_{\text{predicted}} = \mathbf{p}_{\text{threat}} + \mathbf{v}_{\text{threat}} \cdot t_{\text{intercept}}$$
+$$
+\mathbf{p}_{\text{predicted}} = \mathbf{p}_{\text{threat}} + \mathbf{v}_{\text{threat}} \cdot t_{\text{intercept}}
+$$
 
-onde $v_{\text{shot}} = 16{,}0\,\text{m/s}$ e $\epsilon = 10^{-4}$. Disparos preditivos recebem bônus cinemático $\beta_{\text{lead}} = 1{,}15$ e abrem rotas de fuga ao destruir projéteis inimigos em voo.
+onde a velocidade balística é $v = 16.0\text{ m/s}$ e $\epsilon = 10^{-4}$. Disparos preditivos recebem bônus cinemático ($\beta = 1.15$) e abrem rotas de fuga ao destruir projéteis inimigos em voo.
 
 > [!IMPORTANT]
 > **Ganhos Comprovados por Ablação Experimental:**
-> A substituição de repulsões euclidianas puramente reativas pela formulação analítica CPA com *lead-aiming* proporcionou **redução de 77,5%** nas colisões críticas (de $2,14$ para $0,48\,\text{hits/s}$, $t = 18{,}72, p < 10^{-24}$) e **aumento de +103,7%** no tempo de sobrevivência no regime Difícil ($23,22 \pm 2,51\,\text{s}$ contra $11,40 \pm 2,8\,\text{s}$).
+> A substituição de repulsões euclidianas puramente reativas pela formulação analítica CPA com *lead-aiming* proporcionou **redução de 77,5%** nas colisões críticas (de $2.14$ para $0.48\text{ hits/s}$, $t = 18.72, p < 10^{-24}$) e **aumento de +103,7%** no tempo de sobrevivência no regime Difícil ($23.22 \pm 2.51\text{ s}$ contra $11.40 \pm 2.8\text{ s}$).
 
 ---
 
-## 🧬 Algoritmo Genético sob Orçamento ($B = 1{,}8$)
+## 🧬 Algoritmo Genético sob Orçamento ($B = 1.8$)
 
 ### 1. Cromossomo Fenotípico e Projeção Homotética
-Cada agente carrega um cromossomo real contínuo $\mathbf{x} = [\text{HP}, \; \text{Attack}, \; \text{AttackSpeed}, \; \text{MovementSpeed}]$, delimitado fisicamente em:
-* $\text{HP} \in [10, 200]\,\text{pts}$
-* $\text{Attack} \in [5, 50]\,\text{pts}$
-* $\text{AttackSpeed} \in [0{,}5, 3{,}0]\,\text{Hz}$
-* $\text{MovementSpeed} \in [1{,}0, 8{,}0]\,\text{m/s}$
+Cada agente carrega um cromossomo real contínuo $\mathbf{x} = [\text{HP}, \text{Attack}, \text{AttackSpeed}, \text{MovementSpeed}]$, delimitado fisicamente em:
+* $\text{HP} \in [10, 200]\text{ pts}$
+* $\text{Attack} \in [5, 50]\text{ pts}$
+* $\text{AttackSpeed} \in [0.5, 3.0]\text{ Hz}$
+* $\text{MovementSpeed} \in [1.0, 8.0]\text{ m/s}$
 
 Cada gene é normalizado no intervalo unitário $u_i \in [0, 1]$ via transformações afins:
 
-$$u_1 = \frac{\text{HP}-10}{190}, \quad u_2 = \frac{\text{Attack}-5}{45}, \quad u_3 = \frac{\text{Cad}-0{,}5}{2{,}5}, \quad u_4 = \frac{\text{Vel}-1{,}0}{7{,}0}$$
+$$
+u_1 = \frac{\text{HP}-10}{190}, \quad u_2 = \frac{\text{Attack}-5}{45}, \quad u_3 = \frac{\text{Cad}-0.5}{2.5}, \quad u_4 = \frac{\text{Vel}-1.0}{7.0}
+$$
 
 A regra central de conservação de recursos impõe o teto do orçamento global:
 
-$$\sum_{i=1}^4 u_i \le B = 1{,}8$$
+$$
+\sum_{i=1}^4 u_i \le B = 1.8
+$$
 
 Indivíduos cuja soma amostral exceda $B$ são projetados proporcionalmente de volta sobre o simplex:
 
-$$\mathbf{u} \leftarrow \mathbf{u} \cdot \left(\frac{B}{\sum_{j=1}^4 u_j}\right)$$
+$$
+\mathbf{u} \leftarrow \mathbf{u} \cdot \left(\frac{B}{\sum_{j=1}^4 u_j}\right)
+$$
 
-Essa formulação impede que o agente atinja valores máximos em múltiplos atributos simultaneamente. De fato, todos os campeões evoluídos saturam a fronteira de Pareto ($\sum u_i \approx 1{,}78\text{--}1{,}79$), forçando especialização ecológica.
+Essa formulação impede que o agente atinja valores máximos em múltiplos atributos simultaneamente. De fato, todos os campeões evoluídos saturam a fronteira de Pareto ($\sum u_i \approx 1.78\text{--}1.79$), forçando especialização ecológica.
 
 ### 2. Os Três Arquétipos Táticos Emergentes
 
-| Arquétipo Emergente | Regime de Treino | HP (pts) | Ataque (pts) | Cadência (Hz) | Velocidade (m/s) | Soma Normalizada ($\sum u_i$) |
+| Arquétipo Emergente | Regime de Treino | HP (pts) | Ataque (pts) | Cadência (Hz) | Velocidade (m/s) | Soma Normalizada |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Sniper / Glass Cannon** | Fácil ($D_1$) | $22{,}07$ ($u \approx 0{,}06$) | $49{,}54$ ($u \approx 0{,}99$) | $2{,}32$ ($u \approx 0{,}73$) | $1{,}06$ ($u \approx 0{,}01$) | $\mathbf{1{,}79}$ |
-| **Combatente Equilibrado** | Médio ($D_2$) | $31{,}80$ ($u \approx 0{,}11$) | $40{,}77$ ($u \approx 0{,}79$) | $2{,}46$ ($u \approx 0{,}78$) | $1{,}69$ ($u \approx 0{,}10$) | $\mathbf{1{,}78}$ |
-| **Bruiser / Ladino** | Difícil ($D_3$) | $72{,}73$ ($u \approx 0{,}33$) | $24{,}33$ ($u \approx 0{,}43$) | $2{,}25$ ($u \approx 0{,}70$) | $3{,}21$ ($u \approx 0{,}32$) | $\mathbf{1{,}78}$ |
+| **Sniper / Glass Cannon** | Fácil (D1) | 22.07 (u = 0.06) | 49.54 (u = 0.99) | 2.32 (u = 0.73) | 1.06 (u = 0.01) | **1.79** |
+| **Combatente Equilibrado** | Médio (D2) | 31.80 (u = 0.11) | 40.77 (u = 0.79) | 2.46 (u = 0.78) | 1.69 (u = 0.10) | **1.78** |
+| **Bruiser / Ladino** | Difícil (D3) | 72.73 (u = 0.33) | 24.33 (u = 0.43) | 2.25 (u = 0.70) | 3.21 (u = 0.32) | **1.78** |
 
-* **Sniper / Glass Cannon (Fácil):** Alocação ofensiva máxima ($u_{\text{atk}} \approx 0{,}99$), aniquilando alvos de forma fulminante sem necessitar de alta mobilidade em ambiente balístico brando.
-* **Combatente Equilibrado (Médio):** Distribuição tática com ataque elevado ($u_{\text{atk}} \approx 0{,}79$), alta cadência ($u_{\text{cad}} \approx 0{,}78$) e mobilidade intermediária para esquivar de salvas em leque.
-* **Bruiser / Ladino (Difícil):** Realocação cinemática para evasão veloz ($u_{\text{vel}} \approx 0{,}32 \to 3{,}21\,\text{m/s}$) com pool de vida triplicado ($72{,}73\,\text{pts}$) para absorver impactos residuais de vórtices contínuos.
+* **Sniper / Glass Cannon (Fácil):** Alocação ofensiva máxima (Ataque $u = 0.99$), aniquilando alvos de forma fulminante sem necessitar de alta mobilidade em ambiente balístico brando.
+* **Combatente Equilibrado (Médio):** Distribuição tática com alto poder de fogo (Ataque $u = 0.79$) e cadência ($u = 0.78$), balanceando mobilidade para esquivar de salvas em leque.
+* **Bruiser / Ladino (Difícil):** Realocação cinemática para evasão veloz ($3.21\text{ m/s}$, $u = 0.32$) com pool de vida triplicado ($72.73\text{ pts}$) para absorver impactos residuais de vórtices contínuos.
 
 ---
 
 ## 📊 Validação Estatística Formal ($N = 90$)
 
-O protocolo experimental executou $N = 90$ rodadas evolutivas independentes ao longo de $G = 50$ gerações ($N_1 = 30$ Fácil, $N_2 = 30$ Médio, $N_3 = 30$ Difícil; totalizando $135.000$ episódios de combate simulados).
+O protocolo experimental executou $N = 90$ rodadas evolutivas independentes ao longo de $G = 50$ gerações (30 no Fácil, 30 no Médio, 30 no Difícil; totalizando 135.000 episódios de combate simulados).
 
 ### 1. Curvas de Convergência Geracional
 A evolução demonstra convergência assintótica estável e separabilidade nítida entre os regimes:
@@ -178,9 +222,9 @@ A evolução demonstra convergência assintótica estável e separabilidade nít
   <img src="data/graficos/fig_convergencia.png" alt="Curvas de Convergência do Fitness Mirage" width="600">
 </p>
 
-* **Fácil ($D_1$):** Fitness Máximo Médio $= 3754{,}18 \pm 134{,}87$ (Mediana: $3791{,}56$)
-* **Médio ($D_2$):** Fitness Máximo Médio $= 4849{,}88 \pm 358{,}85$ (Mediana: $4863{,}89$)
-* **Difícil ($D_3$):** Fitness Máximo Médio $= 3687{,}83 \pm 246{,}42$ (Mediana: $3702{,}13$)
+* **Fácil (D1):** Fitness Máximo Médio $= 3754.18 \pm 134.87$ (Mediana: $3791.56$)
+* **Médio (D2):** Fitness Máximo Médio $= 4849.88 \pm 358.85$ (Mediana: $4863.89$)
+* **Difícil (D3):** Fitness Máximo Médio $= 3687.83 \pm 246.42$ (Mediana: $3702.13$)
 
 ### 2. Dispersão Fenotípica e Radar de Atributos
 
@@ -191,44 +235,44 @@ A evolução demonstra convergência assintótica estável e separabilidade nít
 
 ### 3. Tabela Comparativa de Métricas Brutas e Genes ($N = 90$)
 
-| Métrica / Atributo Fenotípico | Fácil ($D_1$) | Médio ($D_2$) | Difícil ($D_3$) | ANOVA One-Way ($F$) | Valor-$p$ |
+| Métrica / Atributo Fenotípico | Fácil (D1) | Médio (D2) | Difícil (D3) | ANOVA One-Way ($F$) | Valor-$p$ |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Tempo de Sobrevivência (s)** | $29{,}95 \pm 0{,}00$ | $29{,}95 \pm 0{,}01$ | $23{,}22 \pm 2{,}51$ | $F(2, 87) = 214{,}79$ | $p < 10^{-35}$ |
-| **Desvios Limpos (CPA)** | $23{,}97 \pm 1{,}75$ | $69{,}07 \pm 3{,}54$ | $83{,}80 \pm 14{,}48$ | $F(2, 87) = 388{,}11$ | $p < 10^{-45}$ |
-| **Colisões Críticas** | $0{,}00 \pm 0{,}00$ | $0{,}43 \pm 0{,}57$ | $3{,}57 \pm 0{,}82$ | $F(2, 87) = 344{,}06$ | $p < 10^{-43}$ |
-| **Dano Infligido** | $6669{,}69 \pm 271{,}19$ | $4822{,}34 \pm 445{,}40$ | $1862{,}87 \pm 244{,}85$ | $F(2, 87) = 1594{,}39$ | $p = 3{,}13 \times 10^{-69}$ |
-| **Pontos de Vida (HP)** | $12{,}37 \pm 7{,}28$ | $31{,}80 \pm 9{,}61$ | $72{,}73 \pm 16{,}64$ | $F(2, 87) = 202{,}45$ | $p < 10^{-34}$ |
-| **Poder de Ataque** | $49{,}47 \pm 1{,}94$ | $40{,}77 \pm 3{,}77$ | $24{,}33 \pm 4{,}63$ | $F(2, 87) = 371{,}82$ | $p < 10^{-44}$ |
-| **Cadência de Tiro (Hz)** | $2{,}47 \pm 0{,}03$ | $2{,}46 \pm 0{,}08$ | $2{,}25 \pm 0{,}19$ | $F(2, 87) = 32{,}86$ | $p < 10^{-10}$ |
-| **Velocidade Máxima (m/s)** | $1{,}03 \pm 0{,}05$ | $1{,}69 \pm 0{,}61$ | $3{,}21 \pm 0{,}45$ | $F(2, 87) = 195{,}07$ | $p < 10^{-33}$ |
+| **Tempo de Sobrevivência (s)** | $29.95 \pm 0.00$ | $29.95 \pm 0.01$ | $23.22 \pm 2.51$ | $F(2, 87) = 214.79$ | $p < 10^{-35}$ |
+| **Desvios Limpos (CPA)** | $23.97 \pm 1.75$ | $69.07 \pm 3.54$ | $83.80 \pm 14.48$ | $F(2, 87) = 388.11$ | $p < 10^{-45}$ |
+| **Colisões Críticas** | $0.00 \pm 0.00$ | $0.43 \pm 0.57$ | $3.57 \pm 0.82$ | $F(2, 87) = 344.06$ | $p < 10^{-43}$ |
+| **Dano Infligido** | $6669.69 \pm 271.19$ | $4822.34 \pm 445.40$ | $1862.87 \pm 244.85$ | $F(2, 87) = 1594.39$ | $p = 3.13 \times 10^{-69}$ |
+| **Pontos de Vida (HP)** | $12.37 \pm 7.28$ | $31.80 \pm 9.61$ | $72.73 \pm 16.64$ | $F(2, 87) = 202.45$ | $p < 10^{-34}$ |
+| **Poder de Ataque** | $49.47 \pm 1.94$ | $40.77 \pm 3.77$ | $24.33 \pm 4.63$ | $F(2, 87) = 371.82$ | $p < 10^{-44}$ |
+| **Cadência de Tiro (Hz)** | $2.47 \pm 0.03$ | $2.46 \pm 0.08$ | $2.25 \pm 0.19$ | $F(2, 87) = 32.86$ | $p < 10^{-10}$ |
+| **Velocidade Máxima (m/s)** | $1.03 \pm 0.05$ | $1.69 \pm 0.61$ | $3.21 \pm 0.45$ | $F(2, 87) = 195.07$ | $p < 10^{-33}$ |
 
-* **Validação Paramétrica (ANOVA):** $F(2, 87) = 184{,}55$ ($p = 2{,}12 \times 10^{-32}$) para o Fitness Máximo.
-* **Validação Não-Paramétrica (Kruskal-Wallis):** $H = 61{,}80$ ($p = 3{,}80 \times 10^{-14}$) confirmando robustez a desvios de normalidade.
-* **Tamanhos de Efeito (Cohen's $d$):** $d = 18{,}61$ ($D_1$ vs $D_3$) e $d = 8{,}23$ ($D_2$ vs $D_3$) para dano infligido, evidenciando separação comportamental drástica.
+* **Validação Paramétrica (ANOVA):** $F(2, 87) = 184.55$ ($p = 2.12 \times 10^{-32}$) para o Fitness Máximo.
+* **Validação Não-Paramétrica (Kruskal-Wallis):** $H = 61.80$ ($p = 3.80 \times 10^{-14}$) confirmando robustez a desvios de normalidade.
+* **Tamanhos de Efeito (Cohen's $d$):** $d = 18.61$ (Fácil vs Difícil) e $d = 8.23$ (Médio vs Difícil) para dano infligido, evidenciando separação comportamental drástica.
 
 ---
 
 ## 🗺️ MAP-Elites & Qualidade-Diversidade (QD)
 
-O arquivo de Qualidade-Diversidade discretiza o repertório em um espaço de características $3 \times 3 = 9$ nichos (Razão $\text{HP}/\text{Atk}$ vs. Faixas de Mobilidade):
+O arquivo de Qualidade-Diversidade discretiza o repertório em um espaço de características $3 \times 3 = 9$ nichos (Razão HP/Atk vs. Faixas de Mobilidade):
 
 <p align="center">
   <img src="data/graficos/fig_map_elites.png" alt="Heatmap MAP-Elites 3x3 Mirage" width="560">
 </p>
 
 ### 1. Métricas Formais de QD
-* **Cobertura Espacial:** $\mathbf{100{,}00\%}$ ($9/9$ nichos fenotípicos preenchidos);
-* **QD-Score Global:** $\mathbf{39.114{,}40}$;
-* **Fitness Máximo Global:** $5.340{,}91$ (Nicho *Glass Cannon Lento*).
+* **Cobertura Espacial:** $\mathbf{100.00\%}$ (9/9 nichos fenotípicos preenchidos);
+* **QD-Score Global:** $\mathbf{39114.40}$;
+* **Fitness Máximo Global:** $5340.91$ (Nicho *Glass Cannon Lento*).
 
 ### 2. Matriz de Aptidão dos Elites
 
-| Estrato de Mobilidade | Tanker ($\text{HP}/\text{Atk} > 3$) | Balanceado ($1 \le \text{HP}/\text{Atk} \le 3$) | Glass Cannon ($\text{HP}/\text{Atk} < 1$) | Subtotal do Estrato |
+| Estrato de Mobilidade | Tanker (HP/Atk > 3) | Balanceado (1 <= HP/Atk <= 3) | Glass Cannon (HP/Atk < 1) | Subtotal do Estrato |
 | :--- | :---: | :---: | :---: | :---: |
-| **Lento ($< 4{,}5\,\text{m/s}$)** | $4139{,}58$ | $4852{,}26$ | $5340{,}91$ | $\mathbf{14.332{,}75}$ |
-| **Médio ($4{,}5 \text{ a } 6{,}5\,\text{m/s}$)** | $3850{,}00$ | $4420{,}15$ | $4910{,}50$ | $\mathbf{13.180{,}65}$ |
-| **Rápido ($> 6{,}5\,\text{m/s}$)** | $3400{,}20$ | $3950{,}00$ | $4250{,}80$ | $\mathbf{11.601{,}00}$ |
-| **Total Acumulado (QD-Score)** | — | — | — | $\mathbf{39.114{,}40}$ |
+| **Lento ($< 4.5\text{ m/s}$)** | $4139.58$ | $4852.26$ | $5340.91$ | $\mathbf{14332.75}$ |
+| **Médio ($4.5 \text{ a } 6.5\text{ m/s}$)** | $3850.00$ | $4420.15$ | $4910.50$ | $\mathbf{13180.65}$ |
+| **Rápido ($> 6.5\text{ m/s}$)** | $3400.20$ | $3950.00$ | $4250.80$ | $\mathbf{11601.00}$ |
+| **Total Acumulado (QD-Score)** | — | — | — | $\mathbf{39114.40}$ |
 
 ---
 
