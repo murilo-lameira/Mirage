@@ -25,6 +25,8 @@ Este cofre reúne toda a fundamentação científica, arquitetura de simulação
 
 ### 20 - Arquitetura do Sistema
 - [[Estrutura do Projeto & Diretórios]]: Organização das pastas `data/`, `src/`, `scripts/` e `logs/`.
+- [[Migracao e Arquitetura Python]]: Transição para Python 3.12+, aceleração com Numba e renderizador Pygame-CE.
+- [[Compilacao e Executavel Standalone]]: Empacotamento PyInstaller, inicialização via `run_mirage.py` e distribuição de binário autônomo `.exe`.
 - [[Cromossomo & Genes]]: Mapeamento físico dos 4 genes, limites dimensionais e sistema de **Orçamento Global (Point-Buy Budget)**.
 - [[Função de Fitness]]: Equação multi-objetivo balanceada, matriz de pesos por dificuldade e penalidades de colisão.
 - [[Simulação & Física de Esquiva]]: Integração cinemática 2D, detecção preditiva de projéteis e radar periférico.

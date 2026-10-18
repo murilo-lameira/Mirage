@@ -42,7 +42,7 @@ Graças ao Orçamento Global, o Algoritmo Genético é obrigado a especializar o
                 [ VELOCIDADE ]
                      /\
                     /  \
-     Ninja Evasivo /    \ Assassino Ágil
+     Ladino Evasivo /    \ Assassino Ágil
      (Difícil: 3) /      \
                  /        \
                 /__________\

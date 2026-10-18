@@ -27,7 +27,7 @@ Após a correção da Fase 1, o NPC passou a focar em esquiva. No entanto, surgi
 
 ### A Correção da Fase 2 (Solução Definitiva):
 1. **Sistema de Orçamento Global (Point-Buy Budget):** A soma dos 4 atributos normalizados agora é limitada em $\sum u_i \le 1.8$. Para ter ataque alto, o NPC é obrigado a abrir mão de velocidade ou HP.
-2. **Diferenciação Ambiental e Calibração dos Pesos:** Pesos diferenciados por dificuldade ($w_1, w_2, w_3, p_1, p_2$), forçando arquétipos distintos (Bruiser no Fácil e Ninja Evasivo no Difícil).
+2. **Diferenciação Ambiental e Calibração dos Pesos:** Pesos diferenciados por dificuldade ($w_1, w_2, w_3, p_1, p_2$), forçando arquétipos distintos (Bruiser no Fácil e Ladino no Difícil).
 3. **Precisão Dinâmica em Movimento:** Disparar em velocidade terminal reduz a estabilidade e o dano infligido.
 
 ---

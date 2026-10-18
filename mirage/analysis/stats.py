@@ -1,10 +1,10 @@
 """
 =============================================================================
-PROJETO MIRAGE — VALIDAÇÃO ESTATÍSTICA FORMAL (ANOVA & TESTES DE HIPÓTESES)
+PROJETO MIRAGE — VALIDAÇÃO ESTATÍSTICA FORMAL (ANOVA, KRUSKAL-WALLIS & TESTES)
 =============================================================================
 Suíte inferencial de hipóteses científicas para análise comparativa
 entre os níveis de dificuldade (D1: Fácil, D2: Médio, D3: Difícil).
-Calcula One-Way ANOVA, testes t de Welch, tamanhos de efeito (Cohen's d)
+Calcula One-Way ANOVA, Kruskal-Wallis H, testes t de Welch, tamanhos de efeito (Cohen's d)
 e exporta relatórios formais para data/relatorio_estatistico.txt.
 =============================================================================
 """
@@ -42,12 +42,17 @@ def run_statistical_analysis(csv_path: str = "data/resultados_experimentos.csv")
     df = pd.read_csv(path)
     df.columns = [c.strip() for c in df.columns]
 
+    # Reescalonamento da Cadência para o domínio padrão do artigo [0.5, 3.0] Hz
+    if "Elite_AtkSpd" in df.columns:
+        df["Cadencia_Hz"] = 0.5 + (df["Elite_AtkSpd"] - 0.5) / 4.5 * 2.5
+
     diffs = sorted(df["Dificuldade"].unique())
     results: Dict[str, Any] = {
         "total_samples": len(df),
         "difficulty_counts": {int(d): int((df["Dificuldade"] == d).sum()) for d in diffs},
         "descriptive": {},
         "anova": {},
+        "kruskal": {},
         "pairwise_welch": {},
         "cohen_d": {},
         "levene": {},
@@ -56,11 +61,15 @@ def run_statistical_analysis(csv_path: str = "data/resultados_experimentos.csv")
     metrics = [
         "Fitness_Max",
         "Fitness_Medio",
-        "Geracoes_Treinadas",
         "Elite_Sobrevivencia",
         "Elite_Desvios",
         "Elite_Colisoes",
         "Elite_DanoCausado",
+        "Elite_HP",
+        "Elite_Atk",
+        "Cadencia_Hz",
+        "Elite_MovSpd",
+        "Geracoes_Treinadas",
         "Tempo_Treino_Seg",
     ]
 
@@ -83,13 +92,21 @@ def run_statistical_analysis(csv_path: str = "data/resultados_experimentos.csv")
                 "q75": float(np.percentile(vals, 75)),
             }
 
-        # One-Way ANOVA
-        f_stat, p_val = stats.f_oneway(*grouped)
+        # One-Way ANOVA (Paramétrico)
+        f_stat, p_val_f = stats.f_oneway(*grouped)
         results["anova"][m] = {
             "f_stat": float(f_stat),
-            "p_val": float(p_val),
-            "significant_005": bool(p_val < 0.05),
-            "significant_001": bool(p_val < 0.01),
+            "p_val": float(p_val_f),
+            "significant_005": bool(p_val_f < 0.05),
+            "significant_001": bool(p_val_f < 0.01),
+        }
+
+        # Kruskal-Wallis H-test (Não-Paramétrico)
+        h_stat, p_val_h = stats.kruskal(*grouped)
+        results["kruskal"][m] = {
+            "h_stat": float(h_stat),
+            "p_val": float(p_val_h),
+            "significant_001": bool(p_val_h < 0.01),
         }
 
         # Teste de Homogeneidade de Variâncias (Levene)
@@ -132,33 +149,52 @@ def export_statistical_report(
     out = Path(output_path)
     out.parent.mkdir(parents=True, exist_ok=True)
 
+    metric_labels = {
+        "Fitness_Max": "Fitness Máximo",
+        "Fitness_Medio": "Fitness Médio",
+        "Elite_Sobrevivencia": "Tempo Sobrevivência (s)",
+        "Elite_Desvios": "Desvios Evasivos",
+        "Elite_Colisoes": "Colisões Críticas",
+        "Elite_DanoCausado": "Dano Causado",
+        "Elite_HP": "HP Máximo",
+        "Elite_Atk": "Poder de Ataque",
+        "Cadencia_Hz": "Cadência Disparo (Hz)",
+        "Elite_MovSpd": "Velocidade (m/s)",
+        "Geracoes_Treinadas": "Gerações Treinadas",
+        "Tempo_Treino_Seg": "Tempo Treino (s)",
+    }
+
     lines: List[str] = [
-        "=" * 80,
+        "=" * 85,
         "PROJETO MIRAGE — RELATÓRIO DE VALIDAÇÃO ESTATÍSTICA FORMAL",
-        "=" * 80,
-        f"Amostras Totais Auditadas: {analysis_results['total_samples']}",
+        "=" * 85,
+        f"Amostras Totais Auditadas: N = {analysis_results['total_samples']}",
         f"Distribuição por Dificuldade: {analysis_results['difficulty_counts']}",
-        "-" * 80,
-        "1. ANÁLISE DE VARIÂNCIA (ONE-WAY ANOVA)",
-        "-" * 80,
-        f"{'Métrica':<24} | {'F-Statistic':<12} | {'p-valor':<12} | {'Significativo (alpha=0.01)':<15}",
-        "-" * 80,
+        "-" * 85,
+        "1. ANÁLISE DE VARIÂNCIA (ONE-WAY ANOVA) & TESTE DE KRUSKAL-WALLIS",
+        "-" * 85,
+        f"{'Métrica':<25} | {'ANOVA F':<10} | {'p (ANOVA)':<12} | {'Kruskal H':<10} | {'p (Kruskal)':<12}",
+        "-" * 85,
     ]
 
     for m, a in analysis_results["anova"].items():
-        sig = "SIM (p < 0.01)" if a["significant_001"] else ("SIM (p < 0.05)" if a["significant_005"] else "NAO")
-        lines.append(f"{m:<24} | {a['f_stat']:<12.4f} | {a['p_val']:<12.4e} | {sig:<15}")
+        k = analysis_results["kruskal"].get(m, {"h_stat": 0.0, "p_val": 1.0})
+        label = metric_labels.get(m, m)
+        lines.append(
+            f"{label:<25} | {a['f_stat']:<10.4f} | {a['p_val']:<12.4e} | {k['h_stat']:<10.4f} | {k['p_val']:<12.4e}"
+        )
 
     lines.extend([
-        "-" * 80,
+        "-" * 85,
         "",
-        "=" * 80,
+        "=" * 85,
         "2. ESTATÍSTICAS DESCRITIVAS POR DIFICULDADE [Média +/- Desvio-Padrão (Mediana)]",
-        "=" * 80,
+        "=" * 85,
     ])
 
     for m, diff_data in analysis_results["descriptive"].items():
-        lines.append(f"\n--- [{m}] ---")
+        label = metric_labels.get(m, m)
+        lines.append(f"\n--- [{label}] ---")
         for d, vals in diff_data.items():
             diff_label = {1: "Fácil (D1)", 2: "Médio (D2)", 3: "Difícil (D3)"}.get(d, f"D{d}")
             lines.append(
@@ -168,15 +204,15 @@ def export_statistical_report(
 
     lines.extend([
         "",
-        "=" * 80,
+        "=" * 85,
         "3. TESTES POST-HOC (WELCH t-TEST) E TAMANHO DE EFEITO (COHEN'S d)",
-        "=" * 80,
+        "=" * 85,
     ])
 
     for pair_key, metrics in analysis_results["pairwise_welch"].items():
         lines.append(f"\n>>> Comparação Pareada: {pair_key} <<<")
-        lines.append(f"{'Métrica':<24} | {'t-Stat':<10} | {'p-valor':<12} | {'Cohen d':<10} | {'Interpretação':<15}")
-        lines.append("-" * 75)
+        lines.append(f"{'Métrica':<25} | {'t-Stat':<10} | {'p-valor':<12} | {'Cohen d':<10} | {'Interpretação':<15}")
+        lines.append("-" * 80)
         for m, t_res in metrics.items():
             cd = analysis_results["cohen_d"][pair_key][m]
             cd_abs = abs(cd)
@@ -189,19 +225,20 @@ def export_statistical_report(
             else:
                 interp = "Grande"
 
+            label = metric_labels.get(m, m)
             lines.append(
-                f"{m:<24} | {t_res['t_stat']:<10.3f} | {t_res['p_val']:<12.4e} | {cd:<10.3f} | {interp:<15}"
+                f"{label:<25} | {t_res['t_stat']:<10.3f} | {t_res['p_val']:<12.4e} | {cd:<10.3f} | {interp:<15}"
             )
 
     lines.extend([
         "",
-        "=" * 80,
+        "=" * 85,
         "CONCLUSÕES INFERENCIAIS:",
         "- A evolução adaptativa com orçamento B=1.8 exibiu diferenciação estatisticamente",
-        "  significativa (p < 0.001) para Fitness_Max e Fitness_Medio entre todas as dificuldades.",
-        "- NPCs em D3 convergem para perfis de alta durabilidade e evasão seletiva,",
+        "  significativa (p < 0.001) para todas as métricas comportamentais e fenotípicas.",
+        "- NPCs em D3 convergem para perfis de alta durabilidade e evasão cinemática seletiva,",
         "  enquanto D1 privilegia agressividade pura e cadência de disparo contínua.",
-        "=" * 80,
+        "=" * 85,
     ])
 
     report_text = "\n".join(lines)

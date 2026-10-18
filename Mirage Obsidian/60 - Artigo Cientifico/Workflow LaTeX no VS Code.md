@@ -17,8 +17,9 @@ Recomendamos criar uma pasta na raiz do repositório:
 ```text
 Mirage/
 ├── paper/
-│   ├── main.tex              # Arquivo LaTeX principal (estrutura, seções e includes)
-│   ├── referencias.bib       # Base de dados bibliográfica BibTeX
+│   ├── Mirage_Artigo_SENAI.tex   # Arquivo LaTeX principal (estrutura, seções e includes)
+│   ├── Mirage_Artigo_SENAI.pdf   # Documento compilado final
+│   ├── referencias.bib           # Base de dados bibliográfica BibTeX
 │   ├── sbc.sty ou IEEEtran.cls # Folha de estilo do congresso
 │   ├── figuras/              # Cópia das figuras de alta resolução (PDF ou PNG)
 │   └── secoes/               # (Opcional) Divisão modular por seções

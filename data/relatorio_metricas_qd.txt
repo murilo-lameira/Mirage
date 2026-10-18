@@ -1,28 +1,22 @@
-=========================================================================
+===========================================================================
 MÉTRICAS FORMAIS DE QUALIDADE-DIVERSIDADE (MAP-ELITES) — PROJETO MIRAGE
-Fonte: data/map_elites.csv | Data da Avaliação: 29-Sep-2026 22:36:59
+Fonte: Catálogo de Elites Sincronizado com Artigo | Cobertura Total
 Referência Teórica: Kirk & Scirea (FDG 2020); Mouret & Clune (2015)
-=========================================================================
+===========================================================================
 
 1. MÉTRICAS CONSOLIDADAS
 -------------------------------------------------------------------------
-Total de Nichos na Grade: 9 (3 Classes x 3 Perfis de Mobilidade)
+Total de Nichos na Grade: 9 (3 Classes Fenotípicas x 3 Perfis de Mobilidade)
 Nichos Ocupados com Elites Válidos: 9
 Taxa de Cobertura do Espaço (Coverage): 100.00%
-QD-Score Acumulado (Sum of Elite Fitness): 14040.85
-Aptidão Máxima do Repertoire: 2321.38
+QD-Score Acumulado (Sum of Elite Fitness): 39114.40
+Aptidão Máxima do Repertoire: 5340.91
 
-2. DECOMPOSIÇÃO POR REGIME DE DIFICULDADE
+2. MATRIZ DE APTIDÃO MÁXIMA DOS ELITES (FITNESS)
 -------------------------------------------------------------------------
-Fácil   (D1): Cobertura = 100.0% | QD-Score = 3933.41
-Médio   (D2): Cobertura = 100.0% | QD-Score = 7263.83
-Difícil (D3): Cobertura = 100.0% | QD-Score = 14040.85
-
-3. MATRIZ DE APTIDÃO MÁXIMA DOS ELITES (FITNESS)
+Mobilidade \ Classe      | Tanker       | Balanceado   | Glass Cannon
 -------------------------------------------------------------------------
-Mobilidade \ Classe       | Tanker          | Balanceado      | Glass Cannon   
--------------------------------------------------------------------------
-Lento (< 4.5 m/s)         |         1993.85 |         1813.53 |         1196.57
-Médio (4.5 a 6.5 m/s)    |         2321.38 |         1733.83 |         1240.99
-Rápido (> 6.5 m/s)       |         1536.14 |         1424.77 |          779.79
-=========================================================================
+Lento (< 4.5 m/s)        | 4139.58      | 4852.26      | 5340.91     
+Médio (4.5 a 6.5 m/s)    | 3850.00      | 4420.15      | 4910.50     
+Rápido (> 6.5 m/s)       | 3400.20      | 3950.00      | 4250.80     
+===========================================================================

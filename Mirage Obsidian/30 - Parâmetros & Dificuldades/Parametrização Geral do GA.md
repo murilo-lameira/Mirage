@@ -8,7 +8,7 @@ O motor evolutivo do Mirage emprega operadores genéticos adaptados para variáv
 
 ### 1. Inicialização da População
 * A população inicial é gerada aleatoriamente no espaço contínuo dos 4 genes, sujeita à regra de **Orçamento Global ($B = 1.8$)** implementada em `init_population.m`.
-* Isso assegura que a geração $0$ contenha uma mistura equilibrada e diversificada de arquétipos (*ninjas, snipers, bruisers*).
+* Isso assegura que a geração $0$ contenha uma mistura equilibrada e diversificada de arquétipos (*ladinos, snipers, bruisers*).
 
 ### 2. Seleção por Torneio ($k = 3$)
 * Em cada torneio, $k=3$ competidores são sorteados aleatoriamente da população. O indivíduo com maior pontuação de fitness vence e é admitido no pool reprodutivo.
