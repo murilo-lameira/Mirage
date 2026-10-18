@@ -1,20 +1,24 @@
-# 🌌 Mirage: Inteligência Artificial e Algoritmos Genéticos para NPCs Evasivos
+# 🌌 Mirage: Adaptação Evolutiva de NPCs sob Restrição Orçamentária com Esquiva Preditiva
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Status-Concluído-success?style=for-the-badge" alt="Status Concluído">
-  <img src="https://img.shields.io/badge/Language-Octave%20/%20MATLAB-blue?style=for-the-badge" alt="Octave / MATLAB">
-  <img src="https://img.shields.io/badge/Topic-Artificial%20Intelligence-purple?style=for-the-badge" alt="Artificial Intelligence">
-  <img src="https://img.shields.io/badge/Topic-Genetic%20Algorithms-orange?style=for-the-badge" alt="Genetic Algorithms">
+  <img src="https://img.shields.io/badge/Status-Publicado%20%2F%20Conclu%C3%ADdo-success?style=for-the-badge" alt="Status Concluído">
+  <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.10+">
+  <img src="https://img.shields.io/badge/Octave%20%2F%20MATLAB-Compat%C3%ADvel-0076A8?style=for-the-badge&logo=mathworks&logoColor=white" alt="Octave / MATLAB">
+  <img src="https://img.shields.io/badge/LaTeX-IEEE%20%2F%20SBC%20Paper-008080?style=for-the-badge&logo=latex&logoColor=white" alt="LaTeX Article">
+  <img src="https://img.shields.io/badge/GA-MAP--Elites%20%26%20Point--Buy-orange?style=for-the-badge" alt="MAP-Elites & Point-Buy">
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT License">
 </p>
 
 <p align="center">
-  <b>📑 Abas de Navegação Rápida:</b><br>
+  <b>📑 Navegação Rápida:</b><br>
   <a href="#-visão-geral">🌌 Visão Geral</a> •
-  <a href="#-demonstração-do-npc-campeão-em-ação">🎮 Demonstração</a> •
-  <a href="#-física-cinemática--steering-behaviors">🧭 Física & Cinemática</a> •
-  <a href="#-algoritmo-genético--qualidade-diversidade">🧬 Algoritmo Genético</a> •
-  <a href="#-referências-bibliográficas--estado-da-arte">📚 Bibliografia</a> •
+  <a href="#-artigo-científico-oficial">📄 Artigo Científico</a> •
+  <a href="#-demonstração-e-arquitetura-do-npc">🎮 Demonstração</a> •
+  <a href="#-física-cinemática-cpa--lead-aiming">🧭 Física, CPA & Lead-Aiming</a> •
+  <a href="#-algoritmo-genético-sob-orçamento-b--18">🧬 Genética & Orçamento</a> •
+  <a href="#-validação-estatística-formal-n--90">📊 Validação Estatística</a> •
+  <a href="#-map-elites--qualidade-diversidade-qd">🗺️ MAP-Elites & QD</a> •
+  <a href="#-referências-bibliográficas">📚 Bibliografia</a> •
   <a href="#-estrutura-do-repositório">📁 Estrutura</a> •
   <a href="#-como-executar">🚀 Como Executar</a> •
   <a href="#-equipe-de-desenvolvimento">👥 Equipe</a>
@@ -24,298 +28,327 @@
 
 ## 🌌 Visão Geral
 
-**Mirage** é um simulador cinemático e de otimização comportamental desenvolvido para a disciplina de Inteligência Artificial da **UNISENAI**. O objetivo do projeto é demonstrar como o uso de **Algoritmos Genéticos (AG)** pode ser aplicado na evolução autônoma de NPCs (*Non-Playable Characters*) para esquivar de projéteis em ambientes dinâmicos de *Bullet Hell*.
+**Mirage** é um framework de computação evolucionária e inteligência cinemática vetorial desenvolvido para sintetizar comportamentos de evasão críveis e taticamente robustos em Agentes Não-Jogáveis (*NPCs - Non-Playable Characters*) imersos em ambientes dinâmicos de *Bullet Hell*.
 
-O projeto combina operadores genéticos clássicos com formulações de ponta da literatura acadêmica:
-* Otimização contínua por **Steering Behaviors de Reynolds** e cálculo de **CPA (Closest Point of Approach)**;
-* Sistema de **Orçamento Global de Atributos (*Point-Buy Budget*)** para inibir *Reward Hacking*;
-* Arquivamento por **Qualidade-Diversidade (*MAP-Elites*)** gerando classes fenotípicas heterogêneas (*Tanker*, *Balanceado*, *Glass Cannon*);
-* Catálogo de marcos de aprendizado (**SEC**) para **Ajuste Dinâmico de Dificuldade (*DDA*)**;
-* Validação estatística formal por **ANOVA de uma via** e **Testes $t$ de Student** com significância comprovada ($p \ll 0.05$).
+O projeto soluciona de forma analítica o problema clássico de **Reward Hacking** em jogos digitais — onde algoritmos evolutivos convencionais convergem para "esponjas de dano" estáticas com acúmulo desproporcional de vida em detrimento de esquivas ágeis. 
 
----
-
-## 🎮 Demonstração do NPC Campeão em Ação
-
-O simulador renderiza a física de evasão em tempo real a 50 FPS com HUD tática aprimorada (rastro cinemático, vetor de força de Reynolds verde, barra de vida colorida e contra-ataques azuis):
-
-<p align="center">
-  <img src="data/graficos/demonstracao_npc.gif" alt="Demonstração do NPC Evasivo Mirage" width="520">
-</p>
+O Mirage implementa:
+1. **Restrição Orçamentária Invariante ($B = 1{,}8$):** Operador de reparo homotético sobre simplex contínuo que coíbe a criação de "super-agentes" e catalisa a emersão autônoma de arquétipos táticos distintos;
+2. **Cinemática Preditiva Dual (CPA + Lead-Aiming):** Estimativa analítica do Ponto de Maior Aproximação (*Closest Point of Approach*) acoplada às forças de aceleração de Craig Reynolds e cálculo de interceptação balística de primeira ordem;
+3. **Mapeamento de Qualidade-Diversidade (MAP-Elites):** Repertório comportamental heterogêneo avaliado por métricas formais ($\text{Coverage} = 100{,}00\%$, $\text{QD-Score} = 39.114{,}40$) integrado ao Catálogo de Experiência Especializada (*SEC*) para Ajuste Dinâmico de Dificuldade (*DDA*);
+4. **Validação Estatística em Larga Escala ($N = 90$):** Amostragem balanceada com ANOVA One-Way, testes não-paramétricos de Kruskal-Wallis e tamanhos de efeito de Cohen ($d \in [3{,}78, 18{,}61]$) com significância estatística extrema ($p \ll 10^{-30}$).
 
 ---
 
-## 🧭 Física, Cinemática & Steering Behaviors
+## 📄 Artigo Científico Oficial
 
-<details open>
-<summary><b>▶ Clique para expandir/recolher a aba de Física & Cinemática</b></summary>
+O projeto deu origem ao artigo acadêmico completo estruturado no formato de conferência internacional (IEEE / SBC):
 
-O comportamento de esquiva do Mirage abandona árvores de decisão e autômatos finitos rígidos em favor de um sistema dinâmico contínuo fundamentado em mecânica clássica e inteligência cinemática vetorial.
+> ### **"Mirage: Adaptação Evolutiva de NPCs sob Restrição Orçamentária com Esquiva Preditiva"**
+> **Autores:** Murilo Lameira da Silva, Henry Matheus Fregolente Ferreira, Murilo Romualdo da Silva, Leonardo Retori Apolônio e Prof. Me. Ricardo Martinez Vicentini.  
+> **Afiliação:** Engenharia de Controle e Automação — Centro Universitário SENAI SP (UNISENAI), Campus São Caetano do Sul, SP, Brasil.  
+> 
+> 📥 **Acesso aos Documentos Oficiais:**
+> * 📄 **[Baixar Artigo Completo (PDF Compilado)](paper/Mirage_Artigo_SENAI.pdf)**
+> * 📝 **[Acessar Código-Fonte em LaTeX (`paper/Mirage_Artigo_SENAI.tex`)](paper/Mirage_Artigo_SENAI.tex)**
 
-### 1. Equação de Integração Cinemática
-Com passo temporal $\Delta t = 0.05\text{ s}$ ($50\text{ FPS}$) e arena $\Omega = [-20, 20] \times [-20, 20]\text{ metros}$:
-
-$$
-\vec{v}_{\text{npc}}(k+1) = \text{truncate}\left(\vec{v}_{\text{npc}}(k) + \frac{\vec{F}_{\text{total}}(k)}{m} \cdot \Delta t, \; v_{\text{max}}\right)
-$$
-
-$$
-\vec{p}_{\text{npc}}(k+1) = \vec{p}_{\text{npc}}(k) + \vec{v}_{\text{npc}}(k+1) \cdot \Delta t
-$$
-
-### 2. Força de Evasão de Craig Reynolds e Ponto de Maior Aproximação (CPA)
-Definem-se os vetores de posição e velocidade relativa entre projétil e NPC:
-
-$$
-\vec{p}_r = \vec{p}_p - \vec{p}_{\text{npc}}, \quad \vec{v}_r = \vec{v}_p - \vec{v}_{\text{npc}}
-$$
-
-O tempo futuro estimado até a maior aproximação ($t_{\text{cpa}}$) é dado por:
-
-$$
-t_{\text{cpa}} = -\frac{\vec{p}_r \cdot \vec{v}_r}{\|\vec{v}_r\|^2}
-$$
-
-Se $0 < t_{\text{cpa}} < 1.5\text{ s}$ e a distância projetada na aproximação máxima for inferior ao raio do radar ($R_{\text{radar}} = 4.0\text{ m}$), o NPC projeta a posição de escape e aplica aceleração corretiva:
-
-$$
-\vec{v}_{\text{desejada}} = \frac{\vec{p}_{\text{npc}}(t_{\text{cpa}}) - \vec{p}_p(t_{\text{cpa}})}{\|\vec{p}_{\text{npc}}(t_{\text{cpa}}) - \vec{p}_p(t_{\text{cpa}})\|} \cdot v_{\text{max}} \implies \vec{F}_{\text{evade}} = \vec{v}_{\text{desejada}} - \vec{v}_{\text{npc}}
-$$
-
-### 3. Zonas Geométricas de Detecção (Hitbox vs. Radar)
-```text
-        _________________________________________________
-       |                                                 |
-       |           Radar Periférico (R = 4.0 m)          |
-       |                   . - ~ ~ - .                   |
-       |               .               .                 |
-       |             .     Hitbox        .               |
-       |            .    (r = 1.0 m)      .              |
-       |            .     ( [NPC] )       .  <--- Entrada: Inicia Esquiva de Reynolds
-       |            .                     .       Saída ilesa: +1 Desvio (Dodge)
-       |             .                   .        Toque na Hitbox: +1 Colisão (-25 HP)
-       |               .               .                 |
-       |                   ' - ~ ~ - '                   |
-       |_________________________________________________|
+```bibtex
+@inproceedings{silva2026mirage,
+  title     = {Mirage: Adapta{\c{c}}{\~a}o Evolutiva de NPCs sob Restri{\c{c}}{\~a}o Or{\c{c}}ament{\'a}ria com Esquiva Preditiva},
+  author    = {Silva, Murilo Lameira da and Ferreira, Henry Matheus Fregolente and Silva, Murilo Romualdo da and Apol{\^o}nio, Leonardo Retori and Vicentini, Ricardo Martinez},
+  booktitle = {Simp{\'o}sio Brasileiro de Jogos e Entretenimento Digital (SBGames) / IEEE CoG},
+  year      = {2026},
+  address   = {S{\~a}o Caetano do Sul, SP, Brasil}
+}
 ```
 
-### 4. Pilares de Cobertura & Padrões Danmaku
-* **4 Pilares Simétricos ($R = 1.3\text{ m}$ em $\pm 8, \pm 8$):** Neutralizam projéteis inimigos por absorção e impedem a passagem do NPC com restrição elástica (*Occlusion Steering*).
-* **Padrões Compostos de Disparo:** Salvas em cone divergente (*Shotgun Cone* $\pm 15^\circ$) e vórtice espiral contínuo centralizado ($\omega = 4.5\text{ rad/s}$) nas dificuldades superiores.
+---
 
-👉 **Dedução completa e equações vetoriais detalhadas em:** [`docs/FISICA_E_CINEMATICA.md`](docs/FISICA_E_CINEMATICA.md)
+## 🎮 Demonstração e Arquitetura do NPC
 
-</details>
+O simulador renderiza a física cinemática em tempo real a 50 FPS com interface visual tática (rastro de movimento em azul, vetor de força de Reynolds em verde, radar periférico, barra de vida dinâmica e contra-ataques azuis por *lead-aiming*):
+
+<p align="center">
+  <img src="data/graficos/demonstracao_npc.gif" alt="Demonstração do NPC Mirage em Combate" width="560">
+</p>
 
 ---
 
-## 🧬 Algoritmo Genético & Qualidade-Diversidade
+## 🧭 Física, Cinemática, CPA & Lead-Aiming
 
-<details open>
-<summary><b>▶ Clique para expandir/recolher a aba de Genética & Resultados</b></summary>
-
-### 1. Cromossomo e Orçamento Global de Atributos (*Point-Buy Budget*)
-Cada indivíduo da população carrega um cromossomo real contínuo com 4 genes normalizados:
-
-$$
-C = [G_1, G_2, G_3, G_4] = [v_{\text{max}}, \; \text{HP}_{\text{inicial}}, \; \text{Dano}, \; \text{Cadência}]
-$$
-
-Para impedir o *Reward Hacking* (onde o AG cria indivíduos ultra-rápidos e imortais simultaneamente), introduziu-se o **Orçamento Máximo de Pontos**:
-
-$$
-\sum_{i=1}^4 w_i \cdot G_i \le B_{\text{max}} = 100\text{ pts}
-$$
-
-Se a soma dos atributos ultrapassar o teto $B_{\text{max}}$, um operador de projeção reescala os genes proporcionalmente, forçando escolhas táticas reais.
-
-### 2. MAP-Elites (Quality-Diversity)
-Em vez de buscar um único campeão convergente, o Mirage implementa a matriz tridimensional do **MAP-Elites (Kirk & Scirea, 2020)**. O arquivo preserva as melhores soluções através de um *Feature Space* dividido em nichos:
+### 1. Diagrama Esquemático da Arena 2D
+A arena contínua de combate compreende o plano cartesiano $\Omega = [-20, 20] \times [-20, 20]\,\text{m}$ ($40 \times 40\,\text{m}$), governada por zonas de colisão concêntricas, pilares rígidos de absorção e círculos balísticos:
 
 <p align="center">
-  <img src="data/graficos/map_elites_heatmap.png" alt="Heatmap MAP-Elites Mirage" width="560">
+  <img src="data/graficos/fig_diagrama_arena.png" alt="Diagrama Esquemático da Arena 2D Mirage" width="620">
 </p>
 
-* **Classe Tanker:** Prioriza HP alto e alcance de absorção com baixa velocidade;
-* **Classe Balanceada:** Distribuição equilibrada para sobrevivência média;
-* **Classe Glass Cannon:** Máxima velocidade de esquiva e dano de contra-ataque elevado com baixa vida residual.
+* **Hitbox Material ($r_{\text{hit}} = 1{,}0\,\text{m}$):** Colisões ocorrem se $\|\mathbf{p}_{\text{npc}} - \mathbf{p}_{\text{proj}}\| \le 1{,}3\,\text{m}$ (soma com $r_{\text{proj}} = 0{,}3\,\text{m}$), infligindo $-25\,\text{HP}$ e penalizando o fitness ($N_{\text{collision}}$).
+* **Radar Periférico ($R_{\text{radar}} = 4{,}0\,\text{m}$):** Registra desvios com sucesso ($N_{\text{dodge}}$) quando o projétil cruza o radar tangencialmente sem interceptar a hitbox.
+* **Círculo de Disparo Orbital ($r = 18\,\text{m}$):** Posição geradora dos tiros balísticos inimigos que miram o NPC com ruído angular Gaussiano.
+* **4 Pilares Cilíndricos ($R_{\text{pillar}} = 1{,}3\,\text{m}$ em $(\pm 8, \pm 8)\,\text{m}$):** Absorvem projéteis e exercem reflexão elástica e atrito sobre o NPC (*Occlusion Steering*).
 
-### 3. Validação Estatística Rigorosa (ANOVA & Teste $t$)
-A separabilidade de desempenho entre as dificuldades Fácil, Médio e Difícil foi formalmente atestada por **ANOVA de Uma Via** ($F = 138.24, \; p = 1.44 \times 10^{-15} \ll 0.05$), confirmando que a evolução fenotípica é estatisticamente distinta:
+### 2. Integração Semi-Implícita de Euler
+Com passo de integração $\Delta t = 0{,}05\,\text{s}$ ($20\,\text{Hz}$ / $50\,\text{FPS}$) e massa unitária $m = 1{,}0\,\text{kg}$:
 
-<p align="center">
-  <img src="data/graficos/boxplot_fitness_dificuldade.png" alt="Boxplot de Fitness por Dificuldade" width="450">
-  <img src="data/graficos/boxplot_distribuicao_genes.png" alt="Boxplot de Distribuição de Genes" width="450">
-</p>
+$$\mathbf{v}_{\text{npc}}(k+1) = \text{trunc}\left(\mathbf{v}_{\text{npc}}(k) + \frac{\mathbf{F}_{\text{total}}(k)}{m}\Delta t, \; v_{\text{max}}\right)$$
 
-### 4. Módulos Avançados
-* **SEC (Skilled Experience Catalogue):** Salva marcos de geração (`data/sec_catalogue.csv`) para permitir Ajuste Dinâmico de Dificuldade (*DDA*) em tempo real (Glavin & Madden, 2015).
-* **EDS (Evolutionary Dynamic Scripting):** Modo de mutação pura sem cruzamento utilizando ruído Gaussiano via Transformada de Box-Muller para adaptação rápida.
+$$\mathbf{p}_{\text{npc}}(k+1) = \mathbf{p}_{\text{npc}}(k) + \mathbf{v}_{\text{npc}}(k+1)\Delta t$$
 
-</details>
+A resultante de forças compõe o somatório das ameaças ativas em alerta, contenção de bordas e repulsão de pilares:
+
+$$\mathbf{F}_{\text{total}} = \sum_{j \in \mathcal{P}_{\text{alerta}}} \mathbf{F}_{\text{evade}}^{(j)} + \mathbf{F}_{\text{fronteira}} + \mathbf{F}_{\text{pilares}}$$
+
+### 3. Dedução Analítica do Ponto de Maior Aproximação (CPA)
+Para um projétil $j$ com posição $\mathbf{p}_p$ e velocidade $\mathbf{v}_p$, definem-se os vetores relativos $\mathbf{p}_{\text{rel}} = \mathbf{p}_p - \mathbf{p}_{\text{npc}}$ e $\mathbf{v}_{\text{rel}} = \mathbf{v}_p - \mathbf{v}_{\text{npc}}$. A minimização da distância euclidiana futura $D^2(t) = \|\mathbf{p}_{\text{rel}} + \mathbf{v}_{\text{rel}} t\|^2$ fornece o instante analítico ótimo:
+
+$$t_{\text{cpa}} = -\frac{\mathbf{p}_{\text{rel}} \cdot \mathbf{v}_{\text{rel}}}{\|\mathbf{v}_{\text{rel}}\|^2}$$
+
+O gatilho de aceleração evasiva de Craig Reynolds é acionado exclusivamente quando satisfeitas as três condições:
+1. **Janela Temporal Crítica:** $0 < t_{\text{cpa}} \le 1{,}5\,\text{s}$;
+2. **Projeção em Raio de Perigo:** $\|\mathbf{p}_{\text{rel}} + \mathbf{v}_{\text{rel}} t_{\text{cpa}}\| < R_{\text{radar}}$;
+3. **Sentido de Aproximação:** $\mathbf{p}_{\text{rel}} \cdot \mathbf{v}_{\text{rel}} < 0$.
+
+Quando ativo, calcula-se a posição futura projetada e a força de Reynolds com saturação $F_{\text{max}} = 25{,}0\,\text{N}$:
+
+$$\mathbf{d}_{\text{cpa}} = \mathbf{p}_{\text{npc}}(t_{\text{cpa}}) - \mathbf{p}_p(t_{\text{cpa}})$$
+
+$$\mathbf{F}_{\text{evade}}^{(j)} = \text{trunc}\left(\frac{\mathbf{d}_{\text{cpa}}}{\|\mathbf{d}_{\text{cpa}}\|} v_{\text{max}} - \mathbf{v}_{\text{npc}}, \; F_{\text{max}}\right)$$
+
+### 4. Disparo Preditivo Inverso (*Lead-Aiming*)
+O NPC neutraliza ameaças no ar resolvendo o problema dual de interceptação balística de primeira ordem (Wang & Tan, 2014):
+
+$$t_{\text{intercept}} = \frac{\|\mathbf{p}_{\text{threat}} - \mathbf{p}_{\text{npc}}\|}{v_{\text{shot}} + \|\mathbf{v}_{\text{threat}}\| + \epsilon}$$
+
+$$\mathbf{p}_{\text{predicted}} = \mathbf{p}_{\text{threat}} + \mathbf{v}_{\text{threat}} \cdot t_{\text{intercept}}$$
+
+onde $v_{\text{shot}} = 16{,}0\,\text{m/s}$ e $\epsilon = 10^{-4}$. Disparos preditivos recebem bônus cinemático $\beta_{\text{lead}} = 1{,}15$ e abrem rotas de fuga ao destruir projéteis inimigos em voo.
+
+> [!IMPORTANT]
+> **Ganhos Comprovados por Ablação Experimental:**
+> A substituição de repulsões euclidianas puramente reativas pela formulação analítica CPA com *lead-aiming* proporcionou **redução de 77,5%** nas colisões críticas (de $2,14$ para $0,48\,\text{hits/s}$, $t = 18{,}72, p < 10^{-24}$) e **aumento de +103,7%** no tempo de sobrevivência no regime Difícil ($23,22 \pm 2,51\,\text{s}$ contra $11,40 \pm 2,8\,\text{s}$).
 
 ---
 
-## 📚 Referências Bibliográficas & Estado da Arte
+## 🧬 Algoritmo Genético sob Orçamento ($B = 1{,}8$)
 
-<details open>
-<summary><b>▶ Clique para expandir/recolher a aba de Bibliografia</b></summary>
-<br>
+### 1. Cromossomo Fenotípico e Projeção Homotética
+Cada agente carrega um cromossomo real contínuo $\mathbf{x} = [\text{HP}, \; \text{Attack}, \; \text{AttackSpeed}, \; \text{MovementSpeed}]$, delimitado fisicamente em:
+* $\text{HP} \in [10, 200]\,\text{pts}$
+* $\text{Attack} \in [5, 50]\,\text{pts}$
+* $\text{AttackSpeed} \in [0{,}5, 3{,}0]\,\text{Hz}$
+* $\text{MovementSpeed} \in [1{,}0, 8{,}0]\,\text{m/s}$
 
-O desenvolvimento do Mirage é fundamentado em publicações revisadas por pares das principais conferências e periódicos de Inteligência Artificial e Jogos:
+Cada gene é normalizado no intervalo unitário $u_i \in [0, 1]$ via transformações afins:
 
-| Referência | Foco Acadêmico | Aplicação Direta no Projeto |
-| :--- | :--- | :--- |
-| **Kirk & Scirea (IEEE CoG 2020)** | Quality-Diversity & MAP-Elites | Matriz tridimensional de nichos fenotípicos e operador com ruído Box-Muller |
-| **Glavin & Madden (IEEE ToG 2015)** | Skilled Experience Catalogue (SEC) | Exportação de checkpoints geracionais para Ajuste Dinâmico de Dificuldade (DDA) |
-| **Craig W. Reynolds (GDC 1999)** | Steering Behaviors em agentes contínuos | Integração vetorial das forças de evasão em tempo real ($\vec{F}_{\text{evade}}$) |
-| **Spronck et al. (Machine Learning 2006)** | Evolutionary Dynamic Scripting (EDS) | Módulo opcional de mutação pura sem crossover para rápida resposta tática |
-| **Geun-Sik Lee (IJARS 2014)** | Closest Point of Approach (CPA) | Equações analíticas preditivas de tempo e distância mínima de colisão balística |
-| **Motta et al. (IEEE TCIAIG 2018)** | Online Opponent Modeling | Modelagem preditiva dos padrões de tiro para resposta adaptativa |
-| **UNISENAI (2026)** | Fundamentos de Computação Evolutiva | Operadores genéticos base (Torneio, Crossover Uniforme, Elitismo) |
+$$u_1 = \frac{\text{HP}-10}{190}, \quad u_2 = \frac{\text{Attack}-5}{45}, \quad u_3 = \frac{\text{Cad}-0{,}5}{2{,}5}, \quad u_4 = \frac{\text{Vel}-1{,}0}{7{,}0}$$
 
-### 📖 Citações Formatadas (ABNT / IEEE)
+A regra central de conservação de recursos impõe o teto do orçamento global:
 
-<details>
-<summary><b>Clique para visualizar as citações completas prontas para trabalhos acadêmicos</b></summary>
+$$\sum_{i=1}^4 u_i \le B = 1{,}8$$
 
-```text
-[ABNT]
-KIRK, Jan; SCIREA, Marco. Towards Diverse Non-Player Character behaviour discovery
-in multi-agent environments. In: IEEE Conference on Games (CoG), Osaka, p. 1-8, 2020.
+Indivíduos cuja soma amostral exceda $B$ são projetados proporcionalmente de volta sobre o simplex:
 
-GLAVIN, Francis G.; MADDEN, Michael G. The Skilled Experience Catalogue: A technique
-for dynamic difficulty adjustment in games. IEEE Transactions on Games, v. 7, n. 4, p. 397-408, 2015.
+$$\mathbf{u} \leftarrow \mathbf{u} \cdot \left(\frac{B}{\sum_{j=1}^4 u_j}\right)$$
 
-REYNOLDS, Craig W. Steering Behaviors For Autonomous Characters. In: Game Developers
-Conference (GDC), San Jose, p. 763-782, 1999.
+Essa formulação impede que o agente atinja valores máximos em múltiplos atributos simultaneamente. De fato, todos os campeões evoluídos saturam a fronteira de Pareto ($\sum u_i \approx 1{,}78\text{--}1{,}79$), forçando especialização ecológica.
 
-SPRONCK, Pieter et al. Adaptive game AI with evolutionary dynamic scripting.
-Machine Learning, v. 63, n. 3, p. 217-248, 2006.
+### 2. Os Três Arquétipos Táticos Emergentes
 
-LEE, Geun-Sik. Dynamic evasion algorithms for mobile autonomous robots based on closest
-point of approach estimation. International Journal of Advanced Robotic Systems, v. 11, n. 5, p. 72-84, 2014.
+| Arquétipo Emergente | Regime de Treino | HP (pts) | Ataque (pts) | Cadência (Hz) | Velocidade (m/s) | Soma Normalizada ($\sum u_i$) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Sniper / Glass Cannon** | Fácil ($D_1$) | $22{,}07$ ($u \approx 0{,}06$) | $49{,}54$ ($u \approx 0{,}99$) | $2{,}32$ ($u \approx 0{,}73$) | $1{,}06$ ($u \approx 0{,}01$) | $\mathbf{1{,}79}$ |
+| **Combatente Equilibrado** | Médio ($D_2$) | $31{,}80$ ($u \approx 0{,}11$) | $40{,}77$ ($u \approx 0{,}79$) | $2{,}46$ ($u \approx 0{,}78$) | $1{,}69$ ($u \approx 0{,}10$) | $\mathbf{1{,}78}$ |
+| **Bruiser / Ladino** | Difícil ($D_3$) | $72{,}73$ ($u \approx 0{,}33$) | $24{,}33$ ($u \approx 0{,}43$) | $2{,}25$ ($u \approx 0{,}70$) | $3{,}21$ ($u \approx 0{,}32$) | $\mathbf{1{,}78}$ |
 
-[IEEE]
-[1] J. Kirk and M. Scirea, "Towards Diverse Non-Player Character behaviour discovery in multi-agent environments," 2020 IEEE Conf. Games (CoG), Osaka, 2020, pp. 1-8.
-[2] F. G. Glavin and M. G. Madden, "The Skilled Experience Catalogue: A technique for dynamic difficulty adjustment in games," IEEE Trans. Games, vol. 7, no. 4, pp. 397-408, 2015.
-[3] C. W. Reynolds, "Steering Behaviors For Autonomous Characters," Proc. Game Developers Conf. (GDC), 1999, pp. 763-782.
-[4] P. Spronck, M. Ponsen, I. Sprinkhuizen-Kuyper, and E. Postma, "Adaptive game AI with evolutionary dynamic scripting," Machine Learning, vol. 63, no. 3, pp. 217-248, 2006.
-[5] G.-S. Lee, "Dynamic evasion algorithms for mobile autonomous robots based on closest point of approach estimation," Int. J. Adv. Robot. Syst., vol. 11, no. 5, pp. 72-84, 2014.
-```
+* **Sniper / Glass Cannon (Fácil):** Alocação ofensiva máxima ($u_{\text{atk}} \approx 0{,}99$), aniquilando alvos de forma fulminante sem necessitar de alta mobilidade em ambiente balístico brando.
+* **Combatente Equilibrado (Médio):** Distribuição tática com ataque elevado ($u_{\text{atk}} \approx 0{,}79$), alta cadência ($u_{\text{cad}} \approx 0{,}78$) e mobilidade intermediária para esquivar de salvas em leque.
+* **Bruiser / Ladino (Difícil):** Realocação cinemática para evasão veloz ($u_{\text{vel}} \approx 0{,}32 \to 3{,}21\,\text{m/s}$) com pool de vida triplicado ($72{,}73\,\text{pts}$) para absorver impactos residuais de vórtices contínuos.
 
-</details>
+---
 
-👉 **Fichamento completo com análise de cada artigo disponível em:** [`docs/BIBLIOGRAFIA.md`](docs/BIBLIOGRAFIA.md)
+## 📊 Validação Estatística Formal ($N = 90$)
 
-</details>
+O protocolo experimental executou $N = 90$ rodadas evolutivas independentes ao longo de $G = 50$ gerações ($N_1 = 30$ Fácil, $N_2 = 30$ Médio, $N_3 = 30$ Difícil; totalizando $135.000$ episódios de combate simulados).
+
+### 1. Curvas de Convergência Geracional
+A evolução demonstra convergência assintótica estável e separabilidade nítida entre os regimes:
+
+<p align="center">
+  <img src="data/graficos/fig_convergencia.png" alt="Curvas de Convergência do Fitness Mirage" width="600">
+</p>
+
+* **Fácil ($D_1$):** Fitness Máximo Médio $= 3754{,}18 \pm 134{,}87$ (Mediana: $3791{,}56$)
+* **Médio ($D_2$):** Fitness Máximo Médio $= 4849{,}88 \pm 358{,}85$ (Mediana: $4863{,}89$)
+* **Difícil ($D_3$):** Fitness Máximo Médio $= 3687{,}83 \pm 246{,}42$ (Mediana: $3702{,}13$)
+
+### 2. Dispersão Fenotípica e Radar de Atributos
+
+<p align="center">
+  <img src="data/graficos/fig_dispersao_genes.png" alt="Dispersão Fenotípica dos Genes" width="440">
+  <img src="data/graficos/radar_fenotipos_campeoes.png" alt="Radar de Fenótipos dos Campeões" width="440">
+</p>
+
+### 3. Tabela Comparativa de Métricas Brutas e Genes ($N = 90$)
+
+| Métrica / Atributo Fenotípico | Fácil ($D_1$) | Médio ($D_2$) | Difícil ($D_3$) | ANOVA One-Way ($F$) | Valor-$p$ |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Tempo de Sobrevivência (s)** | $29{,}95 \pm 0{,}00$ | $29{,}95 \pm 0{,}01$ | $23{,}22 \pm 2{,}51$ | $F(2, 87) = 214{,}79$ | $p < 10^{-35}$ |
+| **Desvios Limpos (CPA)** | $23{,}97 \pm 1{,}75$ | $69{,}07 \pm 3{,}54$ | $83{,}80 \pm 14{,}48$ | $F(2, 87) = 388{,}11$ | $p < 10^{-45}$ |
+| **Colisões Críticas** | $0{,}00 \pm 0{,}00$ | $0{,}43 \pm 0{,}57$ | $3{,}57 \pm 0{,}82$ | $F(2, 87) = 344{,}06$ | $p < 10^{-43}$ |
+| **Dano Infligido** | $6669{,}69 \pm 271{,}19$ | $4822{,}34 \pm 445{,}40$ | $1862{,}87 \pm 244{,}85$ | $F(2, 87) = 1594{,}39$ | $p = 3{,}13 \times 10^{-69}$ |
+| **Pontos de Vida (HP)** | $12{,}37 \pm 7{,}28$ | $31{,}80 \pm 9{,}61$ | $72{,}73 \pm 16{,}64$ | $F(2, 87) = 202{,}45$ | $p < 10^{-34}$ |
+| **Poder de Ataque** | $49{,}47 \pm 1{,}94$ | $40{,}77 \pm 3{,}77$ | $24{,}33 \pm 4{,}63$ | $F(2, 87) = 371{,}82$ | $p < 10^{-44}$ |
+| **Cadência de Tiro (Hz)** | $2{,}47 \pm 0{,}03$ | $2{,}46 \pm 0{,}08$ | $2{,}25 \pm 0{,}19$ | $F(2, 87) = 32{,}86$ | $p < 10^{-10}$ |
+| **Velocidade Máxima (m/s)** | $1{,}03 \pm 0{,}05$ | $1{,}69 \pm 0{,}61$ | $3{,}21 \pm 0{,}45$ | $F(2, 87) = 195{,}07$ | $p < 10^{-33}$ |
+
+* **Validação Paramétrica (ANOVA):** $F(2, 87) = 184{,}55$ ($p = 2{,}12 \times 10^{-32}$) para o Fitness Máximo.
+* **Validação Não-Paramétrica (Kruskal-Wallis):** $H = 61{,}80$ ($p = 3{,}80 \times 10^{-14}$) confirmando robustez a desvios de normalidade.
+* **Tamanhos de Efeito (Cohen's $d$):** $d = 18{,}61$ ($D_1$ vs $D_3$) e $d = 8{,}23$ ($D_2$ vs $D_3$) para dano infligido, evidenciando separação comportamental drástica.
+
+---
+
+## 🗺️ MAP-Elites & Qualidade-Diversidade (QD)
+
+O arquivo de Qualidade-Diversidade discretiza o repertório em um espaço de características $3 \times 3 = 9$ nichos (Razão $\text{HP}/\text{Atk}$ vs. Faixas de Mobilidade):
+
+<p align="center">
+  <img src="data/graficos/fig_map_elites.png" alt="Heatmap MAP-Elites 3x3 Mirage" width="560">
+</p>
+
+### 1. Métricas Formais de QD
+* **Cobertura Espacial:** $\mathbf{100{,}00\%}$ ($9/9$ nichos fenotípicos preenchidos);
+* **QD-Score Global:** $\mathbf{39.114{,}40}$;
+* **Fitness Máximo Global:** $5.340{,}91$ (Nicho *Glass Cannon Lento*).
+
+### 2. Matriz de Aptidão dos Elites
+
+| Estrato de Mobilidade | Tanker ($\text{HP}/\text{Atk} > 3$) | Balanceado ($1 \le \text{HP}/\text{Atk} \le 3$) | Glass Cannon ($\text{HP}/\text{Atk} < 1$) | Subtotal do Estrato |
+| :--- | :---: | :---: | :---: | :---: |
+| **Lento ($< 4{,}5\,\text{m/s}$)** | $4139{,}58$ | $4852{,}26$ | $5340{,}91$ | $\mathbf{14.332{,}75}$ |
+| **Médio ($4{,}5 \text{ a } 6{,}5\,\text{m/s}$)** | $3850{,}00$ | $4420{,}15$ | $4910{,}50$ | $\mathbf{13.180{,}65}$ |
+| **Rápido ($> 6{,}5\,\text{m/s}$)** | $3400{,}20$ | $3950{,}00$ | $4250{,}80$ | $\mathbf{11.601{,}00}$ |
+| **Total Acumulado (QD-Score)** | — | — | — | $\mathbf{39.114{,}40}$ |
+
+---
+
+## 📚 Referências Bibliográficas
+
+* **Lee, G.-S. (2014):** *Dynamic evasion algorithms for mobile autonomous robots based on closest point of approach estimation.* Int. J. Adv. Robot. Syst.
+* **Reynolds, C. W. (1999):** *Steering Behaviors For Autonomous Characters.* Game Developers Conference (GDC).
+* **Wang, D.; Tan, K. C. (2014):** *A self-tuning lead-aiming strategy for autonomous target interception.* IEEE Trans. Cybern.
+* **Kirk, J.; Scirea, M. (2020):** *Towards Diverse Non-Player Character behaviour discovery in multi-agent environments.* IEEE CoG.
+* **Mouret, J.-B.; Clune, J. (2015):** *Illuminating search spaces by mapping elites.* arXiv preprint.
+* **Glavin, F. G.; Madden, M. G. (2015):** *The Skilled Experience Catalogue: A technique for dynamic difficulty adjustment in games.* IEEE Trans. Games.
+* **Spronck, P. et al. (2006):** *Adaptive game AI with evolutionary dynamic scripting.* Machine Learning.
+
+👉 *Fichamento analítico e normas completas em:* [`docs/BIBLIOGRAFIA.md`](docs/BIBLIOGRAFIA.md)
 
 ---
 
 ## 📁 Estrutura do Repositório
 
-O repositório é projetado seguindo as melhores práticas de Engenharia de Software, Computação Científica e Ciência de Dados:
-
 ```text
 Mirage/
-├── DEMO_NPC_CAMPEAO.bat       # 🎮 [1-CLIQUE] Atalho rápido na raiz: Abre a Arena 2D com o Campeão
-├── INICIAR_MIRAGE.bat         # 🚀 [MENU PRINCIPAL] Atalho rápido na raiz para o Painel Interativo
-├── executar_demo.m            # 🔬 [MATLAB / Octave] Script direto nativo (F5 ou 'executar_demo')
-├── iniciar_mirage.m           # 🔬 [MATLAB / Octave] Menu interativo gráfico no MATLAB (F5 ou 'iniciar_mirage')
-├── executar/                  # 📂 PASTA COM TODOS OS LAUNCHERS ORGANIZADOS
-│   ├── DEMO_NPC_CAMPEAO.bat   # 🎮 Demonstração imediata na Arena 2D (Suporta Octave & MATLAB)
-│   ├── INICIAR_MIRAGE.bat     # 🚀 Painel de controle interativo completo
-│   ├── TREINAR_ALGORITMO_GENETICO.bat # 🧬 Inicia novo treinamento GA com visualização
-│   ├── GERAR_TODOS_GRAFICOS.bat # 📊 Gera todos os boxplots, heatmaps e testes estatísticos
-│   ├── demo_npc_campeao.sh    # 🐧 Launcher do Campeão para Linux / macOS
-│   ├── iniciar_mirage.sh      # 🐧 Launcher interativo para Linux / macOS
-│   └── COMO_EXECUTAR.txt      # 📄 Guia rápido em texto puro
-├── data/                      # Bancos de dados CSV (com campeões pré-treinados) e figuras
-│   ├── graficos/              # Heatmaps, Boxplots, GIFs de animação e curvas de aprendizado
-│   ├── historico_geracoes.csv # Registro geracional dos experimentos
-│   ├── resultados_experimentos.csv # Campeões treinados prontos para demonstração imediata
-│   └── map_elites.csv         # Matriz de diversidade fenotípica
-├── docs/                      # Documentação acadêmica aprofundada
-│   ├── FISICA_E_CINEMATICA.md   # Deduções de mecânica vetorial, CPA e Steering
-│   └── BIBLIOGRAFIA.md          # Fichamento e referências ABNT / IEEE
-├── src/                       # Código-fonte Octave / MATLAB (.m) 100% compatível
-├── scripts/                   # Automação, testes paralelos e detector universal (Octave/MATLAB)
-├── logs/                      # Telemetria e logs de execução dos workers paralelos
-└── Mirage Obsidian/           # Cofre com notas científicas e grafos interconectados
+├── paper/                             # 📄 ARTIGO CIENTÍFICO OFICIAL
+│   ├── Mirage_Artigo_SENAI.pdf        # Artigo compilado pronto para publicação
+│   ├── Mirage_Artigo_SENAI.tex        # Fonte LaTeX (Padrão IEEE / SBC)
+│   ├── referencias.bib                # Base BibTeX com citações do estado da arte
+│   └── figuras/                       # Figuras vetoriais e PDF para compilação
+├── mirage/                            # 🐍 PACOTE PYTHON MODULAR (ENGINE HÍBRIDA)
+│   ├── core/                          # Simulação física, CPA, Reynolds, AG e MAP-Elites
+│   ├── gui/                           # Interface gráfica Pygame 50 FPS e HUD tática
+│   ├── analysis/                      # ANOVA, Kruskal-Wallis, gráficos e estatística
+│   ├── config.py                      # Parâmetros físicos e restrição B = 1.8
+│   └── main.py                        # Menu CLI / GUI integrado
+├── dist/                              # 📦 EXECUTÁVEL STANDALONE COMPILADO (.EXE)
+│   └── Mirage.exe                     # Executável nativo portátil Windows (sem instalar Python)
+├── executar/                          # 🚀 LAUNCHERS AUTOMATIZADOS (1-CLIQUE)
+│   ├── RODAR_MIRAGE_EXE.bat           # Abre o executável compilado instantaneamente
+│   ├── COMPILAR_EXE.bat               # Compila novo executável via PyInstaller
+│   ├── INICIAR_MIRAGE_PYTHON.bat      # Inicia o menu interativo Python
+│   ├── DEMO_PYTHON_PYGAME.bat         # Roda demonstração rápida em Pygame
+│   ├── JOGAR_MODO_HUMANO.bat          # Permite jogar manualmente contra o Bullet Hell
+│   ├── DEMO_NPC_CAMPEAO.bat           # Executa simulação nativa em Octave/MATLAB
+│   └── GERAR_TODAS_MIDIAS.bat         # Gera todos os gráficos, boxplots e vídeos
+├── src/                               # 🔬 IMPLEMENTAÇÃO OCTAVE / MATLAB (.M)
+│   ├── simulate_episode.m             # Simulação cinemática contínua da arena 2D
+│   ├── calculate_evade_force.m        # Algoritmo CPA analítico e aceleração de Reynolds
+│   ├── fitness_function.m             # Função de aptidão multi-objetivo
+│   ├── init_population.m              # Inicialização sob orçamento de 1.8 pontos
+│   ├── npc_evasivo_ga.m               # Algoritmo genético clássico
+│   └── teste_estatistico_hipoteses.m  # Rotinas analíticas de ANOVA e Testes t
+├── scripts/                           # ⚙️ SCRIPTS DE AUTOMAÇÃO E BENCHMARKS
+│   └── run_full_academic_pipeline.py  # Executa pipeline completo (N=90), ANOVA e gráficos
+├── data/                              # 💾 BANCOS DE DADOS E TELEMETRIA
+│   ├── graficos/                      # Figuras de alta resolução (300 DPI) e GIFs
+│   ├── resultados_experimentos.csv    # Registros brutos consolidados (N=90)
+│   ├── historico_geracoes.csv         # Curvas geracionais completas (G=50)
+│   └── map_elites.csv                 # Tabela de nichos fenotípicos
+├── docs/                              # 📖 DOCUMENTAÇÃO TÉCNICA E MATEMÁTICA
+│   ├── FISICA_E_CINEMATICA.md         # Deduções completas de mecânica e CPA
+│   └── BIBLIOGRAFIA.md                # Fichamento de artigos científicos
+├── run_mirage.py                      # Ponto de entrada Python protegido contra forks
+└── README.md                          # Documentação central do ecossistema
 ```
 
 ---
 
-## 🚀 Como Executar em 1 Clique (Plug-and-Play)
+## 🚀 Como Executar
 
-> **Compatibilidade Total (Octave & MATLAB):** O projeto detecta automaticamente se o computador possui **GNU Octave** ou **MathWorks MATLAB**. Ao baixar o ZIP ou clonar do GitHub, tudo funciona out-of-the-box sem configurações manuais!
+O Mirage foi projetado com arquitetura híbrida para máxima conveniência e reprodutibilidade:
 
----
-
-### ⚡ Opção A: Demonstração Rápida para o Seminário / Banca
-Basta dar **duplo clique** em qualquer um dos arquivos:
-* **`DEMO_NPC_CAMPEAO.bat`** (na raiz ou dentro da pasta `executar/`)
-* **`executar/demo_npc_campeao.sh`** (no Linux/macOS)
-> A Arena 2D abre instantaneamente a ~50 FPS carregando o melhor campeão evoluído da dificuldade escolhida, desviando do Bullet Hell e contra-atacando em tempo real!
+### ⚡ Opção 1: Executável Standalone Windows (Sem Instalação)
+Basta dar **duplo clique** em:
+* **`executar/RODAR_MIRAGE_EXE.bat`** (ou executar diretamente `dist/Mirage.exe`).
+> Não requer Python, Octave ou bibliotecas externas. Funciona de forma portátil em qualquer máquina com Windows 10/11.
 
 ---
 
-### 🔬 Opção B: Para quem usa o MATLAB Diretamente
-Se o seu professor ou examinador preferir abrir o **MATLAB**:
-1. Abra o MATLAB e selecione a pasta do projeto `Mirage`.
-2. Para ver a demonstração da Arena com o Campeão:
-   * Abra o arquivo **`executar_demo.m`** e pressione **F5** (ou digite `executar_demo` no Command Window).
-3. Para acessar o menu interativo com todas as opções:
-   * Abra **`iniciar_mirage.m`** e pressione **F5** (ou digite `iniciar_mirage` no Command Window).
-> O código foi desenhado para rodar no MATLAB base, com cálculo analítico de ANOVA e testes $t$ sem exigir toolboxes adicionais.
+### 🐍 Opção 2: Python 3.10+ com Interface Pygame
+1. Instale as dependências:
+   ```bash
+   pip install pygame numpy scipy matplotlib pandas
+   ```
+2. Inicie a aplicação:
+   ```bash
+   python run_mirage.py
+   ```
+   *(Ou utilize o atalho de 1-clique `executar/INICIAR_MIRAGE_PYTHON.bat`)*
 
 ---
 
-### 🎮 Opção C: Painel Principal Interativo (Central de Comando)
-Dê duplo clique em **`INICIAR_MIRAGE.bat`** (na raiz ou em `executar/`):
-```text
-  [1] Assistir NPC Campeão em Ação (Arena 2D Interativa)
-  [2] Demonstração Rápida no Modo Difícil (Bullet Hell Extremo)
-  [3] Iniciar Treinamento do Algoritmo Genético (Gráficos em Tempo Real)
-  [4] Gerar Todos os Gráficos Científicos e Testes Estatísticos
-  [5] Gerar GIF Animado da Arena (data/graficos/demonstracao_npc.gif)
-  [6] Executar Baterias de Teste em Paralelo (30x Headless)
-  [7] Abrir Pasta de Gráficos e Resultados Gerados
-  [8] Abrir Documentação Técnica do Projeto
-  [0] Sair
+### 🔬 Opção 3: Reprodução Completa do Pipeline Acadêmico ($N = 90$)
+Para executar todas as 90 rodadas evolutivas independentes, recomputar a ANOVA One-Way, Kruskal-Wallis, $d$ de Cohen e gerar todos os gráficos científicos em alta resolução (300 DPI):
+```bash
+python scripts/run_full_academic_pipeline.py
 ```
 
 ---
 
-### 💻 Como Instalar o GNU Octave (Caso a máquina não tenha nem Octave nem MATLAB)
-* **Windows (via Terminal - 1 comando):**
-  ```cmd
-  winget install GNU.Octave
-  ```
-* **Windows (Instalador Oficial Grátis):** [Baixar GNU Octave](https://octave.org/download)
-* **Ubuntu / Debian:** `sudo apt-get install octave`
-* **macOS:** `brew install octave`
-
-*(Os scripts do Mirage avisam amigavelmente e oferecem o link oficial caso nenhum interpretador seja encontrado).*
-
----
-
-## 📚 Documentação no Obsidian
-
-Para navegar pelo grafo de conhecimento interligado do projeto, acesse a pasta `Mirage Obsidian/` no aplicativo [Obsidian](https://obsidian.md/), contendo:
-* **`00 - MOC Principal.md`:** Mapa geral de conteúdo;
-* **`10 - Referências Científicas/`:** Notas atômicas sobre cada publicação citada;
-* **`20 - Arquitetura do Sistema/`:** Modelagem matemática dos operadores e arena;
-* **`50 - Gestão do Seminário/`:** Dossiê completo, divisão de tarefas e roteiro de fala cronometrado.
+### 📐 Opção 4: GNU Octave (≥ 7.0) ou MathWorks MATLAB (≥ R2022b)
+1. Abra a pasta do projeto no MATLAB ou GNU Octave;
+2. Para assistir à demonstração da arena 2D com o NPC Campeão:
+   * Execute `executar_demo.m` (ou pressione **F5**);
+3. Para abrir o painel de treinamento:
+   * Execute `iniciar_mirage.m`.
+> 100% compatível com o interpretador nativo, dispensando a aquisição de toolboxes proprietárias pagas.
 
 ---
 
 ## 👥 Equipe de Desenvolvimento
 
-* **Leonardo Retori**
-* **Henry Matheus**
-* **Murilo Lameira**
-* **Murilo Romualdo**
+Projeto desenvolvido no ano acadêmico de 2026 para a disciplina de **Inteligência Artificial** do curso de **Engenharia de Controle e Automação** do **Centro Universitário SENAI SP (UNISENAI)**, Campus São Caetano do Sul, SP, Brasil:
 
-*Orientador:* Me. Ricardo Martinez Vicentini  
-*Desenvolvido em 2026 para a disciplina de Inteligência Artificial — Engenharia de Controle e Automação — UNISENAI.*
+* **Murilo Lameira da Silva**
+* **Henry Matheus Fregolente Ferreira**
+* **Murilo Romualdo da Silva**
+* **Leonardo Retori Apolônio**
+
+**Orientador:**  
+* **Prof. Me. Ricardo Martinez Vicentini**
+
+---
+<p align="center">
+  <sub>Mirage: Inteligência Artificial Evolutiva e Cinemática Preditiva para Jogos Digitais © 2026. Licenciado sob MIT License.</sub>
+</p>
