@@ -56,7 +56,7 @@ O projeto deu origem ao artigo acadêmico completo estruturado no formato de con
 @inproceedings{silva2026mirage,
   title     = {Mirage: Adapta{\c{c}}{\~a}o Evolutiva de NPCs sob Restri{\c{c}}{\~a}o Or{\c{c}}ament{\'a}ria com Esquiva Preditiva},
   author    = {Silva, Murilo Lameira da and Ferreira, Henry Matheus Fregolente and Silva, Murilo Romualdo da and Apol{\^o}nio, Leonardo Retori and Vicentini, Ricardo Martinez},
-  booktitle = {Simp{\'o}sio Brasileiro de Jogos e Entretenimento Digital (SBGames) / IEEE CoG},
+  booktitle = {Congresso SENAI},
   year      = {2026},
   address   = {S{\~a}o Caetano do Sul, SP, Brasil}
 }
