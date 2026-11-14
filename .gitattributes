@@ -1,0 +1,2 @@
+# Notas Markdown sempre com LF, mesmo com core.autocrlf=true no Windows
+*.md text eol=lf
